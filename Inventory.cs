@@ -17,7 +17,11 @@ namespace TeamRpg
         {
             player = playerRef;
         }
-        private void MainInventory()
+        public void SetPlayer(Player playerRef)
+        {
+            player = playerRef;
+        }
+        public void MainInventory()
         {
             while (true)
             {
@@ -72,7 +76,7 @@ namespace TeamRpg
 
                 if (input == "0") return;
 
-                if (int.TryParse(input, out var index) && index >= 1 && index <= _player.inventory.Count)
+                if (int.TryParse(input, out var index) && index >= 1 && index <= player.inventory.Count)
                 {
                     EquipItem(player.inventory[index - 1]);
                     Console.WriteLine($"{player.inventory[index - 1].Name}장착됨!");

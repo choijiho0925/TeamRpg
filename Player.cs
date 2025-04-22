@@ -40,7 +40,7 @@ namespace TeamRpg
         public Player(string name, string job)
         {
             // 인벤토리 초기화 (다른 클래스에서 접근 가능하도록 먼저 생성)
-            inventory = new Inventory();
+            inventory = new Inventory(this);
 
             // 입력받은 이름을 저장합니다.
             this.name = name;
@@ -158,9 +158,9 @@ namespace TeamRpg
             Console.WriteLine($"직업: {job}");
             Console.WriteLine($"체력: {health}/{maxHealth}");
             Console.WriteLine($"마나: {mana}/{maxMana}");
-            Console.WriteLine($"기본 공격력: {baseAttack} (장비 보너스: +{bonusAttack})");
+            Console.WriteLine($"기본 공격력: {baseAttack} (장비 보너스: +{attack - baseAttack})");
             Console.WriteLine($"총 공격력: {attack}");
-            Console.WriteLine($"기본 방어력: {baseDefense} (장비 보너스: +{bonusDefense})");
+            Console.WriteLine($"기본 방어력: {baseDefense} (장비 보너스: +{defense - baseDefense})");
             Console.WriteLine($"총 방어력: {defense}");
             Console.WriteLine($"보유 골드: {gold}G");
 

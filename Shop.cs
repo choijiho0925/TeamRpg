@@ -9,7 +9,7 @@ using System.Numerics;
 namespace TeamRpg
 {
 
-    public class Shop
+    public class Shop 
 
     {
 
@@ -235,7 +235,7 @@ namespace TeamRpg
                     {
                         player.Gold -= item.Gold; //플레이어 골드에 아이템 가격을 뺀후 플레이어 골드저장
                         item.isBuy = true;
-                        player.inventory.AddItem(item);
+                        player.inventory.Add(item);
 
                         Console.WriteLine($"{item.Name}를 구매했습니다!");
                         Console.WriteLine("좋소. 그대의 생명을 조금은 연장시켜줄 테지.");
@@ -280,7 +280,7 @@ namespace TeamRpg
                 Console.WriteLine("아이템 판매 메뉴");
                 Console.ResetColor();
 
-                List<Item> buyItems = player.inventory.Where(item => item.isBuy && !item.IsEquipped).ToList();
+                List<Item> buyItems = player.inventory.Where(item => item.isBuy && !item.isEquipped).ToList();
 
                 if (buyItems.Count == 0)
                 {
