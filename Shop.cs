@@ -48,15 +48,19 @@ namespace TeamRpg
                     Console.WriteLine("2.고블린 처치 ");
                     Console.WriteLine("3.오우거 처치");
                     Console.WriteLine("0. 나가기");
-
                     Console.ResetColor();
-                    Console.ReadKey();
+
 
                     string quest = Console.ReadLine();
 
                     if (quest == "1")
                     {
                         Console.WriteLine("[상인] 슬라임이라.. 너같은놈한테 딱이군 5마리 정도만 처치해 오게");
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("수락하겠네...");
+                        Console.ResetColor();
+                        Console.ReadKey();
 
                     }
 
@@ -65,6 +69,11 @@ namespace TeamRpg
                         Console.WriteLine("[상인] 고블린이라… 걔넨 머리 하나 자르고 나면 셋이 튀어나오지.");
                         Console.WriteLine("[상인] 자네가 과연 그 악취를 견딜 수 있을지 모르겠군.");
                         Console.WriteLine("[상인] 10마리정도 처치해 오게.");
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("수락하겠네...");
+                        Console.ResetColor();
+                        Console.ReadKey();
                     }
                     else if (quest == "3")
                     {
@@ -72,12 +81,17 @@ namespace TeamRpg
                         Console.WriteLine("[상인] 오우거? 하하… 자네, 목숨이 두 개라도 되나?");
                         Console.WriteLine("[상인] 그 괴물은 칼 한 자루로는 안 쓰러지오. 그래도 가겠다는 건가?");
                         Console.WriteLine("[상인] 할수만 있다면 3마리정도 처치해 오게.");
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("수락하겠네...");
+                        Console.ResetColor();
+                        Console.ReadKey();
                     }
                     else if (quest == "0")
                     {
                         Console.WriteLine("[상인] 행운을 빈다네");
+                        Console.ReadKey();
 
-                        return;
                     }
 
 
@@ -99,6 +113,7 @@ namespace TeamRpg
 
 
         }
+
 
         private CancellationTokenSource idleTalkTokenSource; //비동기 작업을 중간에 멈추기 위해 사용하는 객체
         private Random random = new Random();
