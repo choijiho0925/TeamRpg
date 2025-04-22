@@ -64,7 +64,7 @@ namespace TeamRpg
         public bool SetJob(string job)
         {
             // 입력된 직업이 유효한지 확인 (전사, 궁수, 도적만 가능)
-            if (job == "전사" || job == "궁수" || job == "도적")
+            if (job == "검투사" || job == "수렵꾼" || job == "암살자")
             {
                 this.job = job;
                 return true; // 유효한 직업
@@ -72,7 +72,7 @@ namespace TeamRpg
             else
             {
                 // 잘못된 직업 입력 시 메시지 출력
-                Console.WriteLine("잘못된 직업입니다. 전사, 궁수, 도적 중에서 선택해주세요.");
+                Console.WriteLine("잘못된 직업입니다. 검투사, 수렵꾼, 암살자자 중에서 선택해주세요.");
                 return false; // 유효하지 않은 직업
             }
         }
@@ -84,24 +84,24 @@ namespace TeamRpg
             // job 변수에 저장된 직업명에 따라 다른 초기값을 설정합니다.
             switch (job)
             {
-                case "전사":
-                    // 전사는 체력과 방어력이 높지만 마나가 적습니다.
+                case "검투사":
+                    // 검투사는 체력과 방어력이 높지만 마나가 적습니다.
                     this.maxHealth = 150;  // 최대 체력 150
                     this.maxMana = 50;     // 최대 마나 50
                     this.baseAttack = 15;  // 기본 공격력 15
                     this.baseDefense = 10; // 기본 방어력 10
                     break;
 
-                case "궁수":
-                    // 궁수는 중간 수준의 균형잡힌 능력치를 가집니다.
+                case "수렵꾼":
+                    // 수렵꾼은 중간 수준의 균형잡힌 능력치를 가집니다.
                     this.maxHealth = 120;  // 최대 체력 120
                     this.maxMana = 80;     // 최대 마나 80
                     this.baseAttack = 18;  // 기본 공격력 18
                     this.baseDefense = 6;  // 기본 방어력 6
                     break;
 
-                case "도적":
-                    // 도적은 공격력이 높지만 체력과 방어력이 낮습니다.
+                case "암살자":
+                    // 암살자는 공격력이 높지만 체력과 방어력이 낮습니다.
                     this.maxHealth = 100;  // 최대 체력 100
                     this.maxMana = 70;     // 최대 마나 70
                     this.baseAttack = 20;  // 기본 공격력 20
@@ -458,20 +458,20 @@ namespace TeamRpg
             // 직업에 따라 다른 스킬 효과 설정
             switch (job)
             {
-                case "전사":
-                    skillName = "강력한 일격";
+                case "검투사":
+                    skillName = "콜로세움의 생존자";
                     skillDamage = (int)(TotalAttack * 2);  // 총 공격력의 2배 데미지
                     manaCost = 20;  // 마나 20 소비
                     break;
 
-                case "궁수":
-                    skillName = "정밀 사격";
+                case "수렵꾼":
+                    skillName = "야생의 감각";
                     skillDamage = (int)(TotalAttack * 1.5);  // 총 공격력의 1.5배 데미지
                     manaCost = 15;  // 마나 15 소비
                     break;
 
-                case "도적":
-                    skillName = "기습 공격";
+                case "암살자":
+                    skillName = "암습";
                     skillDamage = (int)(TotalAttack * 1.8);  // 총 공격력의 1.8배 데미지
                     manaCost = 10;  // 마나 10 소비
                     break;
