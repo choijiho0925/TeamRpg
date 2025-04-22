@@ -8,58 +8,62 @@ namespace TeamRpg
 {
     internal class Monster
     {
-        public string Name;
-        public int HP;
-        public int MP;
-        public int Attack;
-        public int Defense;
+        private string name;
+        private int health;
+        private int mana;
+        private int attack;
+        private int defense;
 
-        //적 종류들
-        public class Goblin : Monster
+
+        public Monster(string Name, int Health, int Mana, int Attack, int Defense) //생성자 사용
         {
-            public Goblin() : base("고블린", 50, 50, 10, 3) { } // 이름, HP, MP, 공격력, 방어력
+            name = Name;
+            health = Health;
+            mana = Mana;
+            attack = Attack;
+            defense = Defense;
         }
 
-        public class Dragon : Monster
-        {
-            public Dragon() : base("드래곤", 200, 50, 30, 10) { }
-        }
+        //읽기 전용
+        public string Name => name;
+        public int Health => health;
+        public int Mana => mana;
+        public int Attack => attack;
+        public int Defense => defense;
 
-        public class Slime : Monster
+        //몬스터 리스트
+        List<Monster> monsterTypes = new List<Monster>()
+    { 
+        //순서대로 이름, 체력, 마나, 공격력, 방어력 순
+    new Monster("슬라임", 20, 10, 3, 5),
+    new Monster("고블린", 30, 10, 5, 5),
+    new Monster("오우거", 50, 10, 10, 5)
+    };
+        //적의 능력치 출력
+        public void PrintInfo(int number)
         {
-            public Slime() : base("슬라임", 30, 20, 5, 1) { }
+            Console.WriteLine($"{number}. {name} (체력: {health}, 마나: {mana}, 공격력: {attack}, 방어력: {defense})");
         }
-
-        public Monster(string name, int hp, int mp, int attack, int defense) //생성자 사용했어요
-        {
-            Name = name;
-            HP = hp;
-            MP = mp;
-            Attack = attack;
-            Defense = defense;
-        }
-
+        //공격을 받을 때
         public void TakeDamage(int damage)
         {
-            HP -= damage;
-            if (HP < 0) HP = 0;
+            health -= damage;
+            if (health < 0) health = 0;
         }
-
+        //공격할 때
         public void EnemyAttack(Player player)
         {
-            //str = 공격력이라 생각하고 만들었어요
-            int AttackPower = str;
+            int AttackPower = 10;
 
             if (AttackPower >= 0)
             {
-                Console.WriteLine($"\n{Name}가 {player.name}을(를) 공격합니다! {AttackPower}의 피해를 입혔습니다.");
+                Console.WriteLine($"\n{name}가 {player.Name}을(를) 공격합니다! {AttackPower}의 피해를 입혔습니다.");
                 player.TakeDamage(AttackPower);
             }
             else
             {
                 Console.WriteLine("적의 공격을 방어했습니다!");
             }
-
         }
     }
 }
