@@ -9,6 +9,7 @@ namespace TeamRpg
     // Player 클래스 - 게임 내 플레이어 캐릭터를 나타냅니다.
     public class Player
     {
+        public Inventory inventory;
         // ============== 플레이어의 기본 속성들 ==============
         private string name;        // 플레이어 이름
         private string job;         // 플레이어 직업 (전사, 궁수, 도적 중 하나)
@@ -28,6 +29,7 @@ namespace TeamRpg
         // ============== 생성자 - 플레이어 객체를 생성할 때 이름과 직업을 지정합니다. ==============
         public Player(string name, string job)
         {
+            inventory = new Inventory();
             // 입력받은 이름을 저장합니다.
             this.name = name;
 
