@@ -71,11 +71,15 @@ namespace TeamRpg
             this.equippedWeapon = null;
             this.equippedArmor = null;
 
+            // 인벤토리에 플레이어 참조 설정 - 이 부분을 추가
+            inventory.SetPlayer(this);
+
             // 플레이어 생성 메시지를 출력합니다.
             Console.WriteLine($"{name} {job}(이)가 생성되었습니다!");
             Console.WriteLine("초기 스탯:");
             DisplayStatus();
         }
+
 
         // ============== 직업 설정 메서드 - 유효한 직업인지 검사하고 설정합니다. ==============
         // 유효하지 않으면 다시 입력받도록 false를 반환합니다.
