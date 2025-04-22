@@ -289,7 +289,7 @@ namespace TeamRpg
                     break;
 
                 case "3": // 상점
-                    shop.MainShop();
+                    shop.ShopMenu();
                     break;
 
                 case "4": // 던전 입장
