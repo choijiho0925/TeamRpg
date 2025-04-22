@@ -9,6 +9,14 @@ namespace TeamRpg
 {
     public class Inventory
     {
+
+        private Player player; // Player 참조 추가
+
+        // 생성자에서 플레이어 참조 설정
+        public Inventory(Player playerRef)
+        {
+            player = playerRef;
+        }
         private void MainInventory()
         {
             while (true)
