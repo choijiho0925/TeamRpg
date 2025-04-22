@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TeamRpg
 {
-    public class Inventory
+    public class Inventory : List<Item>
     {
 
         private Player player; // Player 참조 추가
