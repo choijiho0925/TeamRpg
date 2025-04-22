@@ -165,7 +165,6 @@ namespace TeamRpg
         }
 
         // 시작 장비 지급 메서드
-        // 시작 장비 지급 메서드
         private void GiveStartingItems()
         {
             // 플레이어 직업에 따른 기본 무기 찾기
@@ -183,7 +182,8 @@ namespace TeamRpg
                 }
 
                 // 기본 무기는 직업별로 다름 (공격력 있음, 레벨 1)
-                if (item.Job == ConvertJobName(player.Job) && item.Attack > 0 && item.Description == "1")
+                // 여기서는 player.Job을 그대로 사용합니다 (변환 없이)
+                if (item.Job == player.Job && item.Attack > 0 && item.Description == "1")
                 {
                     startingWeapon = item;
                     item.isBuy = true; // 구매한 것으로 표시
@@ -203,26 +203,12 @@ namespace TeamRpg
                 Console.WriteLine($"기본 방어구를 지급받았습니다: {startingArmor.Name}");
             }
 
-            // 시작 골드 지급 (0으로 수정)
+            // 시작 골드 지급
             player.Gold = 0;
             Console.WriteLine("시작 골드는 0G입니다. 던전을 탐험하여 골드를 모아보세요!");
         }
 
-        // 직업명 변환 메서드
-        private string ConvertJobName(string playerJob)
-        {
-            switch (playerJob)
-            {
-                case "검투사":
-                    return "전사";
-                case "수렵꾼":
-                    return "궁수";
-                case "암살자":
-                    return "도적";
-                default:
-                    return playerJob;
-            }
-        }
+
 
         // 게임 객체 초기화 메서드
         private void InitializeGameObjects()
