@@ -6,7 +6,551 @@ using System.Threading.Tasks;
 
 namespace TeamRpg
 {
-    internal class Game
+    // Game 클래스 - 게임 전체를 관리하고 통제하는 클래스입니다.
+    public class Game
     {
+        // 싱글톤 패턴 구현
+        private static Game instance = null;
+
+        // 외부에서 Game 인스턴스에 접근할 수 있는 정적 속성
+        public static Game Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new Game();
+
+                return instance;
+            }
+        }
+
+        // 게임에 필요한 주요 객체들
+        public Player player;        // 플레이어 객체
+        public Monster monster;      // 몬스터 객체
+        public Battle battle;        // 전투 관리 객체
+        public Shop shop;            // 상점 객체
+        public List<Item> items;     // 게임 내 존재하는 모든 아이템 목록
+        private Random random;       // 랜덤 요소를 위한 난수 생성기
+
+        // 게임 실행 상태
+        private bool isRunning;      // 게임이 현재 실행 중인지 여부
+
+        // 생성자
+        private Game()
+        {
+            // 게임에 필요한 객체들을 초기화
+            InitializeGame();
+        }
+
+        // 게임 초기화 메서드
+        private void InitializeGame()
+        {
+            // 랜덤 객체 초기화
+            random = new Random();
+
+            // 아이템 목록 초기화
+            items = ItemManager.Instance.Items;
+
+            // 게임 상태 초기화
+            isRunning = false;
+
+            Console.WriteLine("게임 시스템이 초기화되었습니다.");
+        }
+
+        // 게임 시작 메서드
+        public void Start()
+        {
+            // 이미 게임이 실행 중이면 중복 실행 방지
+            if (isRunning)
+            {
+                Console.WriteLine("게임이 이미 실행 중입니다.");
+                return;
+            }
+
+            // 게임 실행 상태로 변경
+            isRunning = true;
+
+            // 게임 시작 화면 표시
+            DisplayStartScreen();
+
+            // 플레이어 생성
+            CreatePlayer();
+
+            // 게임 객체 초기화
+            InitializeGameObjects();
+
+            // 메인 게임 루프 실행
+            GameLoop();
+
+            // 게임 종료 시 실행될 코드
+            Console.WriteLine("게임이 종료되었습니다. 다음에 또 뵙겠습니다!");
+        }
+
+        // 시작 화면 표시 메서드
+        private void DisplayStartScreen()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("========================================");
+            Console.WriteLine("          TEAM RPG ADVENTURE            ");
+            Console.WriteLine("========================================");
+            Console.ResetColor();
+            Console.WriteLine("\n스파르타 던전에 오신 것을 환영합니다!");
+            Console.WriteLine("이곳에서 던전을 탐험하고, 몬스터를 물리치며 성장해보세요.");
+            Console.WriteLine("\n게임을 시작하려면 아무 키나 누르세요...");
+            Console.ReadKey(true);
+            Console.Clear();
+        }
+
+        // 플레이어 생성 메서드
+        private void CreatePlayer()
+        {
+            Console.Clear();
+            Console.WriteLine("캐릭터 생성을 시작합니다.");
+
+            // 이름 입력 받기
+            Console.Write("당신의 이름을 입력하세요: ");
+            string name = Console.ReadLine();
+
+            // 이름이 비어있으면 기본 이름 설정
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = "용사";
+                Console.WriteLine("이름이 입력되지 않아 '용사'로 설정되었습니다.");
+            }
+
+            // 직업 선택
+            string job = "";
+            bool validJob = false;
+
+            while (!validJob)
+            {
+                Console.WriteLine("\n직업을 선택하세요:");
+                Console.WriteLine("1. 검투사 - 체력과 방어력이 높은 전사입니다.");
+                Console.WriteLine("2. 수렵꾼 - 균형 잡힌 능력치를 가진 궁수입니다.");
+                Console.WriteLine("3. 암살자 - 공격력이 높은 도적입니다.");
+
+                Console.Write("\n선택 (1-3): ");
+                string jobChoice = Console.ReadLine();
+
+                switch (jobChoice)
+                {
+                    case "1":
+                        job = "검투사";
+                        validJob = true;
+                        break;
+                    case "2":
+                        job = "수렵꾼";
+                        validJob = true;
+                        break;
+                    case "3":
+                        job = "암살자";
+                        validJob = true;
+                        break;
+                    default:
+                        Console.WriteLine("잘못된 선택입니다. 1부터 3까지의 숫자를 입력해주세요.");
+                        break;
+                }
+            }
+
+            // 플레이어 객체 생성
+            player = new Player(name, job);
+
+            // 기본 장비 지급
+            GiveStartingItems();
+
+            Console.WriteLine("\n캐릭터 생성이 완료되었습니다! 게임을 시작합니다.");
+            Console.WriteLine("계속하려면 아무 키나 누르세요...");
+            Console.ReadKey(true);
+        }
+
+        // 시작 장비 지급 메서드
+        private void GiveStartingItems()
+        {
+            // 플레이어 직업에 따른 기본 무기 찾기
+            Item startingWeapon = null;
+            Item startingArmor = null;
+
+            // 모든 아이템을 검사하며 직업에 맞는 기본 장비 찾기
+            foreach (Item item in items)
+            {
+                // 기본 방어구는 모든 직업 공통 (공용, 방어력 있음, 레벨 1)
+                if (item.Job == "공용" && item.Defense > 0 && item.Description == "1")
+                {
+                    startingArmor = item;
+                    item.isBuy = true; // 구매한 것으로 표시
+                }
+
+                // 기본 무기는 직업별로 다름 (공격력 있음, 레벨 1)
+                // 여기서는 player.Job을 그대로 사용합니다 (변환 없이)
+                if (item.Job == player.Job && item.Attack > 0 && item.Description == "1")
+                {
+                    startingWeapon = item;
+                    item.isBuy = true; // 구매한 것으로 표시
+                }
+            }
+
+            // 기본 장비 인벤토리에 추가
+            if (startingWeapon != null)
+            {
+                player.inventory.Add(startingWeapon);
+                Console.WriteLine($"기본 무기를 지급받았습니다: {startingWeapon.Name}");
+            }
+
+            if (startingArmor != null)
+            {
+                player.inventory.Add(startingArmor);
+                Console.WriteLine($"기본 방어구를 지급받았습니다: {startingArmor.Name}");
+            }
+
+            // 시작 골드 지급
+            player.Gold = 0;
+            Console.WriteLine("시작 골드는 0G입니다. 던전을 탐험하여 골드를 모아보세요!");
+        }
+
+
+
+        // 게임 객체 초기화 메서드
+        private void InitializeGameObjects()
+        {
+            // 상점 객체 생성
+            shop = new Shop(items, player);
+
+            // 전투 시스템 객체 생성
+            battle = new Battle();
+
+            Console.WriteLine("게임 객체 초기화가 완료되었습니다.");
+        }
+
+        // 메인 게임 루프 메서드
+        private void GameLoop()
+        {
+            // 게임 종료 전까지 계속 반복
+            while (isRunning)
+            {
+                // 메인 메뉴 표시
+                DisplayMainMenu();
+
+                // 사용자 선택에 따라 처리
+                string choice = Console.ReadLine();
+                ProcessMainMenuChoice(choice);
+
+                // 플레이어 사망 시 게임 종료
+                if (player.Health <= 0)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("게임 오버! 당신은 사망했습니다.");
+                    Console.ResetColor();
+                    Console.WriteLine("\n아무 키나 누르면 게임이 종료됩니다...");
+                    Console.ReadKey(true);
+                    isRunning = false;
+                }
+            }
+        }
+
+        // 메인 메뉴 표시 메서드
+        private void DisplayMainMenu()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("========================================");
+            Console.WriteLine("              메인 메뉴                 ");
+            Console.WriteLine("========================================");
+            Console.ResetColor();
+
+            // 플레이어 기본 정보 간단 표시
+            Console.WriteLine($"\n{player.Name} ({player.Job}) | 체력: {player.Health}/{player.MaxHealth} | 골드: {player.Gold}G");
+
+            // 메뉴 옵션 표시
+            Console.WriteLine("\n원하시는 행동을 선택하세요:");
+            Console.WriteLine("1. 상태 보기");
+            Console.WriteLine("2. 인벤토리");
+            Console.WriteLine("3. 상점");
+            Console.WriteLine("4. 던전 입장");
+            Console.WriteLine("5. 휴식하기");
+            Console.WriteLine("0. 게임 종료");
+
+            Console.Write("\n선택: ");
+        }
+
+        // 메인 메뉴 선택 처리 메서드
+        private void ProcessMainMenuChoice(string choice)
+        {
+            switch (choice)
+            {
+                case "1": // 상태 보기
+                    player.DisplayStatus();
+                    WaitForKeyPress();
+                    break;
+
+                case "2": // 인벤토리
+                    player.inventory.MainInventory();
+                    break;
+
+                case "3": // 상점
+                    shop.MainShop();
+                    break;
+
+                case "4": // 던전 입장
+                    EnterDungeon();
+                    break;
+
+                case "5": // 휴식하기
+                    Rest();
+                    break;
+
+                case "0": // 게임 종료
+                    ConfirmExit();
+                    break;
+
+                default:
+                    Console.WriteLine("잘못된 선택입니다. 다시 선택해주세요.");
+                    WaitForKeyPress();
+                    break;
+            }
+        }
+
+        // 던전 입장 메서드
+        private void EnterDungeon()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("========================================");
+            Console.WriteLine("              던전 입장                 ");
+            Console.WriteLine("========================================");
+            Console.ResetColor();
+
+            Console.WriteLine("\n입장할 던전을 선택하세요:");
+            Console.WriteLine("1. 쉬운 던전 (레벨 1-5)");
+            Console.WriteLine("2. 보통 던전 (레벨 6-10)");
+            Console.WriteLine("3. 어려운 던전 (레벨 11-15)");
+            Console.WriteLine("0. 뒤로 가기");
+
+            Console.Write("\n선택: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1": // 쉬운 던전
+                    StartBattle(DungeonDifficulty.Easy);
+                    break;
+
+                case "2": // 보통 던전
+                    StartBattle(DungeonDifficulty.Normal);
+                    break;
+
+                case "3": // 어려운 던전
+                    StartBattle(DungeonDifficulty.Hard);
+                    break;
+
+                case "0": // 뒤로 가기
+                    return;
+
+                default:
+                    Console.WriteLine("잘못된 선택입니다. 다시 선택해주세요.");
+                    WaitForKeyPress();
+                    break;
+            }
+        }
+
+        // 던전 난이도 열거형
+        private enum DungeonDifficulty
+        {
+            Easy,
+            Normal,
+            Hard
+        }
+
+        // 전투 시작 메서드
+        private void StartBattle(DungeonDifficulty difficulty)
+        {
+            // 던전 난이도에 따른 몬스터 생성
+            string monsterName;
+            int monsterHealth;
+            int monsterMana;
+            int monsterAttack;
+            int monsterDefense;
+            int rewardGold;
+
+            switch (difficulty)
+            {
+                case DungeonDifficulty.Easy:
+                    monsterName = GetRandomMonsterName(difficulty);
+                    monsterHealth = random.Next(15, 30);
+                    monsterMana = random.Next(5, 15);
+                    monsterAttack = random.Next(3, 8);
+                    monsterDefense = random.Next(1, 4);
+                    rewardGold = random.Next(100, 300);
+                    break;
+
+                case DungeonDifficulty.Normal:
+                    monsterName = GetRandomMonsterName(difficulty);
+                    monsterHealth = random.Next(30, 50);
+                    monsterMana = random.Next(15, 30);
+                    monsterAttack = random.Next(8, 15);
+                    monsterDefense = random.Next(4, 8);
+                    rewardGold = random.Next(300, 600);
+                    break;
+
+                case DungeonDifficulty.Hard:
+                    monsterName = GetRandomMonsterName(difficulty);
+                    monsterHealth = random.Next(50, 80);
+                    monsterMana = random.Next(30, 50);
+                    monsterAttack = random.Next(15, 25);
+                    monsterDefense = random.Next(8, 12);
+                    rewardGold = random.Next(600, 1000);
+                    break;
+
+                default:
+                    monsterName = "알 수 없는 몬스터";
+                    monsterHealth = 20;
+                    monsterMana = 10;
+                    monsterAttack = 5;
+                    monsterDefense = 2;
+                    rewardGold = 100;
+                    break;
+            }
+
+            // 몬스터 객체 생성
+            monster = new Monster(monsterName, monsterHealth, monsterMana, monsterAttack, monsterDefense);
+
+            // 전투 시작 메시지
+            Console.Clear();
+            Console.WriteLine($"{monsterName}를 만났습니다! 전투를 시작합니다.");
+            Console.WriteLine($"몬스터 정보: 체력 {monsterHealth}, 공격력 {monsterAttack}, 방어력 {monsterDefense}");
+            WaitForKeyPress();
+
+            // 전투 실행
+            battle.Start();
+
+            // 전투 후 처리
+            if (player.Health > 0 && monster.Health <= 0)
+            {
+                // 전투 승리
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("축하합니다! 전투에서 승리했습니다.");
+                Console.ResetColor();
+
+                // 보상 지급
+                player.EarnGold(rewardGold);
+                Console.WriteLine($"{rewardGold}G를 획득했습니다!");
+
+                // 체력/마나 일부 회복
+                int healthRecovery = (int)(player.MaxHealth * 0.3);
+                int manaRecovery = (int)(player.MaxMana * 0.3);
+                player.Heal(healthRecovery);
+                player.RecoverMana(manaRecovery);
+
+                WaitForKeyPress();
+            }
+            else if (player.Health <= 0)
+            {
+                // 전투 패배
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("전투에서 패배했습니다...");
+                Console.ResetColor();
+
+                WaitForKeyPress();
+            }
+        }
+
+        // 랜덤 몬스터 이름 생성 메서드
+        private string GetRandomMonsterName(DungeonDifficulty difficulty)
+        {
+            string[] easyMonsters = { "슬라임", "고블린", "쥐", "박쥐", "뱀" };
+            string[] normalMonsters = { "오크", "좀비", "스켈레톤", "거미", "거대 거미" };
+            string[] hardMonsters = { "트롤", "오우거", "미노타우루스", "드래곤", "데몬" };
+
+            string[] monsters;
+
+            // 난이도에 따라 몬스터 목록 선택
+            switch (difficulty)
+            {
+                case DungeonDifficulty.Easy:
+                    monsters = easyMonsters;
+                    break;
+
+                case DungeonDifficulty.Normal:
+                    monsters = normalMonsters;
+                    break;
+
+                case DungeonDifficulty.Hard:
+                    monsters = hardMonsters;
+                    break;
+
+                default:
+                    monsters = easyMonsters;
+                    break;
+            }
+
+            // 랜덤한 몬스터 이름 선택
+            return monsters[random.Next(monsters.Length)];
+        }
+
+        // 휴식 메서드
+        private void Rest()
+        {
+            Console.Clear();
+            Console.WriteLine("휴식을 취합니다...");
+
+            // 휴식 비용
+            int restCost = 100;
+
+            // 보유 골드 확인
+            if (player.Gold < restCost)
+            {
+                Console.WriteLine($"휴식을 취하기 위해 {restCost}G가 필요하지만, 보유 골드가 부족합니다.");
+                WaitForKeyPress();
+                return;
+            }
+
+            // 휴식 비용 지불
+            bool paymentSuccess = player.SpendGold(restCost);
+
+            if (paymentSuccess)
+            {
+                // 체력과 마나 완전 회복
+                int oldHealth = player.Health;
+                int oldMana = player.Mana;
+
+                player.Health = player.MaxHealth;
+                player.Mana = player.MaxMana;
+
+                Console.WriteLine("충분한 휴식을 취했습니다!");
+                Console.WriteLine($"체력: {oldHealth} -> {player.Health}/{player.MaxHealth}");
+                Console.WriteLine($"마나: {oldMana} -> {player.Mana}/{player.MaxMana}");
+            }
+
+            WaitForKeyPress();
+        }
+
+        // 게임 종료 확인 메서드
+        private void ConfirmExit()
+        {
+            Console.Clear();
+            Console.WriteLine("정말로 게임을 종료하시겠습니까?");
+            Console.WriteLine("1. 예");
+            Console.WriteLine("2. 아니오");
+
+            Console.Write("\n선택: ");
+            string choice = Console.ReadLine();
+
+            if (choice == "1")
+            {
+                isRunning = false;
+                Console.WriteLine("게임을 종료합니다. 이용해 주셔서 감사합니다!");
+            }
+            // 다른 입력은 모두 취소로 처리
+        }
+
+        // 키 입력 대기 메서드
+        private void WaitForKeyPress()
+        {
+            Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+            Console.ReadKey(true);
+        }
     }
 }
