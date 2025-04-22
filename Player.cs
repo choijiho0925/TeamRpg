@@ -9,7 +9,9 @@ namespace TeamRpg
     // Player 클래스 - 게임 내 플레이어 캐릭터를 나타냅니다.
     public class Player
     {
+        // ============== 인벤토리 - 다른 클래스에서 접근할 수 있도록 public ==============
         public Inventory inventory;
+
         // ============== 플레이어의 기본 속성들 ==============
         private string name;        // 플레이어 이름
         private string job;         // 플레이어 직업 (전사, 궁수, 도적 중 하나)
@@ -17,19 +19,29 @@ namespace TeamRpg
         private int maxHealth;      // 최대 체력
         private int mana;           // 현재 마나
         private int maxMana;        // 최대 마나
+
+        // 기존 코드와의 호환성을 위해 public으로 변경
+        public int attack;          // 전체 공격력 (기본 + 장비 보너스)
+        public int defense;         // 전체 방어력 (기본 + 장비 보너스)
+
+        // 내부적으로 사용할 속성들
         private int baseAttack;     // 기본 공격력 (장비 효과 제외)
         private int baseDefense;    // 기본 방어력 (장비 효과 제외)
         private int bonusAttack;    // 장비로부터 얻는 추가 공격력
         private int bonusDefense;   // 장비로부터 얻는 추가 방어력
         private int gold;           // 보유 골드
 
-        // 장착된 아이템을 저장하는 리스트 - 여러 개의 아이템을 동시에 장착 가능
-        private List<Item> equippedItems;
+        // ============== 장착 아이템 관련 속성들 - 기존 코드와 호환되도록 public ==============
+        public Item equippedWeapon; // 현재 장착된 무기
+        public Item equippedArmor;  // 현재 장착된 방어구
+        private List<Item> equippedItems; // 장착된 모든 아이템 목록
 
         // ============== 생성자 - 플레이어 객체를 생성할 때 이름과 직업을 지정합니다. ==============
         public Player(string name, string job)
         {
+            // 인벤토리 초기화 (다른 클래스에서 접근 가능하도록 먼저 생성)
             inventory = new Inventory();
+
             // 입력받은 이름을 저장합니다.
             this.name = name;
 
@@ -50,8 +62,14 @@ namespace TeamRpg
             this.bonusAttack = 0;
             this.bonusDefense = 0;
 
+            // 총 공격력과 방어력 초기화
+            this.attack = this.baseAttack + this.bonusAttack;
+            this.defense = this.baseDefense + this.bonusDefense;
+
             // 장착된 아이템 리스트 초기화
             this.equippedItems = new List<Item>();
+            this.equippedWeapon = null;
+            this.equippedArmor = null;
 
             // 플레이어 생성 메시지를 출력합니다.
             Console.WriteLine($"{name} {job}(이)가 생성되었습니다!");
@@ -118,6 +136,10 @@ namespace TeamRpg
                     this.baseDefense = 8;
                     break;
             }
+
+            // 기본값으로 총 공격력과 방어력 초기화
+            this.attack = this.baseAttack;
+            this.defense = this.baseDefense;
         }
 
         // ============== 플레이어 상태 표시 메서드 ==============
@@ -133,9 +155,9 @@ namespace TeamRpg
             Console.WriteLine($"체력: {health}/{maxHealth}");
             Console.WriteLine($"마나: {mana}/{maxMana}");
             Console.WriteLine($"기본 공격력: {baseAttack} (장비 보너스: +{bonusAttack})");
-            Console.WriteLine($"총 공격력: {TotalAttack}");
+            Console.WriteLine($"총 공격력: {attack}");
             Console.WriteLine($"기본 방어력: {baseDefense} (장비 보너스: +{bonusDefense})");
-            Console.WriteLine($"총 방어력: {TotalDefense}");
+            Console.WriteLine($"총 방어력: {defense}");
             Console.WriteLine($"보유 골드: {gold}G");
 
             // 장착 중인 아이템이 있으면 표시
@@ -161,7 +183,7 @@ namespace TeamRpg
         public void TakeDamage(int damage)
         {
             // 실제 받는 데미지 계산 (방어력으로 감소, 최소 1)
-            int actualDamage = Math.Max(1, damage - TotalDefense);
+            int actualDamage = Math.Max(1, damage - defense);
 
             // 현재 체력에서 데미지 감소 (최소 0)
             int oldHealth = health;  // 이전 체력 저장
@@ -186,7 +208,7 @@ namespace TeamRpg
             Random rand = new Random();
 
             // 공격력의 90~110% 범위에서 실제 공격력 결정 (기본+장비 보너스 포함)
-            int actualAttack = (int)(TotalAttack * (0.9 + rand.NextDouble() * 0.2));
+            int actualAttack = (int)(attack * (0.9 + rand.NextDouble() * 0.2));
 
             // 공격 메시지 출력
             Console.WriteLine($"{name}이(가) 공격합니다! (공격력: {actualAttack})");
@@ -269,12 +291,36 @@ namespace TeamRpg
             }
 
             // 이전 능력치 저장 (변화량 표시용)
-            int oldTotalAttack = TotalAttack;
-            int oldTotalDefense = TotalDefense;
+            int oldAttack = attack;
+            int oldDefense = defense;
 
-            // 아이템 효과 적용하여 보너스 능력치 증가
-            bonusAttack += item.Attack;
-            bonusDefense += item.Defense;
+            // 아이템 종류에 따라 다르게 처리
+            if (item.Attack > 0)
+            {
+                // 무기인 경우
+                if (equippedWeapon != null)
+                {
+                    // 이미 무기를 장착 중이면 해제
+                    UnequipItem(equippedWeapon);
+                }
+                equippedWeapon = item;
+                // 공격력 증가
+                bonusAttack += item.Attack;
+                attack += item.Attack;
+            }
+            else if (item.Defense > 0)
+            {
+                // 방어구인 경우
+                if (equippedArmor != null)
+                {
+                    // 이미 방어구를 장착 중이면 해제
+                    UnequipItem(equippedArmor);
+                }
+                equippedArmor = item;
+                // 방어력 증가
+                bonusDefense += item.Defense;
+                defense += item.Defense;
+            }
 
             // 아이템을 장착 상태로 변경
             item.isEquipped = true;
@@ -288,13 +334,13 @@ namespace TeamRpg
             // 공격력 변화가 있으면 표시
             if (item.Attack != 0)
             {
-                Console.WriteLine($"공격력: {oldTotalAttack} -> {TotalAttack} (+{item.Attack})");
+                Console.WriteLine($"공격력: {oldAttack} -> {attack} (+{item.Attack})");
             }
 
             // 방어력 변화가 있으면 표시
             if (item.Defense != 0)
             {
-                Console.WriteLine($"방어력: {oldTotalDefense} -> {TotalDefense} (+{item.Defense})");
+                Console.WriteLine($"방어력: {oldDefense} -> {defense} (+{item.Defense})");
             }
 
             return true; // 장착 성공
@@ -319,12 +365,22 @@ namespace TeamRpg
             }
 
             // 이전 능력치 저장 (변화량 표시용)
-            int oldTotalAttack = TotalAttack;
-            int oldTotalDefense = TotalDefense;
+            int oldAttack = attack;
+            int oldDefense = defense;
 
-            // 아이템 효과 제거로 보너스 능력치 감소
-            bonusAttack -= item.Attack;
-            bonusDefense -= item.Defense;
+            // 아이템 종류에 따라 참조 제거 및 능력치 감소
+            if (equippedWeapon == item)
+            {
+                equippedWeapon = null;
+                bonusAttack -= item.Attack;
+                attack -= item.Attack;
+            }
+            else if (equippedArmor == item)
+            {
+                equippedArmor = null;
+                bonusDefense -= item.Defense;
+                defense -= item.Defense;
+            }
 
             // 아이템 장착 상태 변경
             item.isEquipped = false;
@@ -338,30 +394,16 @@ namespace TeamRpg
             // 공격력 변화가 있으면 표시
             if (item.Attack != 0)
             {
-                Console.WriteLine($"공격력: {oldTotalAttack} -> {TotalAttack} (-{item.Attack})");
+                Console.WriteLine($"공격력: {oldAttack} -> {attack} (-{item.Attack})");
             }
 
             // 방어력 변화가 있으면 표시
             if (item.Defense != 0)
             {
-                Console.WriteLine($"방어력: {oldTotalDefense} -> {TotalDefense} (-{item.Defense})");
+                Console.WriteLine($"방어력: {oldDefense} -> {defense} (-{item.Defense})");
             }
 
             return true; // 해제 성공
-        }
-
-        // ============== 아이템 장착 여부 확인 메서드 ==============
-        // 특정 아이템이 현재 장착되어 있는지 확인합니다.
-        public bool IsItemEquipped(Item item)
-        {
-            return equippedItems.Contains(item);
-        }
-
-        // ============== 장착된 아이템 목록 반환 메서드 ==============
-        // 현재 장착 중인 아이템 목록을 반환합니다.
-        public List<Item> GetEquippedItems()
-        {
-            return equippedItems;
         }
 
         // ============== 체력 회복 메서드 ==============
@@ -446,8 +488,7 @@ namespace TeamRpg
 
         // ============== 직업별 특수 기술 사용 메서드 ==============
         // 각 직업마다 다른 특수 기술을 사용할 수 있습니다.
-        // 현재는 Battle 클래스와 조율이 필요하므로 주석 처리합니다.
-        /*
+        // 주석 처리된 코드를 살림
         public int UseSpecialSkill()
         {
             // 직업별로 다른 특수 기술 구현
@@ -460,25 +501,25 @@ namespace TeamRpg
             {
                 case "검투사":
                     skillName = "콜로세움의 생존자";
-                    skillDamage = (int)(TotalAttack * 2);  // 총 공격력의 2배 데미지
+                    skillDamage = (int)(attack * 2);  // 총 공격력의 2배 데미지
                     manaCost = 20;  // 마나 20 소비
                     break;
 
                 case "수렵꾼":
                     skillName = "야생의 감각";
-                    skillDamage = (int)(TotalAttack * 1.5);  // 총 공격력의 1.5배 데미지
+                    skillDamage = (int)(attack * 1.5);  // 총 공격력의 1.5배 데미지
                     manaCost = 15;  // 마나 15 소비
                     break;
 
                 case "암살자":
                     skillName = "암습";
-                    skillDamage = (int)(TotalAttack * 1.8);  // 총 공격력의 1.8배 데미지
+                    skillDamage = (int)(attack * 1.8);  // 총 공격력의 1.8배 데미지
                     manaCost = 10;  // 마나 10 소비
                     break;
 
                 default:
                     skillName = "기본 스킬";
-                    skillDamage = TotalAttack;  // 기본 공격력과 동일한 데미지
+                    skillDamage = attack;  // 기본 공격력과 동일한 데미지
                     manaCost = 5;  // 마나 5 소비
                     break;
             }
@@ -497,7 +538,6 @@ namespace TeamRpg
                 return 0;  // 마나 부족으로 스킬 사용 실패
             }
         }
-        */
 
         // ============== 속성(Property) 정의 - C#의 getter/setter ==============
         // 다른 클래스에서 플레이어의 속성을 읽거나 수정할 때 사용됩니다.
@@ -556,26 +596,24 @@ namespace TeamRpg
         public int BaseAttack
         {
             get { return baseAttack; }
-            set { baseAttack = Math.Max(1, value); }  // 최소 1의 공격력 보장
+            set
+            {
+                baseAttack = Math.Max(1, value);  // 최소 1의 공격력 보장
+                // 총 공격력도 함께 업데이트
+                attack = baseAttack + bonusAttack;
+            }
         }
 
         // 기본 방어력 - 읽기/쓰기 가능
         public int BaseDefense
         {
             get { return baseDefense; }
-            set { baseDefense = Math.Max(0, value); }  // 최소 0의 방어력 보장
-        }
-
-        // 총 공격력 계산 - 기본 공격력과 장비 보너스의 합
-        public int TotalAttack
-        {
-            get { return baseAttack + bonusAttack; }
-        }
-
-        // 총 방어력 계산 - 기본 방어력과 장비 보너스의 합
-        public int TotalDefense
-        {
-            get { return baseDefense + bonusDefense; }
+            set
+            {
+                baseDefense = Math.Max(0, value);  // 최소 0의 방어력 보장
+                // 총 방어력도 함께 업데이트
+                defense = baseDefense + bonusDefense;
+            }
         }
 
         // 보유 골드 - 읽기/쓰기 가능
