@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TeamRpg
 {
-    internal class Battle
+    public class Battle
     {
         //객체 가져옴
-        Player player = GameManager.Instance.player;
-        Monster monster = GameManager.Instance.monster;
+        Player player = Game.Instance.player;
+        Monster monster = Game.Instance.monster;
 
         Random random = new Random();
         List<Monster> monstersInBattle = new List<Monster>();

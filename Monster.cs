@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamRpg
 {
-    internal class Monster
+    public class Monster
     {
         private string name;
         private int health;
