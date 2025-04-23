@@ -217,8 +217,12 @@ namespace TeamRpg
             // 공격 메시지 출력
             Console.WriteLine($"{name}이(가) 공격합니다! (공격력: {actualAttack})");
 
+            //적 체력 감소
+            Game.Instance.monsterHealth -= actualAttack;
+
             // 계산된 공격력 반환
             return actualAttack;
+
         }
 
         // ============== 골드 획득 메서드 ==============
