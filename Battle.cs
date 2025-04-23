@@ -125,7 +125,6 @@ namespace TeamRpg
         //플레이어 턴
         private void PlayerTurn(Monster target)
         {
-            Thread.Sleep(1000);
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 스킬");
 
@@ -137,13 +136,11 @@ namespace TeamRpg
                     //일반 공격
                     Console.Clear();
                     player.Attack(target);
-                    Thread.Sleep(1000);
                     break;
                 case "2":
                     //스킬
                     Console.Clear();
                     player.UseSpecialSkill(target);
-                    Thread.Sleep(1000);
                     break;
                 default:
                     Console.WriteLine("잘못된 선택입니다.");
@@ -157,7 +154,7 @@ namespace TeamRpg
             Console.WriteLine($"\n{Game.Instance.monsterName}의 턴입니다.");
             monster.EnemyAttack(player);
 
-            Thread.Sleep(1000);
+            Game.Instance.WaitForKeyPress();
         }
     }
 }
