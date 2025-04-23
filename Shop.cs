@@ -222,7 +222,7 @@ namespace TeamRpg
                         continue;
                     }
 
-                    if (item.Job != null && item.Job != player.Job)
+                    if (item.Job != null && item.Job != player.Job && item.Job != "공용")
                     {
                         Console.WriteLine("자네가 그걸 든다면, 웃음거리가 될 뿐이오.");// 특정 직업만 구입가능 아이템
 
