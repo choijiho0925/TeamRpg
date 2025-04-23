@@ -203,7 +203,7 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        검투사로서의 삶        ");
+                    Console.WriteLine($"        검투사: 모래 위의 투혼        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
@@ -215,52 +215,65 @@ namespace TeamRpg
  | |___| (_) | | (_) \__ \__ \ |_| | | | | | |
   \_____\___/|_|\___/|___/___/\__,_|_| |_| |_|
             ");
-                    Console.WriteLine("\n승리. 그저 승리만을 추구하던 시절이 있었다.");
-                    Console.WriteLine("\n영광한 전투에서 적들을 베어내고, 자신의 힘을 증명하는 것.");
-                    Console.WriteLine("\n그것이 검투사로서의 삶이었다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n하지만 언제부터 였을까.");
-                    Console.WriteLine("\n베고 죽이는데에...즐거움도 명예도 목표도 없다는것을 알게된다.");
+                    Console.WriteLine("\n한때, 콜로세움의 뜨거운 모래 위에서 군중의 환호를 받으며 살았다.");
+                    Console.WriteLine("강철과 강철이 부딪히는 소리, 승리의 함성, 패자의 신음...");
+                    Console.WriteLine("오직 강함만이 증명되는 세계에서 정점에 서기도 했다.");
+                    Console.WriteLine("내 이름 앞에는 늘 '불패의', '무적의' 같은 수식어가 따라붙었지.");
+                    Console.WriteLine("\n영광스러운 전투에서 적들을 베어내고 힘을 증명하는 것.");
+                    Console.WriteLine("그것이 검투사로서 나의 전부였다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
-                    // 2부: 전환점
+                    // 2부: 공허함과 새로운 길
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        삶의 2부가 시작된다.        ");
+                    Console.WriteLine($"       검투사: 영광 뒤의 그림자         ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
-
-                    Console.WriteLine("\n그렇다면 이제는 무엇을 위해 싸워야 할까?");
-                    Console.WriteLine("\n이제는 더 이상 싸우지 않겠다고 결심한다.");
-                    Console.WriteLine("\n하지만 그 결심은 오래가지 못했다.");
-                    Console.WriteLine("\n검투사로서의 삶을 끝내고 농사도 지어보고, 대장간에도 취직해봤지만");
-                    Console.WriteLine("\n몸 속에 남은 이상한 갈망이 끊임없이 나를 굶주리게 했다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n집 구석에 박혀있는 검이 언제나 나를 부르듯 속삭인다.");
-                    Console.WriteLine("\n넌 내게서 도망칠 수 없어...라고.");
-                    Console.WriteLine("\n결국 나는....다시 검을 잡고 용병의 길을 선택했다.");
+                    Console.WriteLine("\n하지만 언제부터였을까. 끝없는 싸움에 영혼이 마모되는 것을 느꼈다.");
+                    Console.WriteLine("승리의 순간에도 더 이상 가슴이 뛰지 않았다. 오직 피와 죽음의 공허함만이 남았다.");
+                    Console.WriteLine("베고 죽이는 행위에 즐거움도, 명예도, 목표도 사라져 버렸다.");
+                    Console.WriteLine("\n검을 놓고 다른 삶을 살아보려 했다. 농사도 지어보고, 대장간 일도 해봤지만,");
+                    Console.WriteLine("내 몸은 평화로운 삶을 거부했다. 싸움에 대한 갈망이 나를 놓아주지 않았다.");
+                    Console.WriteLine("집 구석에 박힌 검은 여전히 나를 유혹하는 듯 속삭였다. '넌 도망칠 수 없어...'");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
-                    // 3부: 현재
+                    // 3부: 용병의 삶
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        용병으로 살아가던 나날        ");
+                    Console.WriteLine($"       검투사: 용병의 길           ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
+                    Console.WriteLine("\n결국, 나는 다시 검을 잡았다. 다만 이번엔 영광이 아닌, 돈을 위해서였다.");
+                    Console.WriteLine("용병. 의뢰를 받고 싸우는 삶은 의외로 적성에 맞았다.");
+                    Console.WriteLine("명예는 없었지만, 금화와 술이 있었다. 과거의 영광 따위는 잊은 지 오래.");
+                    Console.WriteLine("그저 하루하루 주어지는 의뢰를 처리하며 살아갈 뿐.");
+                    Console.WriteLine("\n세상이 어떻게 돌아가는지, 왕국에 무슨 일이 벌어지는지는 큰 관심사가 아니다.");
+                    Console.WriteLine("내게 중요한 것은 다음 의뢰와 그 보수뿐이니까.");
+                    Console.WriteLine("하지만 가끔, 밤의 정적 속에서 문득 스스로에게 묻는다.");
+                    Console.WriteLine("'이것이 내가 원했던 삶인가?' ... 답은 찾지 못했다.");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
 
-                    Console.WriteLine("\n꽤 적성에 맞았다. 그저 돈을 받고 죽였다.");
-                    Console.WriteLine("\n명예는 없었지만, 금화와 보물이 있었다.");
-                    Console.WriteLine("\n그렇게 나는 용병으로서의 삶을 살았다.");
-                    Console.WriteLine("\n갑자기 생긴 던전의 이야기로 떠들석했지만, 난 신경쓰지 않았다.");
-                    Console.WriteLine("\n그저 돈이 되는 일이라면 뭐든지 했다.");
-                    Console.WriteLine("\n그러던 어느날. 선발대라는 것이 던전으로 들어갔고");
-                    Console.WriteLine("\n그들은 돌아오지 않았다.");
-                    Console.WriteLine("\n그렇게 일자리가 점점 줄어들던 어느날");
-                    Console.WriteLine("\n왕의 칙서가 내 손에 쥐어졌다.");
+                    // 4부: 왕국의 부름
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"       검투사: 왕국의 부름           ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+                    Console.WriteLine("\n최근 들어 용병 일거리가 눈에 띄게 줄었다.");
+                    Console.WriteLine("수도 근처에서 뭔가 큰일이 벌어졌다는 소문만 무성할 뿐, 정확한 내막은 알 수 없었다.");
+                    Console.WriteLine("의뢰가 줄어드니 수입도 자연스레 줄었고, 술값마저 부담스러워지기 시작했다.");
+                    Console.WriteLine("다시 농사라도 지어야 하나, 아니면 더 위험한 일이라도 찾아야 하나 고민하던 찰나.");
+                    Console.WriteLine("\n낡은 용병 숙소의 문을 두드리는 소리가 들렸다.");
+                    Console.WriteLine("문을 열자, 값비싼 갑옷을 입은 왕궁의 전령이 서 있었다.");
+                    Console.WriteLine("그는 나를 위아래로 훑어보더니, 정중하지만 단호한 목소리로 말했다.");
+                    Console.WriteLine("'왕명을 받들라.'");
+                    Console.WriteLine("\n...그렇게 왕의 칙서가 내 손에 쥐어졌다.");
                     break;
 
                 case "수렵꾼":
@@ -268,7 +281,7 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        청부 수렵꾼의 삶        ");
+                    Console.WriteLine($"        수렵꾼: 숲의 아들        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
@@ -280,66 +293,68 @@ namespace TeamRpg
  | | | (_) | | |  __/\__ \ |_ 
  |_|  \___/|_|  \___||___/\__|
             ");
-                    Console.WriteLine("\n돈을 따라 다녔다.");
-                    Console.WriteLine("\n어렸을 때부터 할 줄 아는 거라곤 활을 쏘고, 짐승을 잡는 것 뿐이었다.");
-                    Console.WriteLine("\n부모가 죽고, 고아가 된 후로는 그깟 동물 사냥으론 먹고 살 수 없었다.");
-                    Console.WriteLine("\n그래서 나는 청부 수렵꾼이 되었다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n돈을 주면 누구든지 죽였다.");
-                    Console.WriteLine("\n어렵지 않았다. 그냥 도망치게 하다 숲으로 들어가면 나의 재능을 발휘했다.");
-                    Console.WriteLine("\n숲은 내 집과 같으며, 정부의 법과 권력의 손길이 닿지 않는 곳이었다.");
-                    Console.WriteLine("\n간단하다. 죽이고, 증거만 가져가면 돈을 준다. 남은 신체는 동물 친구들의 먹이가 된다.");
-                    Console.WriteLine();
+                    Console.WriteLine("\n어렸을 때부터 숲이 나의 스승이자 놀이터였다.");
+                    Console.WriteLine("바람을 읽고, 흔적을 쫓고, 소리 없이 활시위를 당기는 법을 배웠다.");
+                    Console.WriteLine("짐승을 사냥하고 가죽을 벗겨 내다 팔며 겨우 입에 풀칠하던 시절.");
+                    Console.WriteLine("부모님이 돌아가신 후, 세상은 더욱 가혹해졌다.");
+                    Console.WriteLine("\n살아남기 위해, 나는 나의 기술을 다른 방식으로 사용하기 시작했다.");
+                    Console.WriteLine("'청부 수렵꾼'. 돈을 받고 '인간' 사냥을 의뢰받았다.");
+                    Console.WriteLine("숲은 여전히 나의 영역이었고, 그곳에서 나는 누구보다 뛰어난 사냥꾼이었다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
-                    // 2부: 전환점
+                    // 2부: 부러진 화살
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        강제적인 은퇴        ");
+                    Console.WriteLine($"       수렵꾼: 예기치 못한 부상       ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
-
-                    Console.WriteLine("\n그날 따라 날도 좋지 않았고, 표적도 이상했다.");
-                    Console.WriteLine("\n잘난 기사나으리는 처음에 내가 쏜 화살을 맞고 숲으로 도망쳤다.");
-                    Console.WriteLine("\n그래. 그렇게 끝났어야 했다.");
-                    Console.WriteLine("\n하지만 그날은 달랐다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n그는 숲 속에서 나를 기다리고 있었다.");
-                    Console.WriteLine("\n그리고 숲에 익숙한 건 나뿐만이 아니었고,");
-                    Console.WriteLine("\n그런이들은 그 기사나으리의 돈을 받고 나를 사냥하고자 했다.")
-                    Console.WriteLine()
-                    Console.WriteLine("\n그렇게 나는 그들과 싸웠다. 사냥감이 되고 싶지 않았기에.");
-                    Console.WriteLine("\n다행히 나는 살아남았다. 하지만...무릎은 예전같이 잘 움직이지 않았다.");
-                    Console.WriteLine("\n그때 느꼈다. 아, 이제는 더 이상 이런 일을 할 수 없겠구나.");
-                    Console.WriteLine("\n그렇게 나는 숲을 떠났다.");
-                    Console.WriteLine();
+                    Console.WriteLine("\n언제나처럼 의뢰를 수행하던 날이었다. 날씨도 좋지 않았고, 표적도 유난히 까다로웠다.");
+                    Console.WriteLine("숲으로 유인하는 것까진 성공했지만, 그는 혼자가 아니었다.");
+                    Console.WriteLine("매복. 나를 노린 함정이었다. 그들이 노린 것은 내가 가진 돈이었을까, 아니면 내 목숨 자체였을까.");
+                    Console.WriteLine("\n격렬한 싸움 끝에 간신히 살아남았지만, 대가는 컸다.");
+                    Console.WriteLine("무릎에 깊숙이 박힌 화살은 나의 민첩함을 영원히 앗아갔다.");
+                    Console.WriteLine("절뚝이는 다리로는 더 이상 예전처럼 숲을 누빌 수 없었다.");
+                    Console.WriteLine("나의 시대는 그렇게 끝났음을 직감했다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
-                    // 3부: 현재
+                    // 3부: 은퇴자의 그늘
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        불안한 삶        ");
+                    Console.WriteLine($"       수렵꾼: 술집의 이방인         ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
+                    Console.WriteLine("\n숲을 떠나 이름 없는 마을에 정착했다.");
+                    Console.WriteLine("가끔 좀도둑질을 하거나, 사냥으로 얻은 고기를 팔아 근근이 살아갔다.");
+                    Console.WriteLine("삶의 유일한 낙은 해 질 녘 술집에 들러 독한 술을 마시는 것.");
+                    Console.WriteLine("왁자지껄한 사람들 속에서 나는 언제나 이방인이었다.");
+                    Console.WriteLine("\n다친 무릎은 비가 오거나 날이 궂으면 욱신거렸고, 그때마다 과거가 떠올랐다.");
+                    Console.WriteLine("자유롭게 숲을 누비던 시절, 날카로웠던 감각, 그리고... 내가 저질렀던 일들.");
+                    Console.WriteLine("후회는 없다. 그저 살아남기 위한 발버둥이었을 뿐.");
+                    Console.WriteLine("하지만 가끔씩, 조용한 밤이면 활을 잡고 싶다는 충동에 시달린다.");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
 
-                    Console.WriteLine("\n아 그래. 그냥 좀 도둑같이 살았다.");
-                    Console.WriteLine("\n삶의 낙이라곤 하루를 마치며 마을의 술집에서");
-                    Console.WriteLine("\n술을 마시고 그 집주인의 딸을 지켜보는 것 뿐.");
-                    Console.WriteLine("\n그녀는 나를 보지 않았다. 하지만 나는 그녀를 보았다.");
-                    Console.WriteLine("\n상관없었다. 그저 즐거움 중 하나일 뿐이다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n어느날 이었다.");
-                    Console.WriteLine("\n어떤 남자가 나를 불렀다.");
-                    Console.WriteLine("\n그는 나에게 돈과 서류뭉치를 하나 건낸다.");
-                    Console.WriteLine("\n이게 뭐냐고 물어보니,");
-                    Console.WriteLine("\n그냥 읽어보라고 한다.");
-                    Console.WriteLine("\n그것은 왕의 칙서였다. 은퇴했지만, 실적이 좋았던 나를 찾는");
-                    Console.WriteLine("\n나는 가볍게 그 문서를 열어보았다.");
-                    Console.WriteLine();
+                    // 4부: 뜻밖의 방문
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"       수렵꾼: 뜻밖의 방문           ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+                    Console.WriteLine("\n마을에도 뒤숭숭한 소문이 돌기 시작했다. 수도 근처에 괴물 소굴이라도 생긴 건지...");
+                    Console.WriteLine("그런 소문 때문인지, 마을을 찾는 외지인의 발길도 뜸해지고,");
+                    Console.WriteLine("내가 간간이 하던 일거리마저 끊겨 생활이 더욱 팍팍해졌다.");
+                    Console.WriteLine("무릎은 여전히 성가시게 굴었지만, 몸은 근질거렸다. 뭔가 해야 했다.");
+                    Console.WriteLine("\n여느 때처럼 술집 구석에서 술잔을 기울이고 있을 때였다.");
+                    Console.WriteLine("낯선 차림의 남자가 다가와 내 앞에 앉았다. 그의 눈빛은 예사롭지 않았다.");
+                    Console.WriteLine("그는 내 과거를 알고 있다는 듯이, 은밀하게 말을 건넸다.");
+                    Console.WriteLine("'당신의 능력이 필요하다는 분의 전갈이오.'");
+                    Console.WriteLine("\n그가 내민 것은 양피지에 찍힌 왕가의 인장이 선명한 문서였다.");
+                    Console.WriteLine("왕의 칙서. 은퇴한 나를 어떻게 찾아낸 것일까.");
                     break;
 
                 case "암살자":
@@ -347,7 +362,7 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        암살자의 이야기 - 1부        ");
+                    Console.WriteLine($"        암살자: 암부의 도구        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
@@ -359,73 +374,114 @@ namespace TeamRpg
   ____) | | | | (_| | (_| | (_) \ V  V / 
  |_____/|_| |_|\__,_|\__,_|\___/ \_/\_/  
             ");
-                    Console.WriteLine("\n어릴때부터, 암부라고 불리는 집단에서 길러졌다.");
-                    Console.WriteLine("\n그저 남을 죽이는데, 특화된 훈련을 했다.")
-                    Console.WriteLine("\n어릴적부터, 나의 목표는 단 하나였다.");
-                    Console.WriteLine("\n실력과 명성을 쌓아, 이 더러운 암부에서 벗어나는 것.");
-                    Console.WriteLine("\n그래서 돈만 받으면 다 죽였다. 신분에 상관없이.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n그렇게 죽이고, 죽이고, 또 죽이다보니.");
-                    Console.WriteLine("\n어느새 나의 이름은 암부에서 유명해졌다.");
-                    Console.WriteLine("\n그런 나를 암부는 내버려두지 않았다.");
-                    Console.WriteLine("\n점차 내가 죽일 사람들의 신분이 높아졌다.");
-                    Console.WriteLine("\n그렇게 나의 목표는 점차 멀어졌다.");
-                    Console.WriteLine();
+                    Console.WriteLine("\n나의 유년기는 '암부'라 불리는 그림자 조직 안에서 시작되었다.");
+                    Console.WriteLine("이름 대신 코드로 불렸고, 감정 대신 기술을 배웠다.");
+                    Console.WriteLine("소리 없이 다가가 흔적 없이 제거하는 법. 그것이 내가 배운 전부였다.");
+                    Console.WriteLine("나에게 주어진 유일한 목표는 조직 최고의 암살자가 되는 것.");
+                    Console.WriteLine("그것만이 이 지긋지긋한 어둠 속에서 벗어날 유일한 길이라 믿었다.");
+                    Console.WriteLine("\n그래서 닥치는 대로 죽였다. 신분도, 이유도 묻지 않았다. 오직 명령만이 존재했다.");
+                    Console.WriteLine("피로 얼룩진 길 위에서 나의 명성은 높아져만 갔다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
-                    // 2부: 전환점
+                    // 2부: 배신과 탈출
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        암살자의 이야기 - 2부        ");
+                    Console.WriteLine($"       암살자: 버려진 칼날           ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
-
-                    Console.WriteLine("\n그럴듯한 명분은 없었다.");
-                    Console.WriteLine("\n그저 암부의 명령이었고, 그 명령을 따르지 않으면 나의 목숨이 위험했다.");
-                    Console.WriteLine("\n그렇게 나는 암부의 명령을 따르며,");
-                    Console.WriteLine("\n무고한 이들의 피를 흘리게 했다.");
-                    Console.WriteLine("\n그런데 어느날, 암부의 명령이 나를 죽이려는 것이었다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\아. 그렇구나. 암부의 수뇌부는 수십년간 바뀌지 않았고,");
-                    Console.WriteLine("\n그들이 수십년간 안전할 수 있었던 이유는");
-                    Console.WriteLine("\n수많은 에이스들이 그들을 죽이지 않았기 때문이었다.");
-                    Console.WriteLine("\n아니, 죽일 수 없었기 때문이었다.");
-                    Console.WriteLine("\n허탈함에 그저, 도망쳤다. 따라오는 자들을 모두 죽여가며.");
-                    Console.WriteLine();
+                    Console.WriteLine("\n조직의 신뢰를 얻었다고 생각했을 때, 나는 가장 큰 실수를 저질렀다.");
+                    Console.WriteLine("암부의 수뇌부는 결코 도구를 신뢰하지 않았다. 그들은 오직 이용하고 버릴 뿐.");
+                    Console.WriteLine("나의 명성이 너무 높아진 것이 문제였을까. 아니면 그들의 비밀을 너무 많이 알게 된 것일까.");
+                    Console.WriteLine("어느 날 내려온 명령. 다음 제거 대상은 바로 나 자신이었다.");
+                    Console.WriteLine("\n허탈했다. 평생을 바친 조직에게 배신당했다는 사실보다,");
+                    Console.WriteLine("그들의 손아귀에서 벗어날 수 없다고 믿었던 어리석음이 더 견딜 수 없었다.");
+                    Console.WriteLine("나는 처음으로 명령을 거부하고 도망쳤다.");
+                    Console.WriteLine("과거의 동료들이 추격자로 변해 나를 쫓았고, 나는 그들을 모두 베어 넘기며 어둠 속으로 사라졌다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
-                    // 3부: 현재
+                    // 3부: 숨겨진 삶
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        암살자의 이야기 - 3부        ");
+                    Console.WriteLine($"       암살자: 그림자 속의 생존        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
+                    Console.WriteLine("\n그 후로 나는 유령처럼 살았다. 이름도, 얼굴도, 과거도 없는 존재.");
+                    Console.WriteLine("작은 마을들을 전전하며 눈에 띄지 않게 숨어 지냈다.");
+                    Console.WriteLine("암부의 추적은 집요했고, 잠시의 방심도 허용되지 않았다.");
+                    Console.WriteLine("사람들과 어울리는 법도, 평범하게 살아가는 법도 잊은 지 오래.");
+                    Console.WriteLine("내가 아는 세상은 오직 경계와 의심, 그리고 생존 본능뿐이었다.");
+                    Console.WriteLine("\n때로는 과거의 기술을 이용해 생계를 유지하기도 했지만,");
+                    Console.WriteLine("그럴 때마다 암부에게 발각될 위험은 커져만 갔다.");
+                    Console.WriteLine("나는 여전히 그림자 속에 속박되어 있었다.");
+                    Console.WriteLine("언제까지 이렇게 도망쳐야 할까. 진정한 자유는 어디에 있는 걸까.");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
 
-                    Console.WriteLine("\n숨어살다보니, 돈도 부족하고. 여러가지로 사회는,");
-                    Console.WriteLine("\n내가 배운 상식들과 동떨어져 있었다.");
-                    Console.WriteLine("\n적응할 수 없었다. 나는 그저 뒤떨어진 사람일 뿐이었다.");
-                    Console.WriteLine("\n그렇게 숨어살던 중, 우연히 수도와 가까운 마을에 도착했다.");
-                    Console.WriteLine("\n그곳에서, 어떻게 나를 찾았는지");
-                    Console.WriteLine("\n왕의 부하들이 나를 찾고 있었다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n그들은 나에게 왕의 칙서를 건내주며,");
-                    Console.WriteLine("\n왕의 명령을 수행하라고 했다.");
-                    Console.WriteLine("\n암부에게서 도망칠 수 있다고, 왕이 보장해준다고 했다.");
-                    Console.WriteLine("\n뭐....그들은 그 말만 남기고 사라졌다.");
-                    Console.WriteLine();
-                    Console.WriteLine("\n나는 가볍게 칙서를 열어본다.");
-                    Console.WriteLine();
+                    // 4부: 드러난 그림자
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"       암살자: 드러난 그림자           ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+                    Console.WriteLine("\n숨어 지내는 것도 한계에 다다르고 있었다. 자금은 바닥났고, 암부의 추적은 점점 숨통을 조여왔다.");
+                    Console.WriteLine("이 마을도 더 이상 안전하지 않다는 불길한 예감이 들었다. 떠나야 했다.");
+                    Console.WriteLine("하지만 어디로 가야 할까? 암부의 손길이 닿지 않는 곳이 세상에 존재하기는 할까?");
+                    Console.WriteLine("막다른 길에 몰린 기분이었다.");
+                    Console.WriteLine("\n짐을 챙겨 어둠 속으로 다시 몸을 숨기려던 그 밤.");
+                    Console.WriteLine("골목길 어귀에서 나를 기다리고 있는 이들이 있었다. 암부가 아니었다.");
+                    Console.WriteLine("그들의 복장은... 왕궁 소속임을 나타내고 있었다.");
+                    Console.WriteLine("그들은 나를 제압하려 하지 않았다. 대신, 한 사람이 조용히 문서를 내밀었다.");
+                    Console.WriteLine("'왕께서 찾으신다.'");
+                    Console.WriteLine("\n그것은... 왕의 칙서였다. 어떻게 나를...? 그리고 왜...?");
                     break;
 
-                default:
-                    Console.WriteLine("\n스토리 텍스트");
+                default: // 혹시 모를 예외 처리
+                    Console.WriteLine("\n당신의 이야기는 아직 시작되지 않았습니다...");
                     break;
             }
+            // 모든 직업 스토리 공통으로 칙서 내용 표시 전에 잠시 대기
+            Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+            Console.ReadKey(true);
 
+            // 왕의 칙서 내용 표시
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Magenta; // 칙서 내용을 다른 색으로 강조
+            Console.WriteLine("========================================");
+            Console.WriteLine($"          왕 의  칙 서             ");
+            Console.WriteLine("========================================");
+            Console.ResetColor();
+            Console.WriteLine("\n그대에게 왕명을 내린다.");
+            Console.WriteLine("\n최근 수도 인근에서 발견된 정체불명의 지하 던전으로 인해 왕국이 혼란에 빠졌다.");
+            Console.WriteLine("이에 선발대를 파견하였으나, 안타깝게도 그들과의 소식이 끊긴 지 오래다.");
+            Console.WriteLine("\n그대의 뛰어난 능력과 용맹함에 대한 명성을 익히 들어 알고 있다.");
+            Console.WriteLine("부디 왕국을 위해 그대의 힘을 빌려주길 바란다.");
+            Console.WriteLine("\n던전으로 진입하여 실종된 선발대의 행방을 찾고,");
+            Console.WriteLine("던전 내부의 상황을 파악하여 보고하라.");
+            Console.WriteLine("그대의 용기와 헌신에는 합당한 보상을 약속하겠다.");
+            Console.WriteLine("\n왕국의 안위가 그대의 어깨에 달려있다.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n- 국왕 라인헬름2세 -");
+            Console.ResetColor();
+
+            Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+            Console.ReadKey(true);
+
+            // 최종 전환 문구 표시
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green; // 마지막 문구를 다른 색으로
+            Console.WriteLine("========================================");
+            Console.WriteLine($"            심 연 으 로             ");
+            Console.WriteLine("========================================");
+            Console.ResetColor();
+            Console.WriteLine("\n그 목적이 탐욕이든, 영광이든. 당신은 이 빌어먹을 던전에 찾아왔습니다...");
+            Console.WriteLine("\n당신의 앞에... 어떤 운명이 기다리고 있을까요?");
+
+            // 마지막 키 입력 대기 (이후 게임 로직으로 넘어감)
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
         }
@@ -520,9 +576,23 @@ namespace TeamRpg
         private void DisplayMainMenu()
         {
             Console.Clear();
+
+            // 분위기 묘사 텍스트 추가
+            Console.ForegroundColor = ConsoleColor.DarkGray; // 어두운 회색 유지
+            Console.WriteLine("\n버려진 듯 넓은 공터에는 임시 천막과 조잡한 가건물들이 어지럽게 널려있다.");
+            Console.WriteLine("한때는 북적였을 법한 이곳엔 이제 스산한 바람 소리만이 감돌 뿐, 사람의 온기라곤 느껴지지 않는다.");
+            Console.WriteLine("먼지가 내려앉은 길 위에는 정체 모를 발자국들만 희미하게 남아있고,");
+            Console.WriteLine("저편의 여관과 상점만이 꺼질 듯한 불빛을 내며 기묘한 존재감을 드러낸다.");
+            Console.WriteLine(); // 공백 추가
+            Console.WriteLine("그 안에 선 여관주인과 상점주인은 초췌한 몰골로, 텅 빈 눈동자로 나를 응시한다.");
+            Console.WriteLine("몇 마디 말을 걸어보았지만, 돌아오는 것은 의미 없는 침묵과 각자의 목적을 위한 대답뿐.");
+            Console.WriteLine("그들은... 아니, 이것들은... 내 질문에 답할 생각이 전혀 없어 보인다.");
+            Console.WriteLine("이 섬뜩한 정적 속에는 무엇이 도사리고 있는 걸까.\n");
+            Console.ResetColor(); // 색상 초기화
+            // 메인 메뉴 제목
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("========================================");
-            Console.WriteLine("              메인 메뉴                 ");
+            Console.WriteLine("            제1원정대 정착지            ");
             Console.WriteLine("========================================");
             Console.ResetColor();
 
