@@ -86,9 +86,17 @@ namespace TeamRpg
                 Console.WriteLine($"{player.Name}의 체력: {player.Health}, {target.Name}의 체력: {target.Health}\n");
 
                 PlayerTurn(target);
-                EnemyTurn();
+                if (target.Health <= 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write($"\n{target.Name}");
+                    Console.ResetColor();
+                    Console.Write("이(가) 사망했습니다.\n");
+                }
+                if (Game.Instance.monstersInBattle.Any(monster => monster.Health > 0)) EnemyTurn();
             }
 
+            Game.Instance.WaitForKeyPress();
             Console.Clear();
 
             // 모든 몬스터가 죽었는지 다시 확인
@@ -151,7 +159,7 @@ namespace TeamRpg
         //적 턴
         private void EnemyTurn()
         {
-            Console.WriteLine($"\n{Game.Instance.monsterName}의 턴입니다.");
+            Console.WriteLine($"\n적의 턴입니다.");
             monster.EnemyAttack(player);
 
             Game.Instance.WaitForKeyPress();
