@@ -192,7 +192,7 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        검투사의 이야기 - 1부        ");
+                    Console.WriteLine($"        검투사로서의 삶        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
@@ -204,7 +204,11 @@ namespace TeamRpg
  | |___| (_) | | (_) \__ \__ \ |_| | | | | | |
   \_____\___/|_|\___/|___/___/\__,_|_| |_| |_|
             ");
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n승리. 그저 승리만을 추구하던 시절이 있었다.");
+                    Console.WriteLine("영광한 전투에서 적들을 베어내고, 자신의 힘을 증명하는 것.");
+                    Console.WriteLine("그것이 검투사로서의 삶이었다.");
+                    Console.WriteLine("\n하지만 언제부터 였을까.");
+                    Console.WriteLine("\n베고 죽이는데에...즐거움도 명예도 목표도 없다는것을 알게된다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
@@ -212,11 +216,19 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        검투사의 이야기 - 2부        ");
+                    Console.WriteLine($"        삶의 2부가 시작된다.        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n그렇다면 이제는 무엇을 위해 싸워야 할까?");
+                    Console.WriteLine("\n이제는 더 이상 싸우지 않겠다고 결심한다.");
+                    Console.WriteLine("\n하지만 그 결심은 오래가지 못했다.");
+                    Console.WriteLine("\n검투사로서의 삶을 끝내고 농사도 지어보고, 대장간에도 취직해봤지만");
+                    Console.WriteLine("\n몸 속에 남은 이상한 갈망이 끊임없이 나를 굶주리게 했다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n집 구석에 박혀있는 검이 언제나 나를 부르듯 속삭인다.");
+                    Console.WriteLine("\n넌 내게서 도망칠 수 없어...라고.");
+                    Console.WriteLine("\n결국 나는....다시 검을 잡고 용병의 길을 선택했다.")
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
@@ -224,11 +236,19 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        검투사의 이야기 - 3부        ");
+                    Console.WriteLine($"        용병으로 살아가던 나날        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n꽤 적성에 맞았다. 그저 돈을 받고 죽였다.");
+                    Console.WriteLine("\n명예는 없었지만, 금화와 보물이 있었다.");
+                    Console.WriteLine("\n그렇게 나는 용병으로서의 삶을 살았다.");
+                    Console.WriteLine("\n갑자기 생긴 던전의 이야기로 떠들석했지만, 난 신경쓰지 않았다.");
+                    Console.WriteLine("\n그저 돈이 되는 일이라면 뭐든지 했다.");
+                    Console.WriteLine("\n그러던 어느날. 선발대라는 것이 던전으로 들어갔고");
+                    Console.WriteLine("\n그들은 돌아오지 않았다.");
+                    Console.WriteLine("\n그렇게 일자리가 점점 줄어들던 어느날")
+                    Console.WriteLine("\n왕의 칙서가 내 손에 쥐어졌다.");
                     break;
 
                 case "수렵꾼":
