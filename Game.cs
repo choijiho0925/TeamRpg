@@ -130,13 +130,13 @@ namespace TeamRpg
             {
                 Console.WriteLine("\n직업을 선택하세요:");
                 Console.WriteLine("1. 검투사 - 체력과 방어력이 높은 전사입니다.");
-                Console.WriteLine("콜로세움에서 전투를 즐기던 전사로서 적들과의 전투에서 뛰어난 능력을 발휘합니다.");
+                Console.WriteLine("콜로세움에서 전투를 즐기던 전사. 적들과의 전투에서 물러서지 않는 투지를 발휘합니다.");
                 Console.WriteLine();
                 Console.WriteLine("2. 수렵꾼 - 균형 잡힌 능력치를 가진 궁수입니다.");
-                Console.WriteLine("사냥꾼으로서의 직감과 경험을 바탕으로 적들을 물리치는 데 능숙합니다.");
+                Console.WriteLine("숲을 누비던 청부사냥꾼. 사냥꾼으로서의 직감과 경험을 바탕으로 적들을 물리치는 데 능숙합니다.");
                 Console.WriteLine();
                 Console.WriteLine("3. 암살자 - 공격력이 높은 도적입니다.");
-                Console.WriteLine("어둠 속에서 타겟을 조용히 처리하는 능력을 가지고 있습니다.");
+                Console.WriteLine("돈만 주면 누구든 암살하는 암부의 에이스 암살자. 어둠 속에서 타겟을 조용히 처리하는 능력을 가지고 있습니다.");
                 Console.WriteLine();
 
                 Console.Write("\n선택 (1-3): ");
