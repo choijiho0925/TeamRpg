@@ -249,6 +249,80 @@ namespace TeamRpg
 
         }
 
+        // ============== 포션 사용 메서드 ==============
+        // 전투 중 HP나 MP 포션을 사용할 때 호출됩니다.
+        public bool UsePotion(string potionType)
+        {
+            // 포션 종류 확인 (HP 또는 MP)
+            if (potionType == "HP")
+            {
+                // HP 포션 (엘릭서) 찾기
+                Item hpPotion = inventory.FirstOrDefault(item => item.Name == "엘릭서" && item.isBuy);
+
+                // 포션이 없으면 사용 실패
+                if (hpPotion == null)
+                {
+                    Console.WriteLine("엘릭서가 없습니다!");
+                    return false;
+                }
+
+                // 포션 사용하여 체력 회복 (50 고정)
+                int oldHealth = Health;
+                Heal(50); // 기존 Heal 메서드 활용
+
+                // 인벤토리에서 포션 제거
+                inventory.Remove(hpPotion);
+
+                Console.WriteLine($"엘릭서를 사용했습니다! 체력이 회복되었습니다. ({oldHealth} -> {Health}/{MaxHealth})");
+                return true;
+            }
+            else if (potionType == "MP")
+            {
+                // MP 포션 (무미야) 찾기
+                Item mpPotion = inventory.FirstOrDefault(item => item.Name == "무미야" && item.isBuy);
+
+                // 포션이 없으면 사용 실패
+                if (mpPotion == null)
+                {
+                    Console.WriteLine("무미야가 없습니다!");
+                    return false;
+                }
+
+                // 포션 사용하여 마나 회복 (50 고정)
+                int oldMana = Mana;
+                RecoverMana(50); // 기존 RecoverMana 메서드 활용
+
+                // 인벤토리에서 포션 제거
+                inventory.Remove(mpPotion);
+
+                Console.WriteLine($"무미야를 사용했습니다! 마나가 회복되었습니다. ({oldMana} -> {Mana}/{MaxMana})");
+                return true;
+            }
+
+            // 잘못된 포션 타입 요청
+            Console.WriteLine("알 수 없는 포션 타입입니다!");
+            return false;
+        }
+
+        // ============== 포션 개수 확인 메서드 ==============
+        // 특정 종류의 포션 개수를 반환합니다.
+        public int GetPotionCount(string potionType)
+        {
+            if (potionType == "HP")
+            {
+                // HP 포션 (엘릭서) 개수 반환
+                return inventory.Count(item => item.Name == "엘릭서" && item.isBuy);
+            }
+            else if (potionType == "MP")
+            {
+                // MP 포션 (무미야) 개수 반환
+                return inventory.Count(item => item.Name == "무미야" && item.isBuy);
+            }
+
+            // 잘못된 포션 타입
+            return 0;
+        }
+
         // ============== 골드 획득 메서드 ==============
         // 전투 승리나 아이템 판매 등으로 골드를 획득할 때 호출됩니다.
         public void EarnGold(int amount)

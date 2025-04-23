@@ -25,12 +25,14 @@ namespace TeamRpg
         {
             while (true)
             {
-
-
                 Console.Clear();
                 Console.WriteLine("인벤토리");
 
-                if (player.inventory.Count == 0)
+                // 포션이 아닌 아이템 필터링
+                var nonPotionItems = player.inventory.Where(item =>
+                    item.Name != "엘릭서" && item.Name != "무미야").ToList();
+
+                if (nonPotionItems.Count == 0)
                 {
                     Console.WriteLine("아무것도없음");
                     Console.WriteLine("엔터누르면계속");
@@ -38,9 +40,9 @@ namespace TeamRpg
                     return;
                 }
 
-                for (int i = 0; i < player.inventory.Count; i++)
+                for (int i = 0; i < nonPotionItems.Count; i++)
                 {
-                    var item = player.inventory[i];
+                    var item = nonPotionItems[i];
 
                     string equipMark = "   ";
                     ConsoleColor? color = null;
@@ -76,26 +78,18 @@ namespace TeamRpg
 
                 if (input == "0") return;
 
-                if (int.TryParse(input, out var index) && index >= 1 && index <= player.inventory.Count)
+                if (int.TryParse(input, out var index) && index >= 1 && index <= nonPotionItems.Count)
                 {
-                    EquipItem(player.inventory[index - 1]);
-                    Console.WriteLine($"{player.inventory[index - 1].Name}장착됨!");
+                    EquipItem(nonPotionItems[index - 1]);
+                    Console.WriteLine($"{nonPotionItems[index - 1].Name}장착됨!");
                 }
                 else
                 {
-
                     Console.WriteLine("다시 입력하세요");
-
-
                 }
                 Console.WriteLine("엔터 누르면 계속");
                 Console.ReadLine();
-
-
-
             }
-
-
         }
         private void EquipItem(Item item)
         {

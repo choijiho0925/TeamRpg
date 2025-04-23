@@ -135,25 +135,94 @@ namespace TeamRpg
         {
             Console.WriteLine("1. 공격");
             Console.WriteLine("2. 스킬");
+            Console.WriteLine("3. 특수행동"); // 새로운 옵션 추가
 
             string choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    //일반 공격
+                    // 일반 공격
                     Console.Clear();
                     player.Attack(target);
                     break;
                 case "2":
-                    //스킬
+                    // 스킬
                     Console.Clear();
                     player.UseSpecialSkill(target);
+                    break;
+                case "3":
+                    // 특수행동 - 포션 사용
+                    Console.Clear();
+                    UseSpecialAction();
                     break;
                 default:
                     Console.WriteLine("잘못된 선택입니다.");
                     Thread.Sleep(1000);
                     break;
+            }
+        }
+
+        // ============== 특수행동 메서드 ==============
+        // 전투 중 특수행동(포션 사용 등)을 처리합니다.
+        private void UseSpecialAction()
+        {
+            Console.Clear();
+            Console.WriteLine("===== 특수행동 =====");
+            Console.WriteLine("1. 엘릭서 사용 [HP 회복] - 남은 개수: " + player.GetPotionCount("HP"));
+            Console.WriteLine("2. 무미야 사용 [MP 회복] - 남은 개수: " + player.GetPotionCount("MP"));
+            Console.WriteLine("0. 돌아가기");
+
+            Console.Write("\n선택: ");
+            string actionChoice = Console.ReadLine();
+
+            switch (actionChoice)
+            {
+                case "1":
+                    // HP 포션 사용
+                    if (player.UsePotion("HP"))
+                    {
+                        // 포션 사용 성공 - 턴 종료
+                        Game.Instance.WaitForKeyPress();
+                    }
+                    else
+                    {
+                        // 포션 없음 - 다시 특수행동 메뉴로
+                        Game.Instance.WaitForKeyPress();
+                        UseSpecialAction();
+                        return;
+                    }
+                    break;
+
+                case "2":
+                    // MP 포션 사용
+                    if (player.UsePotion("MP"))
+                    {
+                        // 포션 사용 성공 - 턴 종료
+                        Game.Instance.WaitForKeyPress();
+                    }
+                    else
+                    {
+                        // 포션 없음 - 다시 특수행동 메뉴로
+                        Game.Instance.WaitForKeyPress();
+                        UseSpecialAction();
+                        return;
+                    }
+                    break;
+
+                case "0":
+                    // 돌아가기 (턴은 소비하지 않음)
+                    Console.WriteLine("특수행동을 취소합니다.");
+                    Game.Instance.WaitForKeyPress();
+                    // 다시 행동 선택으로 돌아감
+                    PlayerTurn(Game.Instance.monstersInBattle.FirstOrDefault(m => m.Health > 0));
+                    return;
+
+                default:
+                    Console.WriteLine("잘못된 선택입니다.");
+                    Game.Instance.WaitForKeyPress();
+                    UseSpecialAction();
+                    return;
             }
         }
         //적 턴
