@@ -3,6 +3,13 @@ using System.Runtime.InteropServices;
 
 namespace TeamRpg
 {
+    [DllImport("kernel32.dll", ExactSpelling = true)]
+    private static extern IntPtr GetConsoleWindow();
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+    private const int MAXIMIZE = 3;
     // Program 클래스 - 프로그램의 진입점 역할을 합니다.
     class Program
     {
@@ -11,6 +18,10 @@ namespace TeamRpg
         {
             try
             {
+                // 콘솔 윈도우 최대화
+                IntPtr consoleWindow = GetConsoleWindow();
+                ShowWindow(consoleWindow, MAXIMIZE);
+
                 // 콘솔 제목 설정
                 Console.Title = "Team RPG Adventure";
 
