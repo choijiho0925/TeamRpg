@@ -103,6 +103,7 @@ namespace TeamRpg
         }
 
         // 플레이어 생성 메서드
+        // 플레이어 생성 메서드
         private void CreatePlayer()
         {
             Console.Clear();
@@ -127,8 +128,14 @@ namespace TeamRpg
             {
                 Console.WriteLine("\n직업을 선택하세요:");
                 Console.WriteLine("1. 검투사 - 체력과 방어력이 높은 전사입니다.");
+                Console.WriteLine("콜로세움에서 전투를 즐기던 전사로서 적들과의 전투에서 뛰어난 능력을 발휘합니다.")
+                Console.WriteLine();
                 Console.WriteLine("2. 수렵꾼 - 균형 잡힌 능력치를 가진 궁수입니다.");
+                Console.WriteLine("사냥꾼으로서의 직감과 경험을 바탕으로 적들을 물리치는 데 능숙합니다.");
+                Console.WriteLine();
                 Console.WriteLine("3. 암살자 - 공격력이 높은 도적입니다.");
+                Console.WriteLine("어둠 속에서 타겟을 조용히 처리하는 능력을 가지고 있습니다.");
+                Console.WriteLine();
 
                 Console.Write("\n선택 (1-3): ");
                 string jobChoice = Console.ReadLine();
@@ -153,6 +160,9 @@ namespace TeamRpg
                 }
             }
 
+            // 화면 지우기
+            Console.Clear();
+
             // 플레이어 객체 생성
             player = new Player(name, job);
 
@@ -162,6 +172,9 @@ namespace TeamRpg
             Console.WriteLine("\n캐릭터 생성이 완료되었습니다! 게임을 시작합니다.");
             Console.WriteLine("계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
+
+            // 키 입력 후 화면 다시 지우기
+            Console.Clear();
         }
 
         // 시작 장비 지급 메서드
