@@ -19,6 +19,8 @@ namespace TeamRpg
         private int maxHealth;      // 최대 체력
         private int mana;           // 현재 마나
         private int maxMana;        // 최대 마나
+        private int level;       // 플레이어 레벨
+        private int experience;  // 누적 경험치 (비공개, 출력 X)
 
         // 기존 코드와의 호환성을 위해 public으로 변경
         public int attack;          // 전체 공격력 (기본 + 장비 보너스)
@@ -65,6 +67,10 @@ namespace TeamRpg
             // 총 공격력과 방어력 초기화
             this.attack = this.baseAttack + this.bonusAttack;
             this.defense = this.baseDefense + this.bonusDefense;
+
+            // 레벨과 경험치 초기화
+            this.level = 1;      // 레벨 1로 고정
+            this.experience = 0; // 경험치 0으로 시작
 
             // 장착된 아이템 리스트 초기화
             this.equippedItems = new List<Item>();
@@ -156,6 +162,7 @@ namespace TeamRpg
             // 각 속성별로 정보 출력
             Console.WriteLine($"이름: {name}");
             Console.WriteLine($"직업: {job}");
+            Console.WriteLine($"레벨: {level}");  // 레벨 정보 출력 추가
             Console.WriteLine($"체력: {health}/{maxHealth}");
             Console.WriteLine($"마나: {mana}/{maxMana}");
             Console.WriteLine($"기본 공격력: {baseAttack} (장비 보너스: +{attack - baseAttack})");
@@ -180,6 +187,23 @@ namespace TeamRpg
 
             // 마무리 구분선
             Console.WriteLine("========================\n");
+        }
+
+
+        public void EarnExperience(int amount)
+        {
+            experience += amount;
+            // 현재는 레벨업 기능이 없으므로 단순히 누적만 함
+        }
+
+        public int Level
+        {
+            get { return level; }
+        }
+
+        public int Experience
+        {
+            get { return experience; }
         }
 
         // ============== 데미지 처리 메서드 ==============
