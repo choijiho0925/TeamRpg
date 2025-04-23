@@ -102,11 +102,11 @@ namespace TeamRpg
 
             // 전체화면 권장 메시지 (경고 형태로 강조)
             Console.ForegroundColor = ConsoleColor.Red;  // 빨간색으로 설정 (경고색)
-            Console.WriteLine("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
-            Console.WriteLine("▓    !!! 이 게임은 전체화면 플레이를 권장합니다!!!   ▓");
-            Console.WriteLine("▓    전체화면 미 활용시, 스크립트 반복 출력 오류가   ▓");
-            Console.WriteLine("▓       발생하여 게임의 몰입감을 해칠수있습니다.     ▓");
-            Console.WriteLine("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
+            Console.WriteLine("======================================================");
+            Console.WriteLine("=    !!! 이 게임은 전체화면 플레이를 권장합니다!!!   =");
+            Console.WriteLine("=    전체화면 미 활용시, 스크립트 반복 출력 오류가   =");
+            Console.WriteLine("=       발생하여 게임의 몰입감을 해칠수있습니다.     =");
+            Console.WriteLine("======================================================");
             Console.ResetColor();  // 색상 초기화
 
             Console.WriteLine("\n게임을 시작하려면 아무 키나 누르세요...");
