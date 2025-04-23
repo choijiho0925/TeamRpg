@@ -97,7 +97,7 @@ namespace TeamRpg
             Console.WriteLine("          Into the Abyss            ");
             Console.WriteLine("========================================");
             Console.ResetColor();
-            Console.WriteLine("\n스파르타 던전에 오신 것을 환영합니다!");
+            Console.WriteLine("\n정체를 알 수 없는 심연의 던전에 오신 것을 환영합니다!");
             Console.WriteLine("던전을 탐험하고, 미스테리한 사건에 직면하며 엔딩에 도달해보세요.");
 
             // 전체화면 권장 메시지 (경고 형태로 강조)
@@ -338,6 +338,7 @@ namespace TeamRpg
                     Console.WriteLine("\n이게 뭐냐고 물어보니,");
                     Console.WriteLine("\n그냥 읽어보라고 한다.");
                     Console.WriteLine("\n그것은 왕의 칙서였다. 은퇴했지만, 실적이 좋았던 나를 찾는");
+                    Console.WriteLine("\n나는 가볍게 그 문서를 열어보았다.");
                     Console.WriteLine();
                     break;
 
@@ -381,7 +382,18 @@ namespace TeamRpg
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n그럴듯한 명분은 없었다.");
+                    Console.WriteLine("\n그저 암부의 명령이었고, 그 명령을 따르지 않으면 나의 목숨이 위험했다.");
+                    Console.WriteLine("\n그렇게 나는 암부의 명령을 따르며,");
+                    Console.WriteLine("\n무고한 이들의 피를 흘리게 했다.");
+                    Console.WriteLine("\n그런데 어느날, 암부의 명령이 나를 죽이려는 것이었다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\아. 그렇구나. 암부의 수뇌부는 수십년간 바뀌지 않았고,");
+                    Console.WriteLine("\n그들이 수십년간 안전할 수 있었던 이유는");
+                    Console.WriteLine("\n수많은 에이스들이 그들을 죽이지 않았기 때문이었다.");
+                    Console.WriteLine("\n아니, 죽일 수 없었기 때문이었다.");
+                    Console.WriteLine("\n허탈함에 그저, 도망쳤다. 따라오는 자들을 모두 죽여가며.");
+                    Console.WriteLine();
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
@@ -393,7 +405,20 @@ namespace TeamRpg
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n숨어살다보니, 돈도 부족하고. 여러가지로 사회는,");
+                    Console.WriteLine("\n내가 배운 상식들과 동떨어져 있었다.");
+                    Console.WriteLine("\n적응할 수 없었다. 나는 그저 뒤떨어진 사람일 뿐이었다.");
+                    Console.WriteLine("\n그렇게 숨어살던 중, 우연히 수도와 가까운 마을에 도착했다.");
+                    Console.WriteLine("\n그곳에서, 어떻게 나를 찾았는지");
+                    Console.WriteLine("\n왕의 부하들이 나를 찾고 있었다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n그들은 나에게 왕의 칙서를 건내주며,");
+                    Console.WriteLine("\n왕의 명령을 수행하라고 했다.");
+                    Console.WriteLine("\n암부에게서 도망칠 수 있다고, 왕이 보장해준다고 했다.");
+                    Console.WriteLine("\n뭐....그들은 그 말만 남기고 사라졌다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n나는 가볍게 칙서를 열어본다.");
+                    Console.WriteLine();
                     break;
 
                 default:
