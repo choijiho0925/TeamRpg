@@ -174,38 +174,39 @@ namespace TeamRpg
             // 모든 아이템을 검사하며 직업에 맞는 기본 장비 찾기
             foreach (Item item in items)
             {
-                // 기본 방어구는 모든 직업 공통 (공용, 방어력 있음, 레벨 1)
-                if (item.Job == "공용" && item.Defense > 0 && item.Description == "1")
+                // 기본 방어구는 "패디드 아머" (공용, 가장 낮은 방어력)
+                if (item.Job == "공용" && item.Name == "패디드 아머" && item.Gold == 0)
                 {
                     startingArmor = item;
                     item.isBuy = true; // 구매한 것으로 표시
                 }
 
-                // 기본 무기는 직업별로 다름 (공격력 있음, 레벨 1)
-                // 여기서는 player.Job을 그대로 사용합니다 (변환 없이)
-                if (item.Job == player.Job && item.Attack > 0 && item.Description == "1")
+                // 기본 무기는 직업별로 다름 (Gold가 0인 가장 기본 무기)
+                if (item.Job == player.Job && item.Gold == 0 && item.Attack > 0)
                 {
                     startingWeapon = item;
                     item.isBuy = true; // 구매한 것으로 표시
                 }
             }
 
-            // 기본 장비 인벤토리에 추가
+            // 기본 장비 인벤토리에 추가 및 자동 장착
             if (startingWeapon != null)
             {
                 player.inventory.Add(startingWeapon);
+                player.EquipItem(startingWeapon); // 자동 장착
                 Console.WriteLine($"기본 무기를 지급받았습니다: {startingWeapon.Name}");
             }
 
             if (startingArmor != null)
             {
                 player.inventory.Add(startingArmor);
+                player.EquipItem(startingArmor); // 자동 장착
                 Console.WriteLine($"기본 방어구를 지급받았습니다: {startingArmor.Name}");
             }
 
             // 시작 골드 지급
             player.Gold = 0;
-            Console.WriteLine("시작 골드는 0G입니다. 던전을 탐험하여 골드를 모아보세요!");
+            Console.WriteLine($"시작 골드는 {player.Gold}G 입니다. 던전을 탐험하고, 선발대의 흔적을 찾으며 G를 모아보세요.");
         }
 
 
