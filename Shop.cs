@@ -183,14 +183,14 @@ namespace TeamRpg
                     if (item.isBuy)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray; // 이미 구매한 아이템은 회색
-                        Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}) [구매 완료]");
+                        Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}) [구매 완료]\n{item.Description}");
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White; // 기본 색상
-                        Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense})");
+                        Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}\n{item.Description}");
                     }
-
+                    Console.WriteLine();
                     Console.ResetColor(); // 색상 초기화
                 }
 
