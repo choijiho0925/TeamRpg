@@ -26,6 +26,79 @@ namespace TeamRpg
             }
         }
 
+
+        public static void ClearConsoleCompletely()
+        {
+            // 현재 콘솔 핸들 가져오기
+            IntPtr hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+            // 현재 콘솔 정보 가져오기
+            CONSOLE_SCREEN_BUFFER_INFO csbi;
+            GetConsoleScreenBufferInfo(hConsole, out csbi);
+
+            // 콘솔 전체 영역 계산
+            COORD bufferSize = csbi.dwSize;
+            int totalCells = bufferSize.X * bufferSize.Y;
+
+            // 현재 커서 위치를 (0,0)으로 설정
+            COORD topLeft = new COORD();
+            topLeft.X = 0;
+            topLeft.Y = 0;
+
+            // 콘솔 버퍼 전체를 공백으로 채우기
+            FillConsoleOutputCharacter(hConsole, ' ', totalCells, topLeft, out _);
+            FillConsoleOutputAttribute(hConsole, csbi.wAttributes, totalCells, topLeft, out _);
+
+            // 커서를 (0,0)으로 이동
+            SetConsoleCursorPosition(hConsole, topLeft);
+        }
+
+        // Windows API 선언
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern IntPtr GetStdHandle(int nStdHandle);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool GetConsoleScreenBufferInfo(IntPtr hConsoleOutput, out CONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool SetConsoleCursorPosition(IntPtr hConsoleOutput, COORD dwCursorPosition);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool FillConsoleOutputCharacter(IntPtr hConsoleOutput, char cCharacter, int nLength, COORD dwWriteCoord, out int lpNumberOfCharsWritten);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool FillConsoleOutputAttribute(IntPtr hConsoleOutput, ushort wAttribute, int nLength, COORD dwWriteCoord, out int lpNumberOfAttrsWritten);
+
+        // 콘솔 관련 구조체
+        [StructLayout(LayoutKind.Sequential)]
+        struct COORD
+        {
+            public short X;
+            public short Y;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct SMALL_RECT
+        {
+            public short Left;
+            public short Top;
+            public short Right;
+            public short Bottom;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct CONSOLE_SCREEN_BUFFER_INFO
+        {
+            public COORD dwSize;
+            public COORD dwCursorPosition;
+            public ushort wAttributes;
+            public SMALL_RECT srWindow;
+            public COORD dwMaximumWindowSize;
+        }
+
+        // 표준 출력 핸들 상수
+        const int STD_OUTPUT_HANDLE = -11;
+
         // 게임에 필요한 주요 객체들
         public Player player;        // 플레이어 객체
         public Monster monster;      // 몬스터 객체
@@ -101,7 +174,7 @@ namespace TeamRpg
             Console.WriteLine("이곳에서 던전을 탐험하고, 몬스터를 물리치며 성장해보세요.");
             Console.WriteLine("\n게임을 시작하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
-            Console.Clear();
+            ClearConsoleCompletely();
         }
 
         // 플레이어 생성 메서드
@@ -213,7 +286,7 @@ namespace TeamRpg
                     Console.ReadKey(true);
 
                     // 2부: 전환점
-                    Console.Clear();
+                    ClearConsoleCompletely();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
                     Console.WriteLine($"        삶의 2부가 시작된다.        ");
@@ -233,7 +306,7 @@ namespace TeamRpg
                     Console.ReadKey(true);
 
                     // 3부: 현재
-                    Console.Clear();
+                    ClearConsoleCompletely();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
                     Console.WriteLine($"        용병으로 살아가던 나날        ");
