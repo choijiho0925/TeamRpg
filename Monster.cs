@@ -31,14 +31,6 @@ namespace TeamRpg
         public int Attack => attack;
         public int Defense => defense;
 
-        //몬스터 리스트
-        List<Monster> monsterTypes = new List<Monster>()
-    { 
-        //순서대로 이름, 체력, 마나, 공격력, 방어력 순
-    new Monster("슬라임", 20, 10, 3, 5),
-    new Monster("고블린", 30, 10, 5, 5),
-    new Monster("오우거", 50, 10, 10, 5)
-    };
         //적의 능력치 출력
         public void PrintInfo(int number)
         {
@@ -53,7 +45,7 @@ namespace TeamRpg
         //공격할 때
         public void EnemyAttack(Player player)
         {
-            int AttackPower = 10;
+            int AttackPower = Game.Instance.monsterAttack;
 
             if (AttackPower >= 0)
             {

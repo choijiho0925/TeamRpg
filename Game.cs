@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace TeamRpg
 {
@@ -377,16 +379,17 @@ namespace TeamRpg
             Hard
         }
 
+        // 던전 난이도에 따른 몬스터 생성
+        public string monsterName;
+        public int monsterHealth;
+        public int monsterMana;
+        public int monsterAttack;
+        public int monsterDefense;
+        public int rewardGold;
+        
         // 전투 시작 메서드
         private void StartBattle(DungeonDifficulty difficulty)
         {
-            // 던전 난이도에 따른 몬스터 생성
-            string monsterName;
-            int monsterHealth;
-            int monsterMana;
-            int monsterAttack;
-            int monsterDefense;
-            int rewardGold;
 
             switch (difficulty)
             {
@@ -440,36 +443,36 @@ namespace TeamRpg
             battle.Start();
 
             // 전투 후 처리
-            if (player.Health > 0 && monster.Health <= 0)
-            {
-                // 전투 승리
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("축하합니다! 전투에서 승리했습니다.");
-                Console.ResetColor();
+            //if (player.Health > 0 && monster.Health <= 0)
+            //{
+            //    // 전투 승리
+            //    Console.Clear();
+            //    Console.ForegroundColor = ConsoleColor.Green;
+            //    Console.WriteLine("축하합니다! 전투에서 승리했습니다.");
+            //    Console.ResetColor();
 
-                // 보상 지급
-                player.EarnGold(rewardGold);
-                Console.WriteLine($"{rewardGold}G를 획득했습니다!");
+            //    // 보상 지급
+            //    player.EarnGold(rewardGold);
+            //    Console.WriteLine($"{rewardGold}G를 획득했습니다!");
 
-                // 체력/마나 일부 회복
-                int healthRecovery = (int)(player.MaxHealth * 0.3);
-                int manaRecovery = (int)(player.MaxMana * 0.3);
-                player.Heal(healthRecovery);
-                player.RecoverMana(manaRecovery);
+            //    // 체력/마나 일부 회복
+            //    int healthRecovery = (int)(player.MaxHealth * 0.3);
+            //    int manaRecovery = (int)(player.MaxMana * 0.3);
+            //    player.Heal(healthRecovery);
+            //    player.RecoverMana(manaRecovery);
 
-                WaitForKeyPress();
-            }
-            else if (player.Health <= 0)
-            {
-                // 전투 패배
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("전투에서 패배했습니다...");
-                Console.ResetColor();
+            //    WaitForKeyPress();
+            //}
+            //else if (player.Health <= 0)
+            //{
+            //    // 전투 패배
+            //    Console.Clear();
+            //    Console.ForegroundColor = ConsoleColor.Red;
+            //    Console.WriteLine("전투에서 패배했습니다...");
+            //    Console.ResetColor();
 
-                WaitForKeyPress();
-            }
+            //    WaitForKeyPress();
+            //}
         }
 
         // 랜덤 몬스터 이름 생성 메서드
@@ -562,7 +565,7 @@ namespace TeamRpg
         }
 
         // 키 입력 대기 메서드
-        private void WaitForKeyPress()
+        public void WaitForKeyPress()
         {
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
