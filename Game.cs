@@ -370,8 +370,8 @@ namespace TeamRpg
             // 모든 아이템을 검사하며 직업에 맞는 기본 장비 찾기
             foreach (Item item in items)
             {
-                // 기본 방어구는 "패디드 아머" (공용, 가장 낮은 방어력)
-                if (item.Job == "공용" && item.Name == "패디드 아머" && item.Gold == 0)
+                // 기본 방어구는 "패디드 아머" (방어구, 가장 낮은 방어력)
+                if (item.Job == "방어구" && item.Name == "패디드 아머" && item.Gold == 0)
                 {
                     startingArmor = item;
                     item.isBuy = true; // 구매한 것으로 표시
