@@ -94,11 +94,21 @@ namespace TeamRpg
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("========================================");
-            Console.WriteLine("          TEAM RPG ADVENTURE            ");
+            Console.WriteLine("          Into the Abyss            ");
             Console.WriteLine("========================================");
             Console.ResetColor();
             Console.WriteLine("\n스파르타 던전에 오신 것을 환영합니다!");
-            Console.WriteLine("이곳에서 던전을 탐험하고, 몬스터를 물리치며 성장해보세요.");
+            Console.WriteLine("던전을 탐험하고, 미스테리한 사건에 직면하며 엔딩에 도달해보세요.");
+
+            // 전체화면 권장 메시지 (경고 형태로 강조)
+            Console.ForegroundColor = ConsoleColor.Red;  // 빨간색으로 설정 (경고색)
+            Console.WriteLine("\n▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
+            Console.WriteLine("▓                                                       ▓");
+            Console.WriteLine("▓       !!! 이 게임은 전체화면 플레이를 권장합니다 !!!       ▓");
+            Console.WriteLine("▓                                                       ▓");
+            Console.WriteLine("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓");
+            Console.ResetColor();  // 색상 초기화
+
             Console.WriteLine("\n게임을 시작하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
             Console.Clear();
