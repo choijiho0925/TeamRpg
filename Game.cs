@@ -796,7 +796,7 @@ namespace TeamRpg
         "그들은... 아니, 이것들은... 내 질문에 답할 생각이 전혀 없어 보인다.",
         "이 섬뜩한 정적 속에는 무엇이 도사리고 있는 걸까.\n"
     };
-            TypeMultipleLines(descriptionLines, 30); // TypeMultipleLines 메서드 사용 (딜레이 30ms)
+            TypeMultipleLines(descriptionLines, 10); // TypeMultipleLines 메서드 사용 (딜레이 30ms)
             Console.ResetColor(); // 색상 초기화
 
             // 분위기 묘사 후 메인 메뉴 타이틀 표시
