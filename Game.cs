@@ -360,6 +360,16 @@ namespace TeamRpg
             ");
                     Console.WriteLine("\n어릴때부터, 암부라고 불리는 집단에서 길러졌다.");
                     Console.WriteLine("\n그저 남을 죽이는데, 특화된 훈련을 했다.")
+                    Console.WriteLine("\n어릴적부터, 나의 목표는 단 하나였다.");
+                    Console.WriteLine("\n실력과 명성을 쌓아, 이 더러운 암부에서 벗어나는 것.");
+                    Console.WriteLine("\n그래서 돈만 받으면 다 죽였다. 신분에 상관없이.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n그렇게 죽이고, 죽이고, 또 죽이다보니.");
+                    Console.WriteLine("\n어느새 나의 이름은 암부에서 유명해졌다.");
+                    Console.WriteLine("\n그런 나를 암부는 내버려두지 않았다.");
+                    Console.WriteLine("\n점차 내가 죽일 사람들의 신분이 높아졌다.");
+                    Console.WriteLine("\n그렇게 나의 목표는 점차 멀어졌다.");
+                    Console.WriteLine();
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
