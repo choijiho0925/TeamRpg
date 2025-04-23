@@ -13,56 +13,56 @@ namespace TeamRpg
     public class Shop
 
     {
-        private WaveOutEvent shopDevice;
-        private AudioFileReader shopAudio;
+        //private WaveOutEvent shopDevice;
+        //private AudioFileReader shopAudio;
         public void ShopMenu()
 
         {
             while (true)
             {
-                shopAudio = new AudioFileReader(@"Audio\Shop.mp3");
-                shopDevice = new WaveOutEvent();
-                shopDevice.Init(shopAudio);
-                shopDevice.Play();
-                Console.OutputEncoding = Encoding.UTF8;
-                Console.Clear();
-                string asciiArt = @"
+//                //shopAudio = new AudioFileReader(@"Audio\Shop.mp3");
+//                shopDevice = new WaveOutEvent();
+//                shopDevice.Init(shopAudio);
+//                shopDevice.Play();
+//                Console.OutputEncoding = Encoding.UTF8;
+//                Console.Clear();
+//                string asciiArt = @"
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@&##B#&&#BBBB#&@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@&@BGPG#GYJ5BGBBBG#&@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@&P?~?J!~~7YY5GB5G#@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@&J^^::^~^~JY55?5P&@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@5~7J5J!JGPGBGJYG&@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@Y!77J?^Y#J?Y5P?YB#@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@B~:::^^Y#G??5P!JB&@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@J~^^~?PBB55P57Y&@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@5~7??JPBGGGY75@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@5?!!?Y55PGPG5#@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&Y~?55G##&&###GBGGB@@@@@@@@&@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@&##G!75GPGBBB#G5GPPYJPPB##&&@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@&BB57YPB7!777JJ?5G5G5YJY5YY5PGGPB&@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@##GP5PP7JGGJ~~!~!!7PG5GYY?J55GBBBBBBBGP&@@@@@@@@@
-@@@@@@@@@@@@@@@@@G?Y5PGGBJ?PPP~~~~~~?BBYYBPJ?YGBB###GYBGBG5@@@@@@@@@
-@@@@@@@@@@@@@@@B?~~5GBBBG7?G5?^~~^!YGG5J5#PYYBGB#PJ7~?BBB#PB@@@@@@@@
-@@@@@@@@@@@@@GJ~::!5G#B#J!JG5J^^~?PPPY7YPGPG#GBP!^::7BBG#BBP&@@@@@@@
-@@@@@@@@@@@@Y!!~:7!YB#BG!~YP55~75PPGY7?5GGGBGGJ^:^::G&GG#B#B&@@@@@@@
-@@@@@@@@@@@P:Y!::Y~J#G#P~~YGYG5PPGBB77?PGBGP?~.:^:~5&#PB#B###@@@@@@@
-@@@@@@@@@@@!:??.:?J5#B#G!~JG5GGGBB#B7??PG#5~::..^?P#BGYGGB#&B@@@@@@@
-@@@@@@@@@@P^:~Y!:!5GBBBB5?JPBBBBBB#G7??5BB!.::^~!GGBG?Y#5P#&#&@@@@@@
-@@@@@@@@@Y~7~^!J?!7B####G5GP5GBB##B5?YYJ7^:::.?YYGBG?J#B7G&#B#@@@@@@
-@@@@@@@@#~^5?JYY55YPGGBBBBBBB#BB5!!!??~~::^^::75PB5?JBB7?&&#B#@@@@@@
-@@@@@@@5~^:!YP5Y!7PY55JJY5PPGGBJ::^^?~::^^:?!!7BB?!PBBJ7B@&#GB@@@@@@
-@@@@@@B^!7?~~7??JPGGPJ7?YPYYY5B~.::^~?J!::~~75GB?!P#PJ!5&@&#BB@@@@@@
-@@@@@@B~!?7^7!?5GGBGBBGYPP555G5^::^~^~YY^^?7?BB77PB5Y?JB&&&&BB&@@@@@
-@@@@@@@?:^^~~5GPPP57?5BGBBGGPB5!^:^~!~!YJJJ?J#Y7GGPPY!5&&&&#BB#@@@@@
-@@&@@@@P~^~?GP5BBBG????YG&&&#BBY~^~~77JJ??PBGPJGGBB5!!B@@&&##B#@@@@@
-@@@@@@@@P7Y#&P5B###PY5PG#&#&&@@&G777GP?!~5&&B5PB##57!G@@@&&B###@@@@@
-@@@@@@@@@@BJPBGB#&@&&@@@&&&&&@@&@BY7YG5Y!Y&&#GG#B577G@@@@&&B##B@@@@@
-@@@@@@@@@@@57?YB&@&BBBBGPGGGB#BGGB&YJ5PPYG&##BGGY7!G@@@@@&#B&#B@@@@@";
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@&##B#&&#BBBB#&@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@&@BGPG#GYJ5BGBBBG#&@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@&P?~?J!~~7YY5GB5G#@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@&J^^::^~^~JY55?5P&@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@5~7J5J!JGPGBGJYG&@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@Y!77J?^Y#J?Y5P?YB#@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@B~:::^^Y#G??5P!JB&@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@J~^^~?PBB55P57Y&@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@5~7??JPBGGGY75@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@5?!!?Y55PGPG5#@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&Y~?55G##&&###GBGGB@@@@@@@@&@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@&##G!75GPGBBB#G5GPPYJPPB##&&@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@&BB57YPB7!777JJ?5G5G5YJY5YY5PGGPB&@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@##GP5PP7JGGJ~~!~!!7PG5GYY?J55GBBBBBBBGP&@@@@@@@@@
+//@@@@@@@@@@@@@@@@@G?Y5PGGBJ?PPP~~~~~~?BBYYBPJ?YGBB###GYBGBG5@@@@@@@@@
+//@@@@@@@@@@@@@@@B?~~5GBBBG7?G5?^~~^!YGG5J5#PYYBGB#PJ7~?BBB#PB@@@@@@@@
+//@@@@@@@@@@@@@GJ~::!5G#B#J!JG5J^^~?PPPY7YPGPG#GBP!^::7BBG#BBP&@@@@@@@
+//@@@@@@@@@@@@Y!!~:7!YB#BG!~YP55~75PPGY7?5GGGBGGJ^:^::G&GG#B#B&@@@@@@@
+//@@@@@@@@@@@P:Y!::Y~J#G#P~~YGYG5PPGBB77?PGBGP?~.:^:~5&#PB#B###@@@@@@@
+//@@@@@@@@@@@!:??.:?J5#B#G!~JG5GGGBB#B7??PG#5~::..^?P#BGYGGB#&B@@@@@@@
+//@@@@@@@@@@P^:~Y!:!5GBBBB5?JPBBBBBB#G7??5BB!.::^~!GGBG?Y#5P#&#&@@@@@@
+//@@@@@@@@@Y~7~^!J?!7B####G5GP5GBB##B5?YYJ7^:::.?YYGBG?J#B7G&#B#@@@@@@
+//@@@@@@@@#~^5?JYY55YPGGBBBBBBB#BB5!!!??~~::^^::75PB5?JBB7?&&#B#@@@@@@
+//@@@@@@@5~^:!YP5Y!7PY55JJY5PPGGBJ::^^?~::^^:?!!7BB?!PBBJ7B@&#GB@@@@@@
+//@@@@@@B^!7?~~7??JPGGPJ7?YPYYY5B~.::^~?J!::~~75GB?!P#PJ!5&@&#BB@@@@@@
+//@@@@@@B~!?7^7!?5GGBGBBGYPP555G5^::^~^~YY^^?7?BB77PB5Y?JB&&&&BB&@@@@@
+//@@@@@@@?:^^~~5GPPP57?5BGBBGGPB5!^:^~!~!YJJJ?J#Y7GGPPY!5&&&&#BB#@@@@@
+//@@&@@@@P~^~?GP5BBBG????YG&&&#BBY~^~~77JJ??PBGPJGGBB5!!B@@&&##B#@@@@@
+//@@@@@@@@P7Y#&P5B###PY5PG#&#&&@@&G777GP?!~5&&B5PB##57!G@@@&&B###@@@@@
+//@@@@@@@@@@BJPBGB#&@&&@@@&&&&&@@&@BY7YG5Y!Y&&#GG#B577G@@@@&&B##B@@@@@
+//@@@@@@@@@@@57?YB&@&BBBBGPGGGB#BGGB&YJ5PPYG&##BGGY7!G@@@@@&#B&#B@@@@@";
 
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine(asciiArt);
+                //Console.WriteLine(asciiArt);
                 Console.ResetColor();
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -156,11 +156,11 @@ namespace TeamRpg
 
                 else if (input == "0")
                 {
-                    shopDevice.Stop();
-                    shopDevice.Dispose();
-                    shopAudio.Dispose();
-                    shopDevice = null;
-                    shopAudio = null;
+                    //shopDevice.Stop();
+                    //shopDevice.Dispose();
+                    //shopAudio.Dispose();
+                    //shopDevice = null;
+                    //shopAudio = null;
                     break;
                 }
                 else
