@@ -218,7 +218,7 @@ namespace TeamRpg
             health = Math.Max(0, health - actualDamage);
 
             // 데미지 받음 메시지 출력
-            Console.WriteLine($"{name}이(가) {actualDamage}의 데미지를 받았습니다. ({oldHealth} -> {health})");
+            Console.WriteLine($"{name}이(가) {actualDamage}의 데미지를 받았습니다. (HP: {oldHealth} -> {health})");
 
             // 체력이 0 이하로 떨어지면 쓰러짐 메시지 출력
             if (health <= 0)
@@ -239,7 +239,7 @@ namespace TeamRpg
             int actualAttack = (int)(attack * (0.9 + rand.NextDouble() * 0.2));
 
             // 공격 메시지 출력
-            Console.WriteLine($"{name}이(가) 공격합니다! (공격력: {actualAttack})");
+            Console.WriteLine($"{name}이(가) 공격합니다! (데미지: {actualAttack})");
 
             //적 체력 감소
             target.Health -= actualAttack;

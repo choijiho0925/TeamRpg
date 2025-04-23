@@ -46,15 +46,24 @@ namespace TeamRpg
             int attack = Game.Instance.monsterAttack;
             int actualAttack = (int)(attack * (0.9 + rand.NextDouble() * 0.2));
 
-            if (actualAttack >= 0)
+            foreach (Monster monster in Game.Instance.monstersInBattle)
             {
-
-                Console.WriteLine($"\n{Name}가 {player.Name}을(를) 공격합니다! {actualAttack}의 피해를 입혔습니다.");
-                player.TakeDamage(actualAttack);
-            }
-            else
-            {
-                Console.WriteLine("적의 공격을 방어했습니다!");
+                Thread.Sleep(500);
+                if (monster.Health > 0)
+                {
+                    if (actualAttack >= 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write($"\n{monster.Name}");
+                        Console.ResetColor();
+                        Console.WriteLine($"이(가) {player.Name}을(를) 공격합니다! {actualAttack}의 피해를 입혔습니다.");
+                        player.TakeDamage(actualAttack);
+                    }
+                    else
+                    {
+                        Console.WriteLine("적의 공격을 방어했습니다!");
+                    }
+                }
             }
         }
     }
