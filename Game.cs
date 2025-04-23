@@ -128,7 +128,7 @@ namespace TeamRpg
             {
                 Console.WriteLine("\n직업을 선택하세요:");
                 Console.WriteLine("1. 검투사 - 체력과 방어력이 높은 전사입니다.");
-                Console.WriteLine("콜로세움에서 전투를 즐기던 전사로서 적들과의 전투에서 뛰어난 능력을 발휘합니다.")
+                Console.WriteLine("콜로세움에서 전투를 즐기던 전사로서 적들과의 전투에서 뛰어난 능력을 발휘합니다.");
                 Console.WriteLine();
                 Console.WriteLine("2. 수렵꾼 - 균형 잡힌 능력치를 가진 궁수입니다.");
                 Console.WriteLine("사냥꾼으로서의 직감과 경험을 바탕으로 적들을 물리치는 데 능숙합니다.");
@@ -294,6 +294,7 @@ namespace TeamRpg
             switch (choice)
             {
                 case "1": // 상태 보기
+                    Console.Clear();
                     player.DisplayStatus();
                     WaitForKeyPress();
                     break;
