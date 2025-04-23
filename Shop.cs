@@ -204,14 +204,12 @@ namespace TeamRpg
                     Console.ResetColor(); // 색상 초기화
                 }
 
-
                 Console.WriteLine("0. 나가기");
 
                 Console.WriteLine();
                 Console.Write("원하시는 장비를 말해보게... ");
                 idleTalkTokenSource = new CancellationTokenSource();// Task 시작할 때 token을 전달
                 var idleTask = IdleTalkAsync(idleTalkTokenSource.Token); //중단 신호를 받을 수 있게 함
-
 
                 string input = Console.ReadLine();
 
@@ -222,7 +220,6 @@ namespace TeamRpg
                 if (int.TryParse(input, out int choice) && choice >= 1 && choice <= items.Count)
                 {
                     Item item = items[choice - 1];
-
 
                     if (item.isBuy)
                     {
@@ -264,15 +261,11 @@ namespace TeamRpg
                         Console.Clear();
                     }
                     Console.ReadKey();
-
                 }
                 else if (input == "1")
                 {
-
                     SellShop();
                 }
-
-
                 else if (input == "0")
                 {
                     return;
@@ -285,9 +278,6 @@ namespace TeamRpg
                 }
             }
         }
-
-
-
 
         private void SellShop()
         {
@@ -348,10 +338,6 @@ namespace TeamRpg
                         Console.WriteLine("이런 자들 때문에 시간만 낭비되는 거지.");
                         Console.ReadKey();
                     }
-
-
-
-
                 }
                 else
                 {
@@ -359,9 +345,6 @@ namespace TeamRpg
                     Console.ReadKey();
                 }
             }
-
-
         }
-
     }
 }
