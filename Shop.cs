@@ -9,7 +9,7 @@ using System.Numerics;
 namespace TeamRpg
 {
 
-    public class Shop 
+    public class Shop
 
     {
 
@@ -25,8 +25,9 @@ namespace TeamRpg
                 Console.WriteLine("여긴 성도, 마을도 아니야. 누구든, 똑같지..");
                 Console.WriteLine();
                 Console.WriteLine("뭐 하나 골라보게 뭘 원하는가?");
-                Console.WriteLine("1. 상점");
-                Console.WriteLine("2. 의뢰 ");
+                Console.WriteLine("1. 장비구매");
+                Console.WriteLine("2. 장비판매");
+                Console.WriteLine("3. 의뢰 ");
                 Console.WriteLine("0. 나가기");
                 Console.ResetColor();
 
@@ -38,6 +39,15 @@ namespace TeamRpg
 
                 }
                 else if (input == "2")
+
+                {
+
+                    SellShop();
+
+                }
+
+
+                else if (input == "3")
                 {
 
                     Console.Clear();
@@ -196,7 +206,7 @@ namespace TeamRpg
 
 
                 Console.WriteLine("0. 나가기");
-                Console.WriteLine("1. 아이템 판매");
+
                 Console.WriteLine();
                 Console.Write("원하시는 장비를 말해보게... ");
                 idleTalkTokenSource = new CancellationTokenSource();// Task 시작할 때 token을 전달
@@ -222,7 +232,8 @@ namespace TeamRpg
                         continue;
                     }
 
-                    if (item.Job != null && item.Job != player.Job && item.Job != "공용")
+                    if (item.Job != null && item.Job != "공용" && item.Job != player.Job)
+
                     {
                         Console.WriteLine("자네가 그걸 든다면, 웃음거리가 될 뿐이오.");// 특정 직업만 구입가능 아이템
 
