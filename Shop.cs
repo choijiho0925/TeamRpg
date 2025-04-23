@@ -242,6 +242,7 @@ namespace TeamRpg
                         continue;
                     }
 
+                    // Shop 클래스 내 MainShop() 메서드의 구매 부분 수정
                     if (player.Gold >= item.Gold) // 플레이어 골드가 아이템 가격보다 많거나 같으면
                     {
                         player.Gold -= item.Gold; //플레이어 골드에 아이템 가격을 뺀후 플레이어 골드저장
@@ -250,11 +251,17 @@ namespace TeamRpg
                         Console.Clear();
                         Console.WriteLine($"{item.Name}를 구매했습니다!");
                         Console.WriteLine("좋소. 그대의 생명을 조금은 연장시켜줄 테지.");
+                        Console.ReadKey();
+                        // 구매 확인 후 다시 화면 클리어 추가
+                        Console.Clear();
                     }
                     else
                     {
                         Console.WriteLine("꿈만 꾸지 마시오. 여긴 자선을 베푸는 곳이 아니니까.");
                         Console.WriteLine(" 이 물건의 값어치를 모른다면, 다시 돌아오시오.");
+                        Console.ReadKey();
+                        // 부족한 금액 메시지 확인 후 다시 화면 클리어 추가
+                        Console.Clear();
                     }
                     Console.ReadKey();
 
