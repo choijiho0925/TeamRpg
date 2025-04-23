@@ -216,8 +216,9 @@ namespace TeamRpg
   \_____\___/|_|\___/|___/___/\__,_|_| |_| |_|
             ");
                     Console.WriteLine("\n승리. 그저 승리만을 추구하던 시절이 있었다.");
-                    Console.WriteLine("영광한 전투에서 적들을 베어내고, 자신의 힘을 증명하는 것.");
-                    Console.WriteLine("그것이 검투사로서의 삶이었다.");
+                    Console.WriteLine("\n영광한 전투에서 적들을 베어내고, 자신의 힘을 증명하는 것.");
+                    Console.WriteLine("\n그것이 검투사로서의 삶이었다.");
+                    Console.WriteLine();
                     Console.WriteLine("\n하지만 언제부터 였을까.");
                     Console.WriteLine("\n베고 죽이는데에...즐거움도 명예도 목표도 없다는것을 알게된다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
@@ -267,7 +268,7 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        수렵꾼의 이야기 - 1부        ");
+                    Console.WriteLine($"        청부 수렵꾼의 삶        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
@@ -279,7 +280,16 @@ namespace TeamRpg
  | | | (_) | | |  __/\__ \ |_ 
  |_|  \___/|_|  \___||___/\__|
             ");
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n돈을 따라 다녔다.");
+                    Console.WriteLine("\n어렸을 때부터 할 줄 아는 거라곤 활을 쏘고, 짐승을 잡는 것 뿐이었다.");
+                    Console.WriteLine("\n부모가 죽고, 고아가 된 후로는 그깟 동물 사냥으론 먹고 살 수 없었다.");
+                    Console.WriteLine("\n그래서 나는 청부 수렵꾼이 되었다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n돈을 주면 누구든지 죽였다.");
+                    Console.WriteLine("\n어렵지 않았다. 그냥 도망치게 하다 숲으로 들어가면 나의 재능을 발휘했다.");
+                    Console.WriteLine("\n숲은 내 집과 같으며, 정부의 법과 권력의 손길이 닿지 않는 곳이었다.");
+                    Console.WriteLine("\n간단하다. 죽이고, 증거만 가져가면 돈을 준다. 남은 신체는 동물 친구들의 먹이가 된다.");
+                    Console.WriteLine();
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
@@ -287,11 +297,24 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        수렵꾼의 이야기 - 2부        ");
+                    Console.WriteLine($"        강제적인 은퇴        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n그날 따라 날도 좋지 않았고, 표적도 이상했다.");
+                    Console.WriteLine("\n잘난 기사나으리는 처음에 내가 쏜 화살을 맞고 숲으로 도망쳤다.");
+                    Console.WriteLine("\n그래. 그렇게 끝났어야 했다.");
+                    Console.WriteLine("\n하지만 그날은 달랐다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n그는 숲 속에서 나를 기다리고 있었다.");
+                    Console.WriteLine("\n그리고 숲에 익숙한 건 나뿐만이 아니었고,");
+                    Console.WriteLine("\n그런이들은 그 기사나으리의 돈을 받고 나를 사냥하고자 했다.")
+                    Console.WriteLine()
+                    Console.WriteLine("\n그렇게 나는 그들과 싸웠다. 사냥감이 되고 싶지 않았기에.");
+                    Console.WriteLine("\n다행히 나는 살아남았다. 하지만...무릎은 예전같이 잘 움직이지 않았다.");
+                    Console.WriteLine("\n그때 느꼈다. 아, 이제는 더 이상 이런 일을 할 수 없겠구나.");
+                    Console.WriteLine("\n그렇게 나는 숲을 떠났다.");
+                    Console.WriteLine();
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
@@ -299,11 +322,23 @@ namespace TeamRpg
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("========================================");
-                    Console.WriteLine($"        수렵꾼의 이야기 - 3부        ");
+                    Console.WriteLine($"        불안한 삶        ");
                     Console.WriteLine("========================================");
                     Console.ResetColor();
 
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n아 그래. 그냥 좀 도둑같이 살았다.");
+                    Console.WriteLine("\n삶의 낙이라곤 하루를 마치며 마을의 술집에서");
+                    Console.WriteLine("\n술을 마시고 그 집주인의 딸을 지켜보는 것 뿐.");
+                    Console.WriteLine("\n그녀는 나를 보지 않았다. 하지만 나는 그녀를 보았다.");
+                    Console.WriteLine("\n상관없었다. 그저 즐거움 중 하나일 뿐이다.");
+                    Console.WriteLine();
+                    Console.WriteLine("\n어느날 이었다.");
+                    Console.WriteLine("\n어떤 남자가 나를 불렀다.");
+                    Console.WriteLine("\n그는 나에게 돈과 서류뭉치를 하나 건낸다.");
+                    Console.WriteLine("\n이게 뭐냐고 물어보니,");
+                    Console.WriteLine("\n그냥 읽어보라고 한다.");
+                    Console.WriteLine("\n그것은 왕의 칙서였다. 은퇴했지만, 실적이 좋았던 나를 찾는");
+                    Console.WriteLine();
                     break;
 
                 case "암살자":
@@ -323,7 +358,8 @@ namespace TeamRpg
   ____) | | | | (_| | (_| | (_) \ V  V / 
  |_____/|_| |_|\__,_|\__,_|\___/ \_/\_/  
             ");
-                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n어릴때부터, 암부라고 불리는 집단에서 길러졌다.");
+                    Console.WriteLine("\n그저 남을 죽이는데, 특화된 훈련을 했다.")
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
