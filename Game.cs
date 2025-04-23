@@ -228,7 +228,7 @@ namespace TeamRpg
                     Console.WriteLine();
                     Console.WriteLine("\n집 구석에 박혀있는 검이 언제나 나를 부르듯 속삭인다.");
                     Console.WriteLine("\n넌 내게서 도망칠 수 없어...라고.");
-                    Console.WriteLine("\n결국 나는....다시 검을 잡고 용병의 길을 선택했다.")
+                    Console.WriteLine("\n결국 나는....다시 검을 잡고 용병의 길을 선택했다.");
                     Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                     Console.ReadKey(true);
 
@@ -247,7 +247,7 @@ namespace TeamRpg
                     Console.WriteLine("\n그저 돈이 되는 일이라면 뭐든지 했다.");
                     Console.WriteLine("\n그러던 어느날. 선발대라는 것이 던전으로 들어갔고");
                     Console.WriteLine("\n그들은 돌아오지 않았다.");
-                    Console.WriteLine("\n그렇게 일자리가 점점 줄어들던 어느날")
+                    Console.WriteLine("\n그렇게 일자리가 점점 줄어들던 어느날");
                     Console.WriteLine("\n왕의 칙서가 내 손에 쥐어졌다.");
                     break;
 
@@ -555,93 +555,65 @@ namespace TeamRpg
         public int monsterAttack;
         public int monsterDefense;
         public int rewardGold;
-        
+
+        public List<Monster> monstersInBattle = new List<Monster>();
         // 전투 시작 메서드
         private void StartBattle(DungeonDifficulty difficulty)
         {
+            int monsterCount = random.Next(1, 5);
 
-            switch (difficulty)
+            for (int i = 0; i < monsterCount; i++)
             {
-                case DungeonDifficulty.Easy:
-                    monsterName = GetRandomMonsterName(difficulty);
-                    monsterHealth = random.Next(15, 30);
-                    monsterMana = random.Next(5, 15);
-                    monsterAttack = random.Next(3, 8);
-                    monsterDefense = random.Next(1, 4);
-                    rewardGold = random.Next(100, 300);
-                    break;
+                switch (difficulty)
+                {
+                    case DungeonDifficulty.Easy:
+                        monsterName = GetRandomMonsterName(difficulty);
+                        monsterHealth = random.Next(15, 30);
+                        monsterMana = random.Next(5, 15);
+                        monsterAttack = random.Next(3, 8);
+                        monsterDefense = random.Next(1, 4);
+                        rewardGold = random.Next(100, 300);
+                        break;
 
-                case DungeonDifficulty.Normal:
-                    monsterName = GetRandomMonsterName(difficulty);
-                    monsterHealth = random.Next(30, 50);
-                    monsterMana = random.Next(15, 30);
-                    monsterAttack = random.Next(8, 15);
-                    monsterDefense = random.Next(4, 8);
-                    rewardGold = random.Next(300, 600);
-                    break;
+                    case DungeonDifficulty.Normal:
+                        monsterName = GetRandomMonsterName(difficulty);
+                        monsterHealth = random.Next(30, 50);
+                        monsterMana = random.Next(15, 30);
+                        monsterAttack = random.Next(8, 15);
+                        monsterDefense = random.Next(4, 8);
+                        rewardGold = random.Next(300, 600);
+                        break;
 
-                case DungeonDifficulty.Hard:
-                    monsterName = GetRandomMonsterName(difficulty);
-                    monsterHealth = random.Next(50, 80);
-                    monsterMana = random.Next(30, 50);
-                    monsterAttack = random.Next(15, 25);
-                    monsterDefense = random.Next(8, 12);
-                    rewardGold = random.Next(600, 1000);
-                    break;
+                    case DungeonDifficulty.Hard:
+                        monsterName = GetRandomMonsterName(difficulty);
+                        monsterHealth = random.Next(50, 80);
+                        monsterMana = random.Next(30, 50);
+                        monsterAttack = random.Next(15, 25);
+                        monsterDefense = random.Next(8, 12);
+                        rewardGold = random.Next(600, 1000);
+                        break;
 
-                default:
-                    monsterName = "알 수 없는 몬스터";
-                    monsterHealth = 20;
-                    monsterMana = 10;
-                    monsterAttack = 5;
-                    monsterDefense = 2;
-                    rewardGold = 100;
-                    break;
+                    default:
+                        monsterName = "알 수 없는 몬스터";
+                        monsterHealth = 20;
+                        monsterMana = 10;
+                        monsterAttack = 5;
+                        monsterDefense = 2;
+                        rewardGold = 100;
+                        break;
+                }
+                monstersInBattle.Add(new Monster(monsterName, monsterHealth, monsterMana, monsterAttack, monsterDefense, rewardGold));
             }
 
             // 몬스터 객체 생성
-            monster = new Monster(monsterName, monsterHealth, monsterMana, monsterAttack, monsterDefense);
+            //monster = new Monster(monsterName, monsterHealth, monsterMana, monsterAttack, monsterDefense);
 
             // 전투 시작 메시지
             Console.Clear();
-            Console.WriteLine($"{monsterName}를 만났습니다! 전투를 시작합니다.");
-            Console.WriteLine($"몬스터 정보: 체력 {monsterHealth}, 공격력 {monsterAttack}, 방어력 {monsterDefense}");
-            WaitForKeyPress();
+            Console.WriteLine($"\n총 {monstersInBattle.Count}마리의 몬스터가 등장했습니다!\n");
 
             // 전투 실행
             battle.Start();
-
-            // 전투 후 처리
-            //if (player.Health > 0 && monster.Health <= 0)
-            //{
-            //    // 전투 승리
-            //    Console.Clear();
-            //    Console.ForegroundColor = ConsoleColor.Green;
-            //    Console.WriteLine("축하합니다! 전투에서 승리했습니다.");
-            //    Console.ResetColor();
-
-            //    // 보상 지급
-            //    player.EarnGold(rewardGold);
-            //    Console.WriteLine($"{rewardGold}G를 획득했습니다!");
-
-            //    // 체력/마나 일부 회복
-            //    int healthRecovery = (int)(player.MaxHealth * 0.3);
-            //    int manaRecovery = (int)(player.MaxMana * 0.3);
-            //    player.Heal(healthRecovery);
-            //    player.RecoverMana(manaRecovery);
-
-            //    WaitForKeyPress();
-            //}
-            //else if (player.Health <= 0)
-            //{
-            //    // 전투 패배
-            //    Console.Clear();
-            //    Console.ForegroundColor = ConsoleColor.Red;
-            //    Console.WriteLine("전투에서 패배했습니다...");
-            //    Console.ResetColor();
-
-            //    WaitForKeyPress();
-            //}
         }
 
         // 랜덤 몬스터 이름 생성 메서드

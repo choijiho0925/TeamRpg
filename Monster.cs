@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,49 +9,48 @@ namespace TeamRpg
 {
     public class Monster
     {
-        private string name;
-        private int health;
-        private int mana;
-        private int attack;
-        private int defense;
+        public string Name;
+        public int Health;
+        public int Mana;
+        public int Attack;
+        public int Defense;
+        public int RewardGold;
 
+        Random rand = new Random();
 
-        public Monster(string Name, int Health, int Mana, int Attack, int Defense) //생성자 사용
+        // 생성자
+        public Monster(string name, int health, int mana, int attack, int defense, int rewardGold)
         {
-            name = Name;
-            health = Health;
-            mana = Mana;
-            attack = Attack;
-            defense = Defense;
+            Name = name;
+            Health = health;
+            Mana = mana;
+            Attack = attack;
+            Defense = defense;
+            RewardGold = rewardGold;
         }
-
-        //읽기 전용
-        public string Name => name;
-        public int Health => health;
-        public int Mana => mana;
-        public int Attack => attack;
-        public int Defense => defense;
 
         //적의 능력치 출력
-        public void PrintInfo(int number)
-        {
-            Console.WriteLine($"{number}. {name} (체력: {health}, 마나: {mana}, 공격력: {attack}, 방어력: {defense})");
-        }
+        //public void PrintInfo(int number)
+        //{
+        //    Console.WriteLine($"{number}. {Name} (체력: {Health}, 마나: {Mana}, 공격력: {Attack}, 방어력: {Defense})");
+        //}
         //공격을 받을 때
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            if (health < 0) health = 0;
+            Health -= damage;
+            if (Health < 0) Health = 0;
         }
         //공격할 때
         public void EnemyAttack(Player player)
         {
-            int AttackPower = Game.Instance.monsterAttack;
+            int attack = Game.Instance.monsterAttack;
+            int actualAttack = (int)(attack * (0.9 + rand.NextDouble() * 0.2));
 
-            if (AttackPower >= 0)
+            if (actualAttack >= 0)
             {
-                Console.WriteLine($"\n{name}가 {player.Name}을(를) 공격합니다! {AttackPower}의 피해를 입혔습니다.");
-                player.TakeDamage(AttackPower);
+
+                Console.WriteLine($"\n{Name}가 {player.Name}을(를) 공격합니다! {actualAttack}의 피해를 입혔습니다.");
+                player.TakeDamage(actualAttack);
             }
             else
             {

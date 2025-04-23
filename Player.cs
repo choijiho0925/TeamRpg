@@ -100,7 +100,7 @@ namespace TeamRpg
             else
             {
                 // 잘못된 직업 입력 시 메시지 출력
-                Console.WriteLine("잘못된 직업입니다. 검투사, 수렵꾼, 암살자자 중에서 선택해주세요.");
+                Console.WriteLine("잘못된 직업입니다. 검투사, 수렵꾼, 암살자 중에서 선택해주세요.");
                 return false; // 유효하지 않은 직업
             }
         }
@@ -230,7 +230,7 @@ namespace TeamRpg
 
         // ============== 공격 메서드 ==============
         // 플레이어가 공격할 때 호출되며, 공격력 값을 반환합니다.
-        public int Attack()
+        public int Attack(Monster target)
         {
             // 랜덤 요소를 위한 난수 생성기
             Random rand = new Random();
@@ -242,7 +242,7 @@ namespace TeamRpg
             Console.WriteLine($"{name}이(가) 공격합니다! (공격력: {actualAttack})");
 
             //적 체력 감소
-            Game.Instance.monsterHealth -= actualAttack;
+            target.Health -= actualAttack;
 
             // 계산된 공격력 반환
             return actualAttack;
@@ -521,7 +521,7 @@ namespace TeamRpg
         // ============== 직업별 특수 기술 사용 메서드 ==============
         // 각 직업마다 다른 특수 기술을 사용할 수 있습니다.
         // 주석 처리된 코드를 살림
-        public int UseSpecialSkill()
+        public int UseSpecialSkill(Monster target)
         {
             // 직업별로 다른 특수 기술 구현
             int skillDamage = 0;
@@ -560,7 +560,8 @@ namespace TeamRpg
             if (UseMana(manaCost))
             {
                 // 마나가 충분하면 스킬 사용 메시지 출력 후 데미지 반환
-                Console.WriteLine($"{name}이(가) {skillName} 기술을 사용했습니다!");
+                Console.WriteLine($"{name}이(가) {skillName} 기술을 사용했습니다!(데미지: {skillDamage})");
+                target.Health -= skillDamage;
                 return skillDamage;
             }
             else
@@ -570,6 +571,7 @@ namespace TeamRpg
                 return 0;  // 마나 부족으로 스킬 사용 실패
             }
         }
+
 
         // ============== 속성(Property) 정의 - C#의 getter/setter ==============
         // 다른 클래스에서 플레이어의 속성을 읽거나 수정할 때 사용됩니다.
