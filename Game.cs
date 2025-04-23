@@ -165,6 +165,7 @@ namespace TeamRpg
         }
 
         // 시작 장비 지급 메서드
+        // 시작 장비 지급 메서드
         private void GiveStartingItems()
         {
             // 플레이어 직업에 따른 기본 무기 찾기
@@ -189,24 +190,23 @@ namespace TeamRpg
                 }
             }
 
-            // 기본 장비 인벤토리에 추가 및 자동 장착
+            // 기본 장비 인벤토리에 추가 (자동 장착 없음)
             if (startingWeapon != null)
             {
                 player.inventory.Add(startingWeapon);
-                player.EquipItem(startingWeapon); // 자동 장착
                 Console.WriteLine($"기본 무기를 지급받았습니다: {startingWeapon.Name}");
             }
 
             if (startingArmor != null)
             {
                 player.inventory.Add(startingArmor);
-                player.EquipItem(startingArmor); // 자동 장착
                 Console.WriteLine($"기본 방어구를 지급받았습니다: {startingArmor.Name}");
             }
 
-            // 시작 골드 지급
+            // 시작 골드
             player.Gold = 0;
-            Console.WriteLine($"시작 골드는 {player.Gold}G 입니다. 던전을 탐험하고, 선발대의 흔적을 찾으며 G를 모아보세요.");
+            Console.WriteLine($"던전을 탐험하며, 선발대의 흔적을 찾고 더 많은 골드와 아이템을 모아보세요!");
+            Console.WriteLine("\n인벤토리에서 장비를 장착하여 던전에 도전해보세요!");
         }
 
 
