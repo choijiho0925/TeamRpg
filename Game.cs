@@ -167,6 +167,7 @@ namespace TeamRpg
                         validJob = true;
                         break;
                     default:
+                        Console.Clear();
                         Console.WriteLine("잘못된 선택입니다. 1부터 3까지의 숫자를 입력해주세요.");
                         break;
                 }

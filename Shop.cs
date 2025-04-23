@@ -25,7 +25,7 @@ namespace TeamRpg
 //                shopDevice.Init(shopAudio);
 //                shopDevice.Play();
 //                Console.OutputEncoding = Encoding.UTF8;
-//                Console.Clear();
+                  Console.Clear();  
 //                string asciiArt = @"
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -177,7 +177,7 @@ namespace TeamRpg
         }
 
 
-        private CancellationTokenSource idleTalkTokenSource; //비동기 작업을 중간에 멈추기 위해 사용하는 객체
+        //private CancellationTokenSource idleTalkTokenSource; //비동기 작업을 중간에 멈추기 위해 사용하는 객체
         private Random random = new Random();
         private List<Item> items;
         private Player player;
@@ -188,51 +188,51 @@ namespace TeamRpg
             this.items = items;
             this.player = player;
         }
-        private async Task IdleTalkAsync(CancellationToken token)
-        {
-            string[] talk = new string[]
-            {
-        "이 조용함, 폭풍이 오기 전의 정적 같군.",
-        "살 돈은 있지만… 그 물건을 감당할 용기는 있소?",
-         "그 칼을 쥐고 죽은 자가 셋이오. 넷째는 당신일지도 모르지.",
-        "나는 그냥 물건을 팔 뿐이오. 피는 당신 손에 묻히시오.",
-        "요즘은 누구도 믿을 수 없지. 특히 돈이 없는 자들은…",
-        "그 검은, 주인을 가리는 법이 없소. 다만 누구나 피를 보게 되지.",
-        "운명이란 건 어쩌면, 우리가 무엇을 사느냐에 따라 정해지는 걸지도 모르지.",
-        "자네가 이걸 들고 떠나면... 다시는 돌아오지 못할 수도 있소."
-            };
+        //private async Task IdleTalkAsync(CancellationToken token)
+        //{
+        //    string[] talk = new string[]
+        //    {
+        //"이 조용함, 폭풍이 오기 전의 정적 같군.",
+        //"살 돈은 있지만… 그 물건을 감당할 용기는 있소?",
+        // "그 칼을 쥐고 죽은 자가 셋이오. 넷째는 당신일지도 모르지.",
+        //"나는 그냥 물건을 팔 뿐이오. 피는 당신 손에 묻히시오.",
+        //"요즘은 누구도 믿을 수 없지. 특히 돈이 없는 자들은…",
+        //"그 검은, 주인을 가리는 법이 없소. 다만 누구나 피를 보게 되지.",
+        //"운명이란 건 어쩌면, 우리가 무엇을 사느냐에 따라 정해지는 걸지도 모르지.",
+        //"자네가 이걸 들고 떠나면... 다시는 돌아오지 못할 수도 있소."
+        //    };
 
-            while (!token.IsCancellationRequested)
-            {
-                try
-                {
-                    await Task.Delay(7000, token); //7초마다
+        //    while (!token.IsCancellationRequested)
+        //    {
+        //        try
+        //        {
+        //            await Task.Delay(7000, token); //7초마다
 
-                    if (!token.IsCancellationRequested)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine($"\n[상인] {talk[random.Next(talk.Length)]}");
-                        Console.ResetColor();
-                    }
-                }
-                catch (TaskCanceledException)
-                {
-                    break;
-                }
-            }
-        }
+        //            if (!token.IsCancellationRequested)
+        //            {
+        //                Console.ForegroundColor = ConsoleColor.DarkGray;
+        //                Console.WriteLine($"\n[상인] {talk[random.Next(talk.Length)]}");
+        //                Console.ResetColor();
+        //            }
+        //        }
+        //        catch (TaskCanceledException)
+        //        {
+        //            break;
+        //        }
+        //    }
+        //}
         public void MainShop()
         {
             while (true)
             {
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("물건이라...내일 다시 돌아오겠군.");
-                Console.WriteLine();
-                Console.WriteLine("여긴 성도, 마을도 아니야. 누구든, 돈만 있으면 상대해주지.");
-                Console.WriteLine();
-                Console.WriteLine("얼른 고르시오. 그대가 써봤자 다 의미 없으니");
-                Console.ResetColor();
+                //Console.ForegroundColor = ConsoleColor.Blue;
+                //Console.WriteLine("물건이라...내일 다시 돌아오겠군.");
+                //Console.WriteLine();
+                //Console.WriteLine("여긴 성도, 마을도 아니야. 누구든, 돈만 있으면 상대해주지.");
+                //Console.WriteLine();
+                //Console.WriteLine("얼른 고르시오. 그대가 써봤자 다 의미 없으니");
+                //Console.ResetColor();
 
                 Console.WriteLine();
                 Console.WriteLine($"보유 Groshen:{player.Gold} Groshen");
@@ -261,15 +261,15 @@ namespace TeamRpg
 
                 Console.WriteLine();
                 Console.Write("원하시는 장비를 말해보게... ");
-                idleTalkTokenSource = new CancellationTokenSource();// Task 시작할 때 token을 전달
-                var idleTask = IdleTalkAsync(idleTalkTokenSource.Token); //중단 신호를 받을 수 있게 함
+                //idleTalkTokenSource = new CancellationTokenSource();// Task 시작할 때 token을 전달
+                //var idleTask = IdleTalkAsync(idleTalkTokenSource.Token); //중단 신호를 받을 수 있게 함
 
 
                 string input = Console.ReadLine();
 
                 // 입력 받았으므로 혼잣말 멈추기
-                idleTalkTokenSource.Cancel();
-                idleTask.Wait();
+                //idleTalkTokenSource.Cancel();
+                //idleTask.Wait();
 
                 if (int.TryParse(input, out int choice) && choice >= 1 && choice <= items.Count)
                 {
@@ -278,6 +278,7 @@ namespace TeamRpg
 
                     if (item.isBuy)
                     {
+                        Console.Clear();
                         Console.WriteLine("다시 보러 온 건가, 아니면 잊은 건가. 어쨌든 거래는 끝났소.");
                         Console.WriteLine("돌아가시게");
                         Console.ReadKey();
@@ -287,6 +288,7 @@ namespace TeamRpg
                     if (item.Job != null && item.Job != "공용" && item.Job != player.Job)
 
                     {
+                        Console.Clear();
                         Console.WriteLine("자네가 그걸 든다면, 웃음거리가 될 뿐이오.");// 특정 직업만 구입가능 아이템
 
                         Console.WriteLine("그 물건은 자네 길이 아니오");
@@ -296,15 +298,16 @@ namespace TeamRpg
 
                     if (player.Gold >= item.Gold) // 플레이어 골드가 아이템 가격보다 많거나 같으면
                     {
+                        Console.Clear();
                         player.Gold -= item.Gold; //플레이어 골드에 아이템 가격을 뺀후 플레이어 골드저장
                         item.isBuy = true;
                         player.inventory.Add(item);
-                        Console.Clear();
                         Console.WriteLine($"{item.Name}를 구매했습니다!");
                         Console.WriteLine("좋소. 그대의 생명을 조금은 연장시켜줄 테지.");
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("꿈만 꾸지 마시오. 여긴 자선을 베푸는 곳이 아니니까.");
                         Console.WriteLine(" 이 물건의 값어치를 모른다면, 다시 돌아오시오.");
                     }
