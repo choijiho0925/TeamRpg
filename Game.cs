@@ -175,8 +175,157 @@ namespace TeamRpg
             Console.WriteLine("계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
 
+            // 직업별 스토리 표시
+            ShowJobStory(job);
+
             // 키 입력 후 화면 다시 지우기
             Console.Clear();
+        }
+
+        // 직업별 스토리 표시 메서드
+        private void ShowJobStory(string job)
+        {
+            switch (job)
+            {
+                case "검투사":
+                    // 1부: 시작
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        검투사의 이야기 - 1부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine(@"
+   _____      _                               
+  / ____|    | |                              
+ | |     ___ | | ___  ___ ___ _   _ _ __ ___  
+ | |    / _ \| |/ _ \/ __/ __| | | | '_ ` _ \ 
+ | |___| (_) | | (_) \__ \__ \ |_| | | | | | |
+  \_____\___/|_|\___/|___/___/\__,_|_| |_| |_|
+            ");
+                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
+
+                    // 2부: 전환점
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        검투사의 이야기 - 2부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
+
+                    // 3부: 현재
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        검투사의 이야기 - 3부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine("\n스토리 텍스트");
+                    break;
+
+                case "수렵꾼":
+                    // 1부: 시작
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        수렵꾼의 이야기 - 1부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine(@"
+  ______                  _   
+ |  ____|                | |  
+ | |__ ___  _ __ ___  ___| |_ 
+ |  __/ _ \| '__/ _ \/ __| __|
+ | | | (_) | | |  __/\__ \ |_ 
+ |_|  \___/|_|  \___||___/\__|
+            ");
+                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
+
+                    // 2부: 전환점
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        수렵꾼의 이야기 - 2부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
+
+                    // 3부: 현재
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        수렵꾼의 이야기 - 3부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine("\n스토리 텍스트");
+                    break;
+
+                case "암살자":
+                    // 1부: 시작
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        암살자의 이야기 - 1부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine(@"
+   _____ _               _               
+  / ____| |             | |              
+ | (___ | |__   __ _  __| | _____      __
+  \___ \| '_ \ / _` |/ _` |/ _ \ \ /\ / /
+  ____) | | | | (_| | (_| | (_) \ V  V / 
+ |_____/|_| |_|\__,_|\__,_|\___/ \_/\_/  
+            ");
+                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
+
+                    // 2부: 전환점
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        암살자의 이야기 - 2부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine("\n스토리 텍스트");
+                    Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                    Console.ReadKey(true);
+
+                    // 3부: 현재
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("========================================");
+                    Console.WriteLine($"        암살자의 이야기 - 3부        ");
+                    Console.WriteLine("========================================");
+                    Console.ResetColor();
+
+                    Console.WriteLine("\n스토리 텍스트");
+                    break;
+
+                default:
+                    Console.WriteLine("\n스토리 텍스트");
+                    break;
+            }
+
+            Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+            Console.ReadKey(true);
         }
 
         // 시작 장비 지급 메서드
