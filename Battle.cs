@@ -27,7 +27,16 @@ namespace TeamRpg
                 int selectedIndex = 0;
                 ConsoleKey key;
 
-                do
+                // 첫 번째 살아있는 몬스터 인덱스 설정
+                for (int i = 0; i < Game.Instance.monstersInBattle.Count; i++)
+                {
+                    if (Game.Instance.monstersInBattle[i].Health > 0)
+                    {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+                    do
                 {
                     Console.Clear();
                     Console.WriteLine("공격할 몬스터를 선택하세요 (↑ ↓, 엔터):\n");
@@ -60,21 +69,35 @@ namespace TeamRpg
                     key = Console.ReadKey(true).Key;
 
                     //방향키대로 입력
-                    if (key == ConsoleKey.DownArrow && selectedIndex < Game.Instance.monstersInBattle.Count - 1)
+                    //아래키
+                    if (key == ConsoleKey.DownArrow)
                     {
-                        // 체력이 0인 몬스터는 넘어가기
+                        int nextIndex = selectedIndex;
                         do
                         {
-                            selectedIndex++;
-                        } while (selectedIndex < Game.Instance.monstersInBattle.Count && Game.Instance.monstersInBattle[selectedIndex].Health <= 0);
+                            //임시변수로 저장
+                            nextIndex++;
+                        } while (nextIndex < Game.Instance.monstersInBattle.Count &&
+                                 Game.Instance.monstersInBattle[nextIndex].Health <= 0);
+
+                        // 살아있는 몬스터면 이동
+                        if (nextIndex < Game.Instance.monstersInBattle.Count)
+                            selectedIndex = nextIndex;
                     }
-                    else if (key == ConsoleKey.UpArrow && selectedIndex > 0)
+
+                    //위키
+                    else if (key == ConsoleKey.UpArrow)
                     {
-                        // 체력이 0인 몬스터는 넘어가기
+                        int prevIndex = selectedIndex;
                         do
                         {
-                            selectedIndex--;
-                        } while (selectedIndex >= 0 && Game.Instance.monstersInBattle[selectedIndex].Health <= 0);
+                            prevIndex--;
+                        } while (prevIndex >= 0 &&
+                                 Game.Instance.monstersInBattle[prevIndex].Health <= 0);
+
+                        // 살아있는 몬스터면 이동
+                        if (prevIndex >= 0)
+                            selectedIndex = prevIndex;
                     }
 
                 } while (key != ConsoleKey.Enter);
