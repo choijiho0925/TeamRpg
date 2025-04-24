@@ -14,17 +14,21 @@ namespace TeamRpg
     public class Shop
 
     {
-        //private WaveOutEvent shopDevice; 
-        //private AudioFileReader shopAudio;
+       
         public void ShopMenu()
 
         {
+            
             while (true)
             {
-                //                //shopAudio = new AudioFileReader(@"Audio\Shop.mp3");
-                //                shopDevice = new WaveOutEvent();
-                //                shopDevice.Init(shopAudio);
-                //                shopDevice.Play();
+                
+                
+                Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/hotelshop.wav");
+                    
+              
+                
+
+
                 Console.OutputEncoding = Encoding.UTF8;
                 Console.Clear();
                 string asciiArt = @"
@@ -162,11 +166,7 @@ namespace TeamRpg
 
                 else if (input == "0")
                 {
-                    //shopDevice.Stop();
-                    //shopDevice.Dispose();
-                    //shopAudio.Dispose();
-                    //shopDevice = null;
-                    //shopAudio = null;
+                   
                     break;
                 }
                 else

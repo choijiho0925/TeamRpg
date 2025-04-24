@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using NAudio.Wave;
 
 namespace TeamRpg
 {
     // Game 클래스 - 게임 전체를 관리하고 통제하는 클래스입니다.
     public class Game
     {
+        
+        
         // 싱글톤 패턴 구현
         private static Game instance = null;
 
@@ -221,9 +224,11 @@ namespace TeamRpg
         // 직업별 스토리 표시 메서드
         private void ShowJobStory(string job)
         {
+            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/jobstory.wav");
             switch (job)
             {
                 case "검투사":
+
                     // 1부: 시작
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -384,6 +389,7 @@ namespace TeamRpg
             };
 
                     TypeMultipleLines(storyLines);
+
                     break;
 
 
@@ -689,6 +695,7 @@ namespace TeamRpg
 
             // 마지막 키 입력 대기 (이후 게임 로직으로 넘어감)
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+            Music.StopMusic();
             Console.ReadKey(true);
         }
 
@@ -784,6 +791,7 @@ namespace TeamRpg
         // DisplayMainMenu 메서드 수정
         private void DisplayMainMenu()
         {
+            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/Main.wav", 15);
             Console.Clear();
 
             // 첫 방문 시에만 상세한 설명 출력
@@ -881,6 +889,7 @@ namespace TeamRpg
         // 던전 입장 메서드
         private void EnterDungeon()
         {
+            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/battlestart.wav");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("========================================");
@@ -941,6 +950,7 @@ namespace TeamRpg
         // 전투 시작 메서드
         private void StartBattle(DungeonDifficulty difficulty)
         {
+            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/battlemain.wav");
             int monsterCount = random.Next(1, 5);
 
             for (int i = 0; i < monsterCount; i++)
@@ -1033,6 +1043,7 @@ namespace TeamRpg
         // 휴식 메서드
         private void Rest()
         {
+            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/hotelshop.wav");
             Console.Clear();
             Console.WriteLine("휴식을 취합니다...");
 
@@ -1063,7 +1074,7 @@ namespace TeamRpg
                 Console.WriteLine($"체력: {oldHealth} -> {player.Health}/{player.MaxHealth}");
                 Console.WriteLine($"마나: {oldMana} -> {player.Mana}/{player.MaxMana}");
             }
-
+            Music.StopMusic();
             WaitForKeyPress();
         }
 
