@@ -853,7 +853,7 @@ namespace TeamRpg
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 상점");
             Console.WriteLine("4. 던전 입장");
-            Console.WriteLine("5. 휴식하기");
+            Console.WriteLine("5. 여관 가기");  // "휴식하기"에서 "여관 가기"로 변경
             Console.WriteLine("0. 게임 종료");
 
             Console.Write("\n선택: ");
@@ -1055,38 +1055,123 @@ namespace TeamRpg
         private void Rest()
         {
             Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/hotelshop.wav");
-            Console.Clear();
-            Console.WriteLine("휴식을 취합니다...");
-
-            // 휴식 비용
-            int restCost = 100;
-
-            // 보유 골드 확인
-            if (player.Gold < restCost)
+            while (true)
             {
-                Console.WriteLine($"휴식을 취하기 위해 {restCost}G가 필요하지만, 보유 골드가 부족합니다.");
-                WaitForKeyPress();
-                return;
+                Console.Clear();
+
+                // 흰색 나레이션
+                Console.ForegroundColor = ConsoleColor.White;
+                TypeText("어둠이 내려앉은 정착지 외곽, 이정표 하나 없는 그 자리에 낡은 여관이 숨죽여 서 있었다.", 15);
+                TypeText("달빛조차 비껴가는 그곳은, 살아 돌아온 자들만이 입을 수 있는 사치였다.", 15);
+                Console.ResetColor();
+
+                // 여관주인 대사 (파란색)
+                Console.ForegroundColor = ConsoleColor.Blue;
+                TypeText("[여관주인] ...또 한 명의 멍청이군. 던전의 입김을 맞고 들어온 자.", 30);
+                TypeText("[여관주인] 여긴 평화가 깃드는 곳이 아니라, 그저...그런 역할을 하는 또 다른 무덤.", 30);
+                TypeText("[여관주인] 바닥은 축축하고, 벽은 썩었지만… 여긴 아직 살아있다네. 아니, 그렇게 되어야 하네.", 30);
+                Console.ResetColor();
+
+                // 선택지 표시
+                Console.WriteLine("\n원하는 서비스를 선택하세요:");
+                Console.WriteLine("1. 휴식");
+                Console.WriteLine("2. 식당");
+                Console.WriteLine("0. 나가기");
+
+                Console.Write("\n선택: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1": // 휴식 취하기 (기존 휴식 기능)
+                        Console.Clear();
+
+                        // 휴식 비용
+                        int restCost = 100;
+
+                        // 보유 골드 확인
+                        if (player.Gold < restCost)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            TypeText("[여관주인] 미안하지만, 자네 주머니가 텅 비었군. 100G가 있어야 방을 빌려줄 수 있네.", 30);
+                            Console.ResetColor();
+                            WaitForKeyPress();
+                            continue;
+                        }
+
+                        // 휴식 비용 지불
+                        bool paymentSuccess = player.SpendGold(restCost);
+
+                        if (paymentSuccess)
+                        {
+                            // 체력과 마나 완전 회복
+                            int oldHealth = player.Health;
+                            int oldMana = player.Mana;
+
+                            player.Health = player.MaxHealth;
+                            player.Mana = player.MaxMana;
+
+                            // 흰색 나레이션
+                            Console.ForegroundColor = ConsoleColor.White;
+                            TypeText("삐걱이는 계단 끝, 스산한 바람이 스며드는 작은 방으로 몸을 숨겼다.", 15);
+                            TypeText("좁고 차가운 침대였지만… 오늘만큼은 죽음이 창문을 두드리지 않았다.", 15);
+                            TypeText("하룻밤의 휴식이었을 뿐인데, 기적처럼 피로가 잠시 잊혔다.", 15);
+                            Console.ResetColor();
+
+                            // 여관주인 대사
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            TypeText("[여관주인] 살아있는 얼굴을 보니, 이 여관도 제 몫은 했군.", 30);
+                            TypeText("[여관주인] 하지만 기억하게. 쉼이란 건… 다시 걷기 위한 저주의 다른 이름일 뿐이야.", 30);
+                            Console.ResetColor();
+
+                            Console.WriteLine($"\n체력: {oldHealth} -> {player.Health}/{player.MaxHealth}");
+                            Console.WriteLine($"마나: {oldMana} -> {player.Mana}/{player.MaxMana}");
+                        }
+                        WaitForKeyPress();
+                        break;
+
+                    case "2": // 식당 이용하기
+                        Console.Clear();
+
+                        // 흰색 나레이션
+                        Console.ForegroundColor = ConsoleColor.White;
+                        TypeText("식당이라 부르기엔 초라한 공간. 곰팡이 냄새가 배인 벽과, 금이 간 그릇들.", 15);
+                        TypeText("그러나 이곳은 죽음의 문턱에서 돌아온 자들이 유일하게 사람인 척 할 수 있는 곳이었다.", 15);
+                        TypeText("살아있는 사람이 있었다면.", 15);
+                        TypeText("여관 주인은 내 말에 그 창백한 안면을 비틀 듯 구기며 웃는다.", 15);
+                        Console.ResetColor();
+
+                        // 여관주인 대사
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        TypeText("[여관주인] ...식당? 허허, 자네 눈엔 정말 이곳에 '음식'이 있어 보이나?", 30);
+                        TypeText("[여관주인] 여기선 허기를 채우는 게 아니라, 죽음을 미루는 거라오.", 30);
+                        TypeText("[여관주인] 굳이 찾겠다면야... 벽에 붙은 곰팡이라도 떼어먹어보게.", 30);
+                        TypeText("[여관주인] 아, 그래도 소문은 들을 수 있을지도 모르지. 입이 살아있는 손님이 있다면 말이야.", 30);
+                        Console.ResetColor();
+
+                        WaitForKeyPress();
+                        break;
+
+                    case "0": // 나가기
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        TypeText("[여관주인] 저 문을 나서면, 다시는 돌아오지 못할지도 몰라.", 30);
+                        TypeText("[여관주인] 죽음은 문턱을 넘는 자를 가리지 않으니… 숨이 붙어 있다면 기도하시오.", 30);
+                        TypeText("[여관주인] 아니. 그냥 죽길 바라시오.", 30);
+                        Console.ResetColor();
+
+                        Music.StopMusic();
+                        WaitForKeyPress();
+                        return;
+
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        TypeText("[여관주인] 무슨 말인지 모르겠군. 다시 말해보게.", 30);
+                        Console.ResetColor();
+
+                        WaitForKeyPress();
+                        break;
+                }
             }
-
-            // 휴식 비용 지불
-            bool paymentSuccess = player.SpendGold(restCost);
-
-            if (paymentSuccess)
-            {
-                // 체력과 마나 완전 회복
-                int oldHealth = player.Health;
-                int oldMana = player.Mana;
-
-                player.Health = player.MaxHealth;
-                player.Mana = player.MaxMana;
-
-                Console.WriteLine("충분한 휴식을 취했습니다!");
-                Console.WriteLine($"체력: {oldHealth} -> {player.Health}/{player.MaxHealth}");
-                Console.WriteLine($"마나: {oldMana} -> {player.Mana}/{player.MaxMana}");
-            }
-            Music.StopMusic();
-            WaitForKeyPress();
         }
 
         // 게임 종료 확인 메서드
