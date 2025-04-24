@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Numerics;
 using NAudio.Wave;
+using System.ComponentModel.Design;
 
 namespace TeamRpg
 {
@@ -13,20 +14,20 @@ namespace TeamRpg
     public class Shop
 
     {
-        //private WaveOutEvent shopDevice;
+        //private WaveOutEvent shopDevice; 
         //private AudioFileReader shopAudio;
         public void ShopMenu()
 
         {
             while (true)
             {
-//                //shopAudio = new AudioFileReader(@"Audio\Shop.mp3");
-//                shopDevice = new WaveOutEvent();
-//                shopDevice.Init(shopAudio);
-//                shopDevice.Play();
-//                Console.OutputEncoding = Encoding.UTF8;
-                  Console.Clear();  
-//                string asciiArt = @"
+                //                //shopAudio = new AudioFileReader(@"Audio\Shop.mp3");
+                //                shopDevice = new WaveOutEvent();
+                //                shopDevice.Init(shopAudio);
+                //                shopDevice.Play();
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.Clear();
+                string asciiArt = @"
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@&##B#&&#BBBB#&@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -62,7 +63,7 @@ namespace TeamRpg
 //@@@@@@@@@@@57?YB&@&BBBBGPGGGB#BGGB&YJ5PPYG&##BGGY7!G@@@@@&#B&#B@@@@@";
 
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                //Console.WriteLine(asciiArt);
+                Console.WriteLine(asciiArt);
                 Console.ResetColor();
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -71,9 +72,10 @@ namespace TeamRpg
                 Console.WriteLine("여긴 성도, 마을도 아니야. 누구든, 똑같지..");
                 Console.WriteLine();
                 Console.WriteLine("뭐 하나 골라보게 뭘 원하는가?");
-                Console.WriteLine("1. 장비구매");
-                Console.WriteLine("2. 장비판매");
-                Console.WriteLine("3. 의뢰 ");
+                Console.WriteLine("1. 무기 상점");
+                Console.WriteLine("2. 방어구 상점");
+                Console.WriteLine("3. 잡화 상점");
+                Console.WriteLine("4. 의뢰 ");
                 Console.WriteLine("0. 나가기");
                 Console.ResetColor();
 
@@ -81,19 +83,23 @@ namespace TeamRpg
 
                 if (input == "1")
                 {
-                    MainShop();
+                    WeaponShop();
 
                 }
                 else if (input == "2")
 
                 {
+                    ArmorShop();
 
-                    SellShop();
+                }
+                else if (input == "3")
+                {
+                    haberdasheryShop();
 
                 }
 
 
-                else if (input == "3")
+                else if (input == "4")
                 {
 
                     Console.Clear();
@@ -177,104 +183,128 @@ namespace TeamRpg
         }
 
 
-        //private CancellationTokenSource idleTalkTokenSource; //비동기 작업을 중간에 멈추기 위해 사용하는 객체
+        private CancellationTokenSource idleTalkTokenSource; //비동기 작업을 중간에 멈추기 위해 사용하는 객체
         private Random random = new Random();
         private List<Item> items;
         private Player player;
-        //private Inventory inventory;
+        private Inventory inventory;
 
         public Shop(List<Item> items, Player player)
         {
             this.items = items;
             this.player = player;
         }
-        //private async Task IdleTalkAsync(CancellationToken token)
-        //{
-        //    string[] talk = new string[]
-        //    {
-        //"이 조용함, 폭풍이 오기 전의 정적 같군.",
-        //"살 돈은 있지만… 그 물건을 감당할 용기는 있소?",
-        // "그 칼을 쥐고 죽은 자가 셋이오. 넷째는 당신일지도 모르지.",
-        //"나는 그냥 물건을 팔 뿐이오. 피는 당신 손에 묻히시오.",
-        //"요즘은 누구도 믿을 수 없지. 특히 돈이 없는 자들은…",
-        //"그 검은, 주인을 가리는 법이 없소. 다만 누구나 피를 보게 되지.",
-        //"운명이란 건 어쩌면, 우리가 무엇을 사느냐에 따라 정해지는 걸지도 모르지.",
-        //"자네가 이걸 들고 떠나면... 다시는 돌아오지 못할 수도 있소."
-        //    };
+        private async Task IdleTalkAsync(CancellationToken token)
+        {
+            string[] talk = new string[]
+            {
+        "이 조용함, 폭풍이 오기 전의 정적 같군.",
+        "살 돈은 있지만… 그 물건을 감당할 용기는 있소?",
+         "그 칼을 쥐고 죽은 자가 셋이오. 넷째는 당신일지도 모르지.",
+        "나는 그냥 물건을 팔 뿐이오. 피는 당신 손에 묻히시오.",
+        "요즘은 누구도 믿을 수 없지. 특히 돈이 없는 자들은…",
+        "그 검은, 주인을 가리는 법이 없소. 다만 누구나 피를 보게 되지.",
+        "운명이란 건 어쩌면, 우리가 무엇을 사느냐에 따라 정해지는 걸지도 모르지.",
+        "자네가 이걸 들고 떠나면... 다시는 돌아오지 못할 수도 있소."
+            };
 
-        //    while (!token.IsCancellationRequested)
-        //    {
-        //        try
-        //        {
-        //            await Task.Delay(7000, token); //7초마다
+            while (!token.IsCancellationRequested)
+            {
+                try
+                {
+                    await Task.Delay(7000, token);//7초마다
 
-        //            if (!token.IsCancellationRequested)
-        //            {
-        //                Console.ForegroundColor = ConsoleColor.DarkGray;
-        //                Console.WriteLine($"\n[상인] {talk[random.Next(talk.Length)]}");
-        //                Console.ResetColor();
-        //            }
-        //        }
-        //        catch (TaskCanceledException)
-        //        {
-        //            break;
-        //        }
-        //    }
-        //}
-        public void MainShop()
+                    if (!token.IsCancellationRequested)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine($"\n[상인] {talk[random.Next(talk.Length)]}");
+                        Console.ResetColor();
+                    }
+                }
+                catch (TaskCanceledException)
+                {
+                    break;
+                }
+            }
+        }
+        public void WeaponShop()
         {
             while (true)
             {
                 Console.Clear();
-                //Console.ForegroundColor = ConsoleColor.Blue;
-                //Console.WriteLine("물건이라...내일 다시 돌아오겠군.");
-                //Console.WriteLine();
-                //Console.WriteLine("여긴 성도, 마을도 아니야. 누구든, 돈만 있으면 상대해주지.");
-                //Console.WriteLine();
-                //Console.WriteLine("얼른 고르시오. 그대가 써봤자 다 의미 없으니");
-                //Console.ResetColor();
-
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("[상인] 여기 있는 것들은 그저 쇳덩어리가 아니오.");
                 Console.WriteLine();
-                Console.WriteLine($"보유 Groshen:{player.Gold} Groshen");
+                Console.WriteLine("[상인] 각각의 무기엔, 한 명의 죽음이 담겨 있지...");
                 Console.WriteLine();
-                Console.WriteLine("아이템 목록");
-                for (int i = 0; i < items.Count; i++)
+                Console.WriteLine("[상인] 얼른 고르시오. 그대가 써봤자 다 의미 없으니");
+                Console.ResetColor();
+                Console.WriteLine("1. 아이템 구매");
+                Console.WriteLine("2. 아이템 판매");
+                Console.WriteLine("0. 돌아가기");
+                string input1 = Console.ReadLine();
+                if (input1 == "1")
                 {
-                    Item item = items[i];
 
-                    if (item.isBuy)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkGray; // 이미 구매한 아이템은 회색
-                        Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}) [구매 완료]");
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.White; // 기본 색상
-                        Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}\n{item.Description}");
-                    }
-                    Console.WriteLine();
-                    Console.ResetColor(); // 색상 초기화
+                    WeaponBuy();
+
+                }
+                else if (input1 == "2")
+                {
+                    WeaponSell();
+                }
+                else if (input1 == "0")
+                {
+                    // 상점 나갈때 대사 출력 선택
+                    // Console.WriteLine("잘 가시오, 잊힌 자여. 다음 만남은… 아마 더 어두울 것이오.");
+                    // Console.ReadKey();
+                    return;
                 }
 
 
-                Console.WriteLine("0. 나가기");
+            }
+        }
 
+
+
+        public void WeaponBuy()
+        {
+
+            while (true) // 아이템 구매 전용 루프
+            {
+                Console.Clear();
+                Console.WriteLine($"보유 Groshen:{player.Gold} Groshen");
                 Console.WriteLine();
-                Console.Write("원하시는 장비를 말해보게... ");
-                //idleTalkTokenSource = new CancellationTokenSource();// Task 시작할 때 token을 전달
-                //var idleTask = IdleTalkAsync(idleTalkTokenSource.Token); //중단 신호를 받을 수 있게 함
+                Console.WriteLine("아이템 목록");
 
+                var weaponItems = items
+                    .Where(item => item.Type == JobOption.Gladiator ||
+                                   item.Type == JobOption.Hunter ||
+                                   item.Type == JobOption.Assassin).ToList();//무기 직업별
 
-                string input = Console.ReadLine();
-
-                // 입력 받았으므로 혼잣말 멈추기
-                //idleTalkTokenSource.Cancel();
-                //idleTask.Wait();
-
-                if (int.TryParse(input, out int choice) && choice >= 1 && choice <= items.Count)
+                for (int i = 0; i < weaponItems.Count; i++)
                 {
-                    Item item = items[choice - 1];
+                    Item item = weaponItems[i];
+                    Console.ForegroundColor = item.isBuy ? ConsoleColor.DarkGray : ConsoleColor.White;
+                    Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}){(item.isBuy ? " [구매 완료]" : "")}");
+                    Console.WriteLine(item.Description);
+                    Console.ResetColor();
+                }
 
+                Console.WriteLine("0. 나가기");
+                Console.Write("원하시는 무기를 말해보게... ");
+                idleTalkTokenSource = new CancellationTokenSource();
+                var idleTask = IdleTalkAsync(idleTalkTokenSource.Token);
+                string input = Console.ReadLine();
+                idleTalkTokenSource.Cancel();
+                idleTask.Wait();
+
+                if (input == "0")
+                    break;
+
+                if (int.TryParse(input, out int choice) && choice >= 1 && choice <= weaponItems.Count)
+                {
+                    Item item = weaponItems[choice - 1];
 
                     if (item.isBuy)
                     {
@@ -285,8 +315,7 @@ namespace TeamRpg
                         continue;
                     }
 
-                    if (item.Job != null && item.Job != "공용" && item.Job != player.Job)
-
+                    if (item.Job != player.Job)
                     {
                         Console.Clear();
                         Console.WriteLine("자네가 그걸 든다면, 웃음거리가 될 뿐이오.");// 특정 직업만 구입가능 아이템
@@ -296,48 +325,39 @@ namespace TeamRpg
                         continue;
                     }
 
-                    if (player.Gold >= item.Gold) // 플레이어 골드가 아이템 가격보다 많거나 같으면
+                    if (player.Gold >= item.Gold)
                     {
                         Console.Clear();
-                        player.Gold -= item.Gold; //플레이어 골드에 아이템 가격을 뺀후 플레이어 골드저장
+                        player.Gold -= item.Gold;
                         item.isBuy = true;
                         player.inventory.Add(item);
                         Console.WriteLine($"{item.Name}를 구매했습니다!");
                         Console.WriteLine("좋소. 그대의 생명을 조금은 연장시켜줄 테지.");
+                        Console.ReadKey();
+
                     }
                     else
                     {
                         Console.Clear();
                         Console.WriteLine("꿈만 꾸지 마시오. 여긴 자선을 베푸는 곳이 아니니까.");
                         Console.WriteLine(" 이 물건의 값어치를 모른다면, 다시 돌아오시오.");
+                        Console.ReadKey();
+                        continue;
                     }
-                    Console.ReadKey();
-
-                }
-                else if (input == "1")
-                {
-
-                    SellShop();
-                }
-
-
-                else if (input == "0")
-                {
-                    return;
                 }
                 else
                 {
                     Console.WriteLine("귀가 멀었소? 아니면 숫자도 못 읽는 건가.");
                     Console.WriteLine("그럴 여유는 없을 텐데.");
                     Console.ReadKey();
+                    continue;
                 }
             }
         }
 
 
 
-
-        private void SellShop()
+        private void WeaponSell()
         {
             while (true)
             {
@@ -346,7 +366,8 @@ namespace TeamRpg
                 Console.WriteLine("아이템 판매 메뉴");
                 Console.ResetColor();
 
-                List<Item> buyItems = player.inventory.Where(item => item.isBuy && !item.isEquipped).ToList();
+                List<Item> buyItems =
+                player.inventory.Where(item => item.isBuy && !item.isEquipped && (item.Type == JobOption.Gladiator || item.Type == JobOption.Hunter || item.Type == JobOption.Assassin)).ToList();
 
                 if (buyItems.Count == 0)
                 {
@@ -411,5 +432,379 @@ namespace TeamRpg
 
         }
 
+        public void ArmorShop()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("[상인] 여기 있는 것들은 그저 쇳덩어리가 아니오.");
+                Console.WriteLine();
+                Console.WriteLine("[상인] 각각의 무기엔, 한 명의 죽음이 담겨 있지...");
+                Console.WriteLine();
+                Console.WriteLine("[상인] 얼른 고르시오. 그대가 써봤자 다 의미 없으니");
+                Console.ResetColor();
+                Console.WriteLine("1. 아이템 구매");
+                Console.WriteLine("2. 아이템 판매");
+                Console.WriteLine("0. 돌아가기");
+                string input1 = Console.ReadLine();
+                if (input1 == "1")
+                {
+
+                    ArmorBuy();
+
+                }
+                else if (input1 == "2")
+                {
+                    ArmorSell();
+                }
+                else if (input1 == "0")
+                {
+                    // 상점 나갈때 대사 출력 선택
+                    // Console.WriteLine("잘 가시오, 잊힌 자여. 다음 만남은… 아마 더 어두울 것이오.");
+                    // Console.ReadKey();
+                    return;
+                }
+
+
+            }
+
+
+        }
+        public void ArmorBuy()
+        {
+            while (true) // 아이템 구매 전용 루프
+            {
+                Console.Clear();
+                Console.WriteLine($"보유 Groshen:{player.Gold} Groshen");
+                Console.WriteLine();
+                Console.WriteLine("아이템 목록");
+
+                var armorItems = items
+                    .Where(item => item.Type == JobOption.Amor).ToList(); //방어구만 
+
+
+                for (int i = 0; i < armorItems.Count; i++)
+                {
+                    Item item = armorItems[i];
+                    Console.ForegroundColor = item.isBuy ? ConsoleColor.DarkGray : ConsoleColor.White;
+                    Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G (공격력: +{item.Attack}, 방어력: +{item.Defense}){(item.isBuy ? " [구매 완료]" : "")}");
+                    Console.WriteLine(item.Description);
+                    Console.ResetColor();
+                }
+
+                Console.WriteLine("0. 나가기");
+                Console.Write("원하시는 방어구를 말해보게... ");
+                idleTalkTokenSource = new CancellationTokenSource();
+                var idleTask = IdleTalkAsync(idleTalkTokenSource.Token);
+                string input = Console.ReadLine();
+                idleTalkTokenSource.Cancel();
+                idleTask.Wait();
+
+                if (input == "0")
+                    break;
+
+                if (int.TryParse(input, out int choice) && choice >= 1 && choice <= armorItems.Count)
+                {
+                    Item item = armorItems[choice - 1];
+
+                    if (item.isBuy)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("다시 보러 온 건가, 아니면 잊은 건가. 어쨌든 거래는 끝났소.");
+                        Console.WriteLine("돌아가시게");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+
+                    if (player.Gold >= item.Gold)
+                    {
+                        Console.Clear();
+                        player.Gold -= item.Gold;
+                        item.isBuy = true;
+                        player.inventory.Add(item);
+                        Console.WriteLine($"{item.Name}를 구매했습니다!");
+                        Console.WriteLine("좋소. 그대의 생명을 조금은 연장시켜줄 테지.");
+                        Console.ReadKey();
+
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("꿈만 꾸지 마시오. 여긴 자선을 베푸는 곳이 아니니까.");
+                        Console.WriteLine(" 이 물건의 값어치를 모른다면, 다시 돌아오시오.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("귀가 멀었소? 아니면 숫자도 못 읽는 건가.");
+                    Console.WriteLine("그럴 여유는 없을 텐데.");
+                    Console.ReadKey();
+                    continue;
+                }
+            }
+
+
+        }
+        private void ArmorSell()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("아이템 판매 메뉴");
+                Console.ResetColor();
+
+                List<Item> buyItems = player.inventory.Where(item => item.isBuy && !item.isEquipped && item.Type == JobOption.Amor).ToList();
+
+                if (buyItems.Count == 0)
+                {
+                    Console.WriteLine("비었소. 마음도, 가방도. 지금은 돌아가시오.");
+                    Console.ReadKey();
+                    return;
+                }
+                for (int i = 0; i < buyItems.Count; i++)
+                {
+                    var item = buyItems[i];
+                    Console.WriteLine($"{i + 1}. {item.Name}  - 판매가: {item.Gold / 2} G");
+                }
+                Console.WriteLine("0. 나가기");
+                Console.Write("판매할 아이템 번호 입력: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int sellchoice))
+                {
+                    if (sellchoice == 0)
+                    {
+                        return;
+                    }
+
+                    if (sellchoice >= 1 && sellchoice <= buyItems.Count)
+                    {
+
+                        Item sellitem = buyItems[sellchoice - 1];
+                        if (sellitem.isEquipped)
+                        {
+                            Console.WriteLine("몸에 붙어 있는 걸 파는 자는… 아직 결심이 덜 선 거요.");
+                            Console.WriteLine("아직 자네가 버릴 준비가 안 된 것 같군. 나중에 다시 말하시오.");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        int sellgold = sellitem.Gold / 2;
+
+                        player.Gold += sellgold;
+                        player.inventory.Remove(sellitem);
+                        sellitem.isBuy = false;
+
+                        Console.WriteLine($"({sellitem.Name}을(를) {sellgold} Gold에 판매했습니다.)");
+                        Console.WriteLine("이걸 판다고 과거가 사라지진 않소.");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine("이런 자들 때문에 시간만 낭비되는 거지.");
+                        Console.ReadKey();
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("숫자조차 제대로 못 고르는 자에겐, 거래란 무리요.");
+                    Console.ReadKey();
+                }
+            }
+
+
+        }
+
+
+        private void haberdasheryShop()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("[상인] 이 물건들은 단순한 약이 아니오. 기억을 지우고, 생명을 비틀기도 하니…");
+                Console.WriteLine();
+                Console.WriteLine("[상인] 이건 연금술사의 피와 악마의 숨결로 만들어졌소. 흔한 물건은 아니지.");
+                Console.WriteLine();
+                Console.WriteLine("[상인] 얼른 고르시오. 그대가 써봤자 다 의미 없으니");
+                Console.ResetColor();
+                Console.WriteLine("1. 아이템 구매");
+                Console.WriteLine("2. 아이템 판매");
+                Console.WriteLine("0. 돌아가기");
+                string input1 = Console.ReadLine();
+                if (input1 == "1")
+                {
+
+                    haberdasheryBuy();
+
+                }
+                else if (input1 == "2")
+                {
+                    haberdasherySell();
+                }
+                else if (input1 == "0")
+                {
+                    // 상점 나갈때 대사 출력 선택
+                    // Console.WriteLine("잘 가시오, 잊힌 자여. 다음 만남은… 아마 더 어두울 것이오.");
+                    // Console.ReadKey();
+                    return;
+                }
+
+
+            }
+        }
+        private void haberdasheryBuy()
+        {
+            while (true) // 아이템 구매 전용 루프
+            {
+                Console.Clear();
+                Console.WriteLine($"보유 Groshen:{player.Gold} Groshen");
+                Console.WriteLine();
+                Console.WriteLine("아이템 목록");
+
+                var potionItems = items
+                    .Where(item => item.Type == JobOption.Potion).ToList(); //포션만 
+
+                for (int i = 0; i < potionItems.Count; i++)
+                {
+                    var item = potionItems[i];
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"{i + 1}. {item.Name} - {item.Gold}G");
+                    Console.WriteLine(item.Description);
+                    Console.ResetColor();
+                }
+
+
+                Console.WriteLine("0. 나가기");
+                Console.Write("원하는 엘릭서를 말해보게... ");
+                idleTalkTokenSource = new CancellationTokenSource();
+                var idleTask = IdleTalkAsync(idleTalkTokenSource.Token);
+                string input = Console.ReadLine();
+                idleTalkTokenSource.Cancel();
+                idleTask.Wait();
+
+                if (input == "0")
+
+                    break;
+
+                if (int.TryParse(input, out int choice) && choice >= 1 && choice <= potionItems.Count)
+                {
+                    Item item = potionItems[choice - 1];
+
+
+
+
+                    if (player.Gold >= item.Gold)
+                    {
+                        Console.Clear();
+                        player.Gold -= item.Gold;
+                        item.isBuy = true;
+                        player.inventory.Add(item);
+                        Console.WriteLine($"{item.Name}를 구매했습니다!");
+                        Console.WriteLine("좋소. 그대의 생명을 조금은 연장시켜줄 테지.");
+                        Console.ReadKey();
+
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("재산이란 허상이지. 하지만 이 허상 없이는… 아무것도 얻을 수 없소");
+                        Console.WriteLine("당신이 가진 건 욕망뿐인가 보오.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("그런 번호는 목록에 없소. 당신이 본 게… 진짜였을까?");
+                    Console.WriteLine("그럴 여유는 없을 텐데.");
+                    Console.ReadKey();
+                    continue;
+                }
+            }
+        }
+
+
+        private void haberdasherySell()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("아이템 판매 메뉴");
+                Console.ResetColor();
+
+                List<Item> buyItems = player.inventory.Where(item => item.isBuy && item.Type == JobOption.Potion).ToList();
+
+                if (buyItems.Count == 0)
+                {
+                    Console.WriteLine("비었소. 마음도, 가방도. 지금은 돌아가시오.");
+                    Console.ReadKey();
+                    return;
+                }
+                for (int i = 0; i < buyItems.Count; i++)
+                {
+                    var item = buyItems[i];
+                    Console.WriteLine($"{i + 1}. {item.Name}  - 판매가: {item.Gold / 2} G");
+                }
+                Console.WriteLine("0. 나가기");
+                Console.Write("판매할 아이템 번호 입력: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int sellchoice))
+                {
+                    if (sellchoice == 0)
+                    {
+                        return;
+                    }
+
+                    if (sellchoice >= 1 && sellchoice <= buyItems.Count)
+                    {
+
+                        Item sellitem = buyItems[sellchoice - 1];
+                        if (sellitem.isEquipped)
+                        {
+                            Console.WriteLine("몸에 붙어 있는 걸 파는 자는… 아직 결심이 덜 선 거요.");
+                            Console.WriteLine("아직 자네가 버릴 준비가 안 된 것 같군. 나중에 다시 말하시오.");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        int sellgold = sellitem.Gold / 2;
+
+                        player.Gold += sellgold;
+                        player.inventory.Remove(sellitem);
+                        sellitem.isBuy = false;
+
+                        Console.WriteLine($"({sellitem.Name}을(를) {sellgold} Gold에 판매했습니다.)");
+                        Console.WriteLine("이걸 판다고 과거가 사라지진 않소.");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine("이런 자들 때문에 시간만 낭비되는 거지.");
+                        Console.ReadKey();
+                    }
+
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("숫자조차 제대로 못 고르는 자에겐, 거래란 무리요.");
+                    Console.ReadKey();
+                }
+            }
+
+
+        }
     }
 }
