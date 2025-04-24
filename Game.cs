@@ -779,24 +779,43 @@ namespace TeamRpg
         }
 
         // 메인 메뉴 표시 메서드
+        private bool isFirstTimeInMainMenu = true; // 메인 메뉴 첫 방문 여부 추적
+
+        // DisplayMainMenu 메서드 수정
         private void DisplayMainMenu()
         {
             Console.Clear();
 
-            // 분위기 묘사 텍스트 (타이핑 효과 적용)
-            Console.ForegroundColor = ConsoleColor.DarkGray; // 어두운 회색 설정
-            string[] descriptionLines = {
-        "\n버려진 듯 넓은 공터에는 임시 천막과 조잡한 가건물들이 어지럽게 널려있다.",
-        "한때는 북적였을 법한 이곳엔 이제 스산한 바람 소리만이 감돌 뿐, 사람의 온기라곤 느껴지지 않는다.",
-        "먼지가 내려앉은 길 위에는 정체 모를 발자국들만 희미하게 남아있고,",
-        "저편의 여관과 상점만이 꺼질 듯한 불빛을 내며 기묘한 존재감을 드러낸다.",
-        "", // 공백 추가
-        "그 안에 선 여관주인과 상점주인은 초췌한 몰골로, 텅 빈 눈동자로 나를 응시한다.",
-        "몇 마디 말을 걸어보았지만, 돌아오는 것은 의미 없는 침묵과 각자의 목적을 위한 대답뿐.",
-        "그들은... 아니, 이것들은... 내 질문에 답할 생각이 전혀 없어 보인다.",
-        "이 섬뜩한 정적 속에는 무엇이 도사리고 있는 걸까.\n"
-    };
-            TypeMultipleLines(descriptionLines, 10); // TypeMultipleLines 메서드 사용 (딜레이 30ms)
+            // 첫 방문 시에만 상세한 설명 출력
+            if (isFirstTimeInMainMenu)
+            {
+                // 분위기 묘사 텍스트 (타이핑 효과 적용)
+                Console.ForegroundColor = ConsoleColor.DarkGray; // 어두운 회색 설정
+                string[] descriptionLines = {
+            "\n버려진 듯 넓은 공터에는 임시 천막과 조잡한 가건물들이 어지럽게 널려있다.",
+            "한때는 북적였을 법한 이곳엔 이제 스산한 바람 소리만이 감돌 뿐, 사람의 온기라곤 느껴지지 않는다.",
+            "먼지가 내려앉은 길 위에는 정체 모를 발자국들만 희미하게 남아있고,",
+            "저편의 여관과 상점만이 꺼질 듯한 불빛을 내며 기묘한 존재감을 드러낸다.",
+            "", // 공백 추가
+            "그 안에 선 여관주인과 상점주인은 초췌한 몰골로, 텅 빈 눈동자로 나를 응시한다.",
+            "몇 마디 말을 걸어보았지만, 돌아오는 것은 의미 없는 침묵과 각자의 목적을 위한 대답뿐.",
+            "그들은... 아니, 이것들은... 내 질문에 답할 생각이 전혀 없어 보인다.",
+            "이 섬뜩한 정적 속에는 무엇이 도사리고 있는 걸까.\n"
+        };
+                TypeMultipleLines(descriptionLines, 10); // TypeMultipleLines 메서드 사용 (딜레이 10ms)
+
+                // 첫 방문 표시를 false로 변경
+                isFirstTimeInMainMenu = false;
+            }
+            else
+            {
+                // 두 번째 방문부터는 간략한 설명만 출력
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("\n언제나 그렇듯, 삭막하고 흉흉한 정착지이다.");
+                Console.WriteLine("");
+                Console.ResetColor();
+            }
+
             Console.ResetColor(); // 색상 초기화
 
             // 분위기 묘사 후 메인 메뉴 타이틀 표시
