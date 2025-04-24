@@ -91,6 +91,17 @@ namespace TeamRpg
             Console.WriteLine("게임이 종료되었습니다. 다음에 또 뵙겠습니다!");
         }
 
+        // 키보드 버퍼를 비우는 메서드
+        private void ClearKeyboardBuffer()
+        {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true); // true는 키 입력을 화면에 표시하지 않음
+            }
+        }
+
+
+
         // 시작 화면 표시 메서드
         private void DisplayStartScreen()
         {
@@ -1101,7 +1112,13 @@ namespace TeamRpg
         public void WaitForKeyPress()
         {
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
-            Console.ReadKey(true);
+            Console.ReadKey(true); // true는 키 입력을 화면에 표시하지 않음
+
+            // 키 입력 후 버퍼를 비웁니다
+            ClearKeyboardBuffer();
+
+            // 약간의 지연 시간을 줍니다 (너무 빠른 연속 입력 방지)
+            System.Threading.Thread.Sleep(150);
         }
     }
 }
