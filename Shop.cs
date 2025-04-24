@@ -94,7 +94,7 @@ namespace TeamRpg
                 }
                 else if (input == "3")
                 {
-                    haberdasheryShop();
+                    HaberDasheryShop();
 
                 }
 
@@ -624,7 +624,7 @@ namespace TeamRpg
         }
 
 
-        private void haberdasheryShop()
+        private void HaberDasheryShop()
         {
             while (true)
             {
