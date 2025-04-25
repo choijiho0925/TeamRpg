@@ -12,20 +12,14 @@ namespace TeamRpg
 {
 
     public class Shop
-
     {
-
         // 상점 방문 여부 확인 변수
         private bool isFirstVisit = true;
 
         public void ShopMenu()
-
         {
-
             while (true)
             {
-
-
                 string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/hotelshop.wav");
                 Music.PlayMusic(test);
 
@@ -229,8 +223,6 @@ namespace TeamRpg
                 }
             }
         }
-
-
         private CancellationTokenSource idleTalkTokenSource; //비동기 작업을 중간에 멈추기 위해 사용하는 객체
         private Random random = new Random();
         private List<Item> items;
@@ -337,9 +329,6 @@ namespace TeamRpg
                 }
             }
         }
-
-
-
 
         public void WeaponBuy()
         {
@@ -493,8 +482,6 @@ namespace TeamRpg
             }
         }
 
-
-
         private void WeaponSell()
         {
             while (true)
@@ -545,7 +532,6 @@ namespace TeamRpg
                         Console.WriteLine($"{i + 1}. {item.Name}  - 판매가: {item.Gold / 2} Gold");
                     }
                 }
-
                 Console.WriteLine("0. 나가기");
 
                 // 직업에 따라 다른 프롬프트 표시
@@ -566,7 +552,6 @@ namespace TeamRpg
                     {
                         return;
                     }
-
                     if (sellchoice >= 1 && sellchoice <= buyItems.Count)
                     {
                         Item sellitem = buyItems[sellchoice - 1];
@@ -587,7 +572,6 @@ namespace TeamRpg
                             Console.ReadKey();
                             continue;
                         }
-
                         int sellgold = sellitem.Gold / 2;
 
                         // 육군 이등별은 골드를 추가로 얻지 않음 (무료로 받았으므로)
@@ -708,6 +692,7 @@ namespace TeamRpg
                 }
             }
         }
+
         public void ArmorBuy()
         {
             string currentPrompt = player.Job == "육군 이등별" ?
@@ -844,6 +829,7 @@ namespace TeamRpg
                 }
             }
         }
+
         private void ArmorSell()
         {
             while (true)
@@ -935,7 +921,6 @@ namespace TeamRpg
                             Console.ReadKey();
                             continue;
                         }
-
                         int sellgold = sellitem.Gold / 2;
 
                         // 육군 이등별은 골드를 추가로 얻지 않음 (무료로 받았으므로)
@@ -943,7 +928,6 @@ namespace TeamRpg
                         {
                             player.Gold += sellgold;
                         }
-
                         player.inventory.Remove(sellitem);
                         sellitem.isBuy = false;
 
@@ -993,7 +977,6 @@ namespace TeamRpg
                 }
             }
         }
-
 
         public void HaberDasheryShop() // 잡화 상점 (포션 등)
         {
@@ -1073,7 +1056,6 @@ namespace TeamRpg
                 {
                     Console.WriteLine($"보유 골드: {player.Gold} G");
                 }
-
                 Console.WriteLine();
 
                 // 타이틀도 직업에 따라 다르게
@@ -1097,7 +1079,6 @@ namespace TeamRpg
                     Console.WriteLine(item.Description);
                     Console.ResetColor();
                 }
-
                 Console.WriteLine("0. 나가기");
 
                 // 직업에 따라 다른 프롬프트 표시
@@ -1184,7 +1165,6 @@ namespace TeamRpg
             }
         }
 
-
         private void haberdasherySell()
         {
             while (true)
@@ -1234,7 +1214,6 @@ namespace TeamRpg
                         Console.WriteLine($"{i + 1}. {item.Name}  - 판매가: {item.Gold / 2} G");
                     }
                 }
-
                 Console.WriteLine("0. 나가기");
 
                 // 직업에 따라 다른 프롬프트 표시
@@ -1275,7 +1254,6 @@ namespace TeamRpg
                             Console.ReadKey();
                             continue;
                         }
-
                         int sellgold = sellitem.Gold / 2;
 
                         // 육군 이등별은 골드를 추가로 얻지 않음 (무료로 받았으므로)

@@ -13,7 +13,6 @@ namespace TeamRpg
     public class Game
     {
         
-        
         // 싱글톤 패턴 구현
         private static Game instance = null;
 
@@ -35,6 +34,7 @@ namespace TeamRpg
         public Battle battle;        // 전투 관리 객체
         public Shop shop;            // 상점 객체
         public List<Item> items;     // 게임 내 존재하는 모든 아이템 목록
+
         private Random random;       // 랜덤 요소를 위한 난수 생성기
 
         // 게임 실행 상태
@@ -99,8 +99,6 @@ namespace TeamRpg
                 Console.ReadKey(true); // true는 키 입력을 화면에 표시하지 않음
             }
         }
-
-
 
         // 시작 화면 표시 메서드
         private void DisplayStartScreen()
@@ -177,14 +175,17 @@ namespace TeamRpg
                         job = "검투사";
                         validJob = true;
                         break;
+
                     case "2":
                         job = "수렵꾼";
                         validJob = true;
                         break;
+
                     case "3":
                         job = "암살자";
                         validJob = true;
                         break;
+
                     case "육군 이등별": // 직접 "육군 이등별"을 입력해도 됨
                     case "4": // 4를 숨겨진 옵션으로 추가
                     case "이등별":
@@ -200,6 +201,7 @@ namespace TeamRpg
                         Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
                         Console.ReadKey(true);
                         break;
+
                     default:
                         // 잘못된 선택 시 자동으로 육군 이등별이 되도록 변경
                         job = "육군 이등별";
@@ -799,7 +801,6 @@ private void ShowRoyalDecree()
                     Console.ResetColor();
                 }
             }
-
             if (startingArmor != null)
             {
                 player.inventory.Add(startingArmor);
@@ -819,12 +820,9 @@ private void ShowRoyalDecree()
             {
                 player.Gold = 0;
             }
-
             Console.WriteLine($"던전을 탐험하며, 선발대의 흔적을 찾고 더 많은 골드와 아이템을 모아보세요!");
             Console.WriteLine("\n인벤토리에서 장비를 장착하여 던전에 도전해보세요!");
         }
-
-
 
         // 게임 객체 초기화 메서드
         private void InitializeGameObjects()
@@ -938,7 +936,6 @@ private void ShowRoyalDecree()
                     Console.ResetColor();
                 }
             }
-
             Console.ResetColor(); // 색상 초기화
 
             // 분위기 묘사 후 메인 메뉴 타이틀 표시
@@ -985,6 +982,7 @@ private void ShowRoyalDecree()
 
             Console.Write("\n선택: ");
         }
+
         // 메인 메뉴 선택 처리 메서드 수정
         private void ProcessMainMenuChoice(string choice)
         {
@@ -1284,7 +1282,6 @@ private void ShowRoyalDecree()
                     Console.WriteLine("2. 이른바 '식당'이라는 곳");
                     Console.WriteLine("0. 이 불길한 곳에서 나가기");
                 }
-
                 Console.Write("\n선택: ");
                 string choice = Console.ReadLine();
 
@@ -1397,7 +1394,6 @@ private void ShowRoyalDecree()
                             TypeText("[여관주인] ...아니면, 바닥에 굴러다니는 뼛조각이라도 주워 먹을 텐가?", 40);
                             Console.ResetColor();
                         }
-
                         WaitForKeyPress();
                         break;
 
@@ -1420,7 +1416,6 @@ private void ShowRoyalDecree()
                             TypeText("[여관주인] 부디... 곱게 죽길 바라네. 다음 손님에게 방해가 되지 않도록.", 40);
                             Console.ResetColor();
                         }
-
                         Music.StopMusic(); // 음악 정지
                         WaitForKeyPress();
                         return; // 메인 메뉴로

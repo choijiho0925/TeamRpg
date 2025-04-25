@@ -19,6 +19,7 @@ namespace TeamRpg
                 return instance;
             }
         }
+
         private ItemManager()
         {
             Items = new List<Item>()

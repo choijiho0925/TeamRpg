@@ -10,6 +10,7 @@ namespace TeamRpg
     public class Monster
     {
         public string Name;
+
         public int Health;
         public int Mana;
         public int Attack;

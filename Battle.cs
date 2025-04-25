@@ -40,7 +40,6 @@ namespace TeamRpg
                 {
                     Console.Clear();
                     Console.WriteLine("공격할 몬스터를 선택하세요 (↑ ↓, 엔터):\n");
-
                     
                     for (int i = 0; i < Game.Instance.monstersInBattle.Count; i++)
                     {
@@ -152,7 +151,6 @@ namespace TeamRpg
                 Game.Instance.WaitForKeyPress();
             }
         }
-
         //플레이어 턴
         private void PlayerTurn(Monster target)
         {
@@ -185,7 +183,6 @@ namespace TeamRpg
                     break;
             }
         }
-
         // ============== 특수행동 메서드 ==============
         // 전투 중 특수행동(포션 사용 등)을 처리합니다.
         private void UseSpecialAction()

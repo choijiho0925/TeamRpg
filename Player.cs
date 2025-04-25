@@ -15,6 +15,7 @@ namespace TeamRpg
         // ============== 플레이어의 기본 속성들 ==============
         private string name;        // 플레이어 이름
         private string job;         // 플레이어 직업 (전사, 궁수, 도적 중 하나)
+
         private int health;         // 현재 체력
         private int maxHealth;      // 최대 체력
         private int mana;           // 현재 마나
@@ -85,7 +86,6 @@ namespace TeamRpg
             Console.WriteLine("초기 스탯:");
             DisplayStatus();
         }
-
 
         // ============== 직업 설정 메서드 - 유효한 직업인지 검사하고 설정합니다. ==============
         // 유효하지 않으면 다시 입력받도록 false를 반환합니다.
@@ -199,7 +199,6 @@ namespace TeamRpg
             // 마무리 구분선
             Console.WriteLine("========================\n");
         }
-
 
         public void EarnExperience(int amount)
         {
