@@ -295,9 +295,11 @@ namespace TeamRpg
                 Console.WriteLine("\n[아이템 목록]");
 
                 var weaponItems = items
-                    .Where(item => item.Type == JobOption.Gladiator ||
+                    .Where(item => (item.Type == JobOption.Gladiator ||
                                    item.Type == JobOption.Hunter ||
-                                   item.Type == JobOption.Assassin).ToList();
+                                   item.Type == JobOption.Assassin) &&
+                                   // 육군 이등별이 아니면 K2소총을 표시하지 않음
+                                   (player.Job == "육군 이등별" || item.Job != "육군 이등별")).ToList();
 
                 // 아이템 목록 표시 (이전 답변 포맷 유지)
                 for (int i = 0; i < weaponItems.Count; i++)
