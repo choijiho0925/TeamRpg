@@ -697,64 +697,120 @@ namespace TeamRpg
             Console.ReadKey(true);
         }
 
-            // 왕의 칙서 내용 표시
-private void ShowRoyalDecree()
+        // 왕의 칙서 내용 표시
+        // ShowRoyalDecree 메서드 수정
+        private void ShowRoyalDecree()
         {
-            // 왕의 칙서 표시
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta; // 칙서 내용을 다른 색으로 강조
-            Console.WriteLine("========================================");
-            Console.WriteLine($"          왕 의  칙 서             ");
-            Console.WriteLine("========================================");
-            Console.ResetColor();
+            // 육군 이등별인 경우 단편명령 출력
+            if (player.Job == "육군 이등별")
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("========================================");
+                Console.WriteLine($"          단편명령 25-13호             ");
+                Console.WriteLine("========================================");
+                Console.ResetColor();
 
-            string[] decreeLines = {
-    "그대에게 왕명을 내린다.",
-    "",
-    "최근 수도 인근에서 발견된 정체불명의 지하 던전으로 인해 왕국이 혼란에 빠졌다.",
-    "이에 선발대를 파견하였으나, 안타깝게도 그들과의 소식이 끊긴 지 오래다.",
-    "",
-    "그대의 뛰어난 능력과 용맹함에 대한 명성을 익히 들어 알고 있다.",
-    "부디 왕국을 위해 그대의 힘을 빌려주길 바란다.",
-    "",
-    "던전으로 진입하여 실종된 선발대의 행방을 찾고,",
-    "던전 내부의 상황을 파악하여 보고하라.",
-    "그대의 용기와 헌신에는 합당한 보상을 약속하겠다.",
-    "",
-    "왕국의 안위가 그대의 어깨에 달려있다."
-    };
+                string[] decreeLines = {
+            "1. 제1기갑사단을 선두로, 헬기대대와 포병여단이 엄호하며 던전으로 진격한다.",
+            "   모든 병력은 전투 준비를 완료하고, 지휘관의 명령에 따라 일사불란하게 움직인다.",
+            "",
+            "2. 던전 내부의 모든 적대 세력은 섬멸을 목표로 한다.",
+            "   어떠한 상황에서도 후퇴는 불허하며, 임무 완수 시까지 전투를 지속한다.",
+            "",
+            "3. 작전 중 발생하는 모든 상황은 즉각 보고하며,",
+            "   지휘부의 판단에 따라 유동적으로 대처한다.",
+            "",
+            "4. 작전 종료 후, 모든 병력은 지정된 집결지로 복귀하여",
+            "   결과를 보고하고 재정비를 실시한다."
+        };
 
-            TypeMultipleLines(decreeLines);
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            TypeText("- 국왕 라인헬름2세 -", 50); // 서명은 조금 더 느리게
-            Console.ResetColor();
+                TypeMultipleLines(decreeLines);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                TypeText("- 국방부 장관 -", 50); // 서명은 조금 더 느리게
+                Console.ResetColor();
+            }
+            else
+            {
+                // 기존 왕의 칙서 표시 유지
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Magenta; // 칙서 내용을 다른 색으로 강조
+                Console.WriteLine("========================================");
+                Console.WriteLine($"          왕 의  칙 서             ");
+                Console.WriteLine("========================================");
+                Console.ResetColor();
+
+                string[] decreeLines = {
+            "그대에게 왕명을 내린다.",
+            "",
+            "최근 수도 인근에서 발견된 정체불명의 지하 던전으로 인해 왕국이 혼란에 빠졌다.",
+            "이에 선발대를 파견하였으나, 안타깝게도 그들과의 소식이 끊긴 지 오래다.",
+            "",
+            "그대의 뛰어난 능력과 용맹함에 대한 명성을 익히 들어 알고 있다.",
+            "부디 왕국을 위해 그대의 힘을 빌려주길 바란다.",
+            "",
+            "던전으로 진입하여 실종된 선발대의 행방을 찾고,",
+            "던전 내부의 상황을 파악하여 보고하라.",
+            "그대의 용기와 헌신에는 합당한 보상을 약속하겠다.",
+            "",
+            "왕국의 안위가 그대의 어깨에 달려있다."
+        };
+
+                TypeMultipleLines(decreeLines);
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                TypeText("- 국왕 라인헬름2세 -", 50); // 서명은 조금 더 느리게
+                Console.ResetColor();
+            }
 
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
 
-            // 최종 전환 문구 표시
+            // 최종 전환 문구 표시 - 직업에 따라 다르게 표시
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green; // 마지막 문구를 다른 색으로
-            Console.WriteLine("========================================");
-            Console.WriteLine($"            심 연 으 로             ");
-            Console.WriteLine("========================================");
-            Console.ResetColor();
 
-            string[] finalLines = {
-    "그 목적이 탐욕이든, 영광이든. 당신은 이 빌어먹을 던전에 찾아왔습니다...",
-    "",
-    "당신의 앞에... 어떤 운명이 기다리고 있을까요?"
-    };
+            if (player.Job == "육군 이등별")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("========================================");
+                Console.WriteLine($"            국군의 진격             ");
+                Console.WriteLine("========================================");
+                Console.ResetColor();
 
-            TypeMultipleLines(finalLines, 40); // 최종 문구는 조금 더 느리게
+                string[] finalLines = {
+            "K2 흑표 전차와 K21 보병전투차를 필두로 한 제1기갑사단이 던전 입구를 향해 굉음을 내지른다.",
+            "뒤이어 UH-60 블랙호크 헬기대대가 하늘을 뒤덮으며 포병여단의 155mm 자주포가 불을 뿜는다.",
+            "",
+            "지축을 뒤흔드는 국군의 압도적인 화력 앞에, 던전 입구는 순식간에 초토화된다.",
+            "이제, 망설일 시간은 없다. 오직 전진, 그리고 승리뿐이다."
+        };
+
+                TypeMultipleLines(finalLines, 40); // 최종 문구는 조금 더 느리게
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green; // 마지막 문구를 다른 색으로
+                Console.WriteLine("========================================");
+                Console.WriteLine($"            심 연 으 로             ");
+                Console.WriteLine("========================================");
+                Console.ResetColor();
+
+                string[] finalLines = {
+            "그 목적이 탐욕이든, 영광이든. 당신은 이 빌어먹을 던전에 찾아왔습니다...",
+            "",
+            "당신의 앞에... 어떤 운명이 기다리고 있을까요?"
+        };
+
+                TypeMultipleLines(finalLines, 40); // 최종 문구는 조금 더 느리게
+            }
 
             // 마지막 키 입력 대기 (이후 게임 로직으로 넘어감)
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
             Music.StopMusic();
             Console.ReadKey(true);
         }
-
         // 시작 장비 지급 메서드
         // 시작 장비 지급 메서드 수정
         private void GiveStartingItems()
