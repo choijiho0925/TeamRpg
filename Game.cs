@@ -860,39 +860,56 @@ namespace TeamRpg
         }
 
         // 메인 메뉴 선택 처리 메서드
+        // 메인 메뉴 선택 처리 메서드 수정
         private void ProcessMainMenuChoice(string choice)
         {
-            switch (choice)
+            // 입력값이 숫자인지 확인
+            if (!int.TryParse(choice, out int choiceNum))
             {
-                case "1": // 상태 보기
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("잘못된 입력입니다.");
+                Console.ResetColor();
+                WaitForKeyPress();
+                return;
+            }
+
+            // 유효한 범위의 숫자인지 확인 (0-5까지만 유효)
+            if (choiceNum < 0 || choiceNum > 5)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("잘못된 선택입니다.");
+                Console.ResetColor();
+                WaitForKeyPress();
+                return;
+            }
+
+            // 이후 기존 switch 문과 동일
+            switch (choiceNum)
+            {
+                case 1: // 상태 보기
                     Console.Clear();
                     player.DisplayStatus();
                     WaitForKeyPress();
                     break;
 
-                case "2": // 인벤토리
+                case 2: // 인벤토리
                     player.inventory.MainInventory();
                     break;
 
-                case "3": // 상점
+                case 3: // 상점
                     shop.ShopMenu();
                     break;
 
-                case "4": // 던전 입장
+                case 4: // 던전 입장
                     EnterDungeon();
                     break;
 
-                case "5": // 휴식하기
+                case 5: // 여관 가기
                     Rest();
                     break;
 
-                case "0": // 게임 종료
+                case 0: // 게임 종료
                     ConfirmExit();
-                    break;
-
-                default:
-                    Console.WriteLine("잘못된 선택입니다. 다시 선택해주세요.");
-                    WaitForKeyPress();
                     break;
             }
         }
