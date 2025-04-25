@@ -163,6 +163,11 @@ namespace TeamRpg
                 Console.WriteLine("돈만 주면 누구든 암살하는 암부의 에이스 암살자. 어둠 속에서 타겟을 조용히 처리하는 능력을 가지고 있습니다.");
                 Console.WriteLine();
 
+                // 숨겨진 힌트로 육군 이등별 존재 암시 (매우 옅은 색상으로)
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("? .... .... ... - .... ... .....");
+                Console.ResetColor();
+
                 Console.Write("\n선택 (1-3): ");
                 string jobChoice = Console.ReadLine();
 
@@ -180,9 +185,34 @@ namespace TeamRpg
                         job = "암살자";
                         validJob = true;
                         break;
-                    default:
+                    case "육군 이등별": // 직접 "육군 이등별"을 입력해도 됨
+                    case "4": // 4를 숨겨진 옵션으로 추가
+                    case "이등별":
+                    case "군인":
+                        job = "육군 이등별";
+                        validJob = true;
                         Console.Clear();
-                        Console.WriteLine("잘못된 선택입니다. 1부터 3까지의 숫자를 입력해주세요.");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("축하합니다! 당신은 육군 이등별로 특별 징집되었습니다!");
+                        Console.WriteLine("역시 대한의 건아! 자랑스럽습니다!");
+                        Console.WriteLine("이제 신체포기각서에 지장만 찍으면 전직 완료!");
+                        Console.ResetColor();
+                        Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                        Console.ReadKey(true);
+                        break;
+                    default:
+                        // 잘못된 선택 시 자동으로 육군 이등별이 되도록 변경
+                        job = "육군 이등별";
+                        validJob = true;
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("잘못된 선택입니다. 하지만...");
+                        Console.WriteLine("축하합니다! 당신은 육군 이등별로 특별 징집되었습니다!");
+                        Console.WriteLine("역시 대한의 건아! 자랑스럽습니다!");
+                        Console.WriteLine("이제 신체포기각서에 지장만 찍으면 전직 완료!");
+                        Console.ResetColor();
+                        Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
+                        Console.ReadKey(true);
                         break;
                 }
             }
@@ -200,8 +230,14 @@ namespace TeamRpg
             Console.WriteLine("계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
 
-            // 직업별 스토리 표시
-            ShowJobStory(job);
+            // 직업별 스토리 표시 (육군 이등별은 스킵)
+            if (job != "육군 이등별")
+            {
+                ShowJobStory(job);
+            }
+
+            // 모든 직업에 대해 왕의 칙서 표시
+            ShowRoyalDecree();
 
             // 키 입력 후 화면 다시 지우기
             Console.Clear();
@@ -657,8 +693,12 @@ namespace TeamRpg
             // 모든 직업 스토리 공통으로 칙서 내용 표시 전에 잠시 대기
             Console.WriteLine("\n계속하려면 아무 키나 누르세요...");
             Console.ReadKey(true);
+        }
 
             // 왕의 칙서 내용 표시
+private void ShowRoyalDecree()
+        {
+            // 왕의 칙서 표시
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Magenta; // 칙서 내용을 다른 색으로 강조
             Console.WriteLine("========================================");
@@ -667,19 +707,19 @@ namespace TeamRpg
             Console.ResetColor();
 
             string[] decreeLines = {
-        "그대에게 왕명을 내린다.",
-        "",
-        "최근 수도 인근에서 발견된 정체불명의 지하 던전으로 인해 왕국이 혼란에 빠졌다.",
-        "이에 선발대를 파견하였으나, 안타깝게도 그들과의 소식이 끊긴 지 오래다.",
-        "",
-        "그대의 뛰어난 능력과 용맹함에 대한 명성을 익히 들어 알고 있다.",
-        "부디 왕국을 위해 그대의 힘을 빌려주길 바란다.",
-        "",
-        "던전으로 진입하여 실종된 선발대의 행방을 찾고,",
-        "던전 내부의 상황을 파악하여 보고하라.",
-        "그대의 용기와 헌신에는 합당한 보상을 약속하겠다.",
-        "",
-        "왕국의 안위가 그대의 어깨에 달려있다."
+    "그대에게 왕명을 내린다.",
+    "",
+    "최근 수도 인근에서 발견된 정체불명의 지하 던전으로 인해 왕국이 혼란에 빠졌다.",
+    "이에 선발대를 파견하였으나, 안타깝게도 그들과의 소식이 끊긴 지 오래다.",
+    "",
+    "그대의 뛰어난 능력과 용맹함에 대한 명성을 익히 들어 알고 있다.",
+    "부디 왕국을 위해 그대의 힘을 빌려주길 바란다.",
+    "",
+    "던전으로 진입하여 실종된 선발대의 행방을 찾고,",
+    "던전 내부의 상황을 파악하여 보고하라.",
+    "그대의 용기와 헌신에는 합당한 보상을 약속하겠다.",
+    "",
+    "왕국의 안위가 그대의 어깨에 달려있다."
     };
 
             TypeMultipleLines(decreeLines);
@@ -700,9 +740,9 @@ namespace TeamRpg
             Console.ResetColor();
 
             string[] finalLines = {
-        "그 목적이 탐욕이든, 영광이든. 당신은 이 빌어먹을 던전에 찾아왔습니다...",
-        "",
-        "당신의 앞에... 어떤 운명이 기다리고 있을까요?"
+    "그 목적이 탐욕이든, 영광이든. 당신은 이 빌어먹을 던전에 찾아왔습니다...",
+    "",
+    "당신의 앞에... 어떤 운명이 기다리고 있을까요?"
     };
 
             TypeMultipleLines(finalLines, 40); // 최종 문구는 조금 더 느리게
@@ -713,7 +753,6 @@ namespace TeamRpg
             Console.ReadKey(true);
         }
 
-        // 시작 장비 지급 메서드
         // 시작 장비 지급 메서드
         private void GiveStartingItems()
         {
@@ -744,6 +783,14 @@ namespace TeamRpg
             {
                 player.inventory.Add(startingWeapon);
                 Console.WriteLine($"기본 무기를 지급받았습니다: {startingWeapon.Name}");
+
+                // 육군 이등별인 경우 추가 메시지
+                if (player.Job == "육군 이등별" && startingWeapon.Name == "K2소총")
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("국방과학연구소의 피땀의 결실! K2소총과 총기멜빵을 받았습니다!");
+                    Console.ResetColor();
+                }
             }
 
             if (startingArmor != null)
@@ -752,8 +799,19 @@ namespace TeamRpg
                 Console.WriteLine($"기본 방어구를 지급받았습니다: {startingArmor.Name}");
             }
 
-            // 시작 골드
-            player.Gold = 0;
+            // 시작 골드 - 육군 이등별은 특별 지급
+            if (player.Job == "육군 이등별")
+            {
+                player.Gold = 100000; // 10만 골드 지급
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("육군 이등별 특별 지원금 100,000G가 지급되었습니다!");
+                Console.ResetColor();
+            }
+            else
+            {
+                player.Gold = 0;
+            }
+
             Console.WriteLine($"던전을 탐험하며, 선발대의 흔적을 찾고 더 많은 골드와 아이템을 모아보세요!");
             Console.WriteLine("\n인벤토리에서 장비를 장착하여 던전에 도전해보세요!");
         }

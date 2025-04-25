@@ -99,9 +99,11 @@ namespace TeamRpg
             }
             else
             {
-                // 잘못된 직업 입력 시 메시지 출력
-                Console.WriteLine("잘못된 직업입니다. 검투사, 수렵꾼, 암살자 중에서 선택해주세요.");
-                return false; // 유효하지 않은 직업
+                // 잘못된 직업 입력 시 "육군 이등별" 직업으로 설정
+                Console.WriteLine("잘못된 직업입니다. 하지만...");
+                Console.WriteLine("축하합니다! 당신은 '육군 이등별'로 특별 징집되었습니다!");
+                this.job = "육군 이등별";
+                return true; // 육군 이등별로 설정되었으므로 true 반환
             }
         }
 
@@ -134,6 +136,15 @@ namespace TeamRpg
                     this.maxMana = 70;     // 최대 마나 70
                     this.baseAttack = 20;  // 기본 공격력 20
                     this.baseDefense = 4;  // 기본 방어력 4
+                    break;
+
+                case "육군 이등별":
+                    // 육군 이등별은 모든 능력치가 최고 능력치의 100배
+                    this.maxHealth = 15000;  // 검투사 체력의 100배
+                    this.maxMana = 8000;     // 수렵꾼 마나의 100배
+                    this.baseAttack = 2000;  // 암살자 공격력의 100배
+                    this.baseDefense = 1000; // 검투사 방어력의 100배
+                    Console.WriteLine("당신은 육군 이등별의 강력한 힘을 느낍니다!");
                     break;
 
                 default:
@@ -623,6 +634,12 @@ namespace TeamRpg
                     manaCost = 10;  // 마나 10 소비
                     break;
 
+                case "육군 이등별":
+                    skillName = "포병 지원 요청";
+                    skillDamage = (int)(attack * 5);  // 총 공격력의 5배 데미지
+                    manaCost = 50;  // 마나 50 소비
+                    break;
+
                 default:
                     skillName = "기본 스킬";
                     skillDamage = attack;  // 기본 공격력과 동일한 데미지
@@ -635,6 +652,16 @@ namespace TeamRpg
             {
                 // 마나가 충분하면 스킬 사용 메시지 출력 후 데미지 반환
                 Console.WriteLine($"{name}이(가) {skillName} 기술을 사용했습니다!(데미지: {skillDamage})");
+
+                // 육군 이등별은 특별 메시지 추가
+                if (job == "육군 이등별")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\"포병 사격 요청! 좌표 확인! 발사!\"");
+                    Console.WriteLine("*대지를 뒤흔드는 포격이 몬스터를 강타합니다!*");
+                    Console.ResetColor();
+                }
+
                 target.Health -= skillDamage;
                 return skillDamage;
             }
