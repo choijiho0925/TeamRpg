@@ -812,6 +812,7 @@ private void ShowRoyalDecree()
                 player.Gold = 1000000; // 100만 골드 지급
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("육군 이등별 특별 지원금 1,000,000G가 지급되었습니다!");
+                Console.WriteLine("2025년! 대한민국 국군은 병사와 간부를 가리지 않고 급여를 인상하였습니다!");
                 Console.ResetColor();
             }
             else
