@@ -235,7 +235,10 @@ namespace TeamRpg
         // 직업별 스토리 표시 메서드
         private void ShowJobStory(string job)
         {
-            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/jobstory.wav");
+            //exe파일 실행점기준폴더경로
+            string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/jobstory.wav");
+            //음악실행하는기준점을 exe실행하는곳으로 기준점을잡아서 해결
+            Music.PlayMusic(test);
             switch (job)
             {
                 case "검투사":
@@ -802,7 +805,8 @@ namespace TeamRpg
         // DisplayMainMenu 메서드 수정
         private void DisplayMainMenu()
         {
-            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/Main.wav", 15);
+            string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/Main.wav");
+            Music.PlayMusic(test, 15);
             Console.Clear();
 
             // 첫 방문 시에만 상세한 설명 출력
@@ -917,7 +921,8 @@ namespace TeamRpg
         // 던전 입장 메서드
         private void EnterDungeon()
         {
-            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/battlestart.wav");
+            string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/battlestart.wav");
+            Music.PlayMusic(test);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("========================================");
@@ -978,7 +983,8 @@ namespace TeamRpg
         // 전투 시작 메서드
         private void StartBattle(DungeonDifficulty difficulty)
         {
-            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/battlemain.wav");
+            string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/battlemain.wav");
+            Music.PlayMusic(test);
             int monsterCount = random.Next(1, 5);
 
             for (int i = 0; i < monsterCount; i++)
@@ -1071,7 +1077,8 @@ namespace TeamRpg
         // 휴식 메서드
         private void Rest()
         {
-            Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/hotelshop.wav");
+            string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/hotelshop.wav");
+            Music.PlayMusic(test);
             while (true)
             {
                 Console.Clear();

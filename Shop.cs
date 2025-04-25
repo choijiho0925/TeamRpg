@@ -21,12 +21,14 @@ namespace TeamRpg
             
             while (true)
             {
-                
-                
-                Music.PlayMusic("C:\\Users\\0214\\Desktop\\TeamRpg-sub_1\\Audio/hotelshop.wav");
-                    
-              
-                
+
+
+                string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/hotelshop.wav");
+
+
+                Music.PlayMusic(test);
+
+
 
 
                 Console.OutputEncoding = Encoding.UTF8;
