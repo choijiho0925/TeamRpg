@@ -997,7 +997,7 @@ namespace TeamRpg
                         monsterMana = random.Next(5, 15);
                         monsterAttack = random.Next(3, 8);
                         monsterDefense = random.Next(1, 4);
-                        rewardGold = random.Next(100, 300);
+                        rewardGold = random.Next(5000, 7000);
                         break;
 
                     case DungeonDifficulty.Normal:
@@ -1006,7 +1006,7 @@ namespace TeamRpg
                         monsterMana = random.Next(15, 30);
                         monsterAttack = random.Next(8, 15);
                         monsterDefense = random.Next(4, 8);
-                        rewardGold = random.Next(300, 600);
+                        rewardGold = random.Next(10000, 20000);
                         break;
 
                     case DungeonDifficulty.Hard:
@@ -1015,7 +1015,7 @@ namespace TeamRpg
                         monsterMana = random.Next(30, 50);
                         monsterAttack = random.Next(15, 25);
                         monsterDefense = random.Next(8, 12);
-                        rewardGold = random.Next(600, 1000);
+                        rewardGold = random.Next(60000, 100000);
                         break;
 
                     default:
