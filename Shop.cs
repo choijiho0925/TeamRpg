@@ -134,39 +134,97 @@ namespace TeamRpg
                 {
                     HaberDasheryShop();
                 }
+
                 else if (input == "4")
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Game.Instance.TypeText("[상점 주인] 의뢰...? 아아, 이 낡아빠진 전단지 말인가.", 30);
-                    Game.Instance.TypeText("[상점 주인] 쯧... 보다시피, 찾는 사람 하나 없는 쓰레기지.", 30);
-                    Game.Instance.TypeText("[상점 주인] 가져가서 불쏘시개로나 쓰던가. 여기선 아무짝에도 쓸모없으니.", 30);
-                    Console.ResetColor();
-                    Console.WriteLine("\n(상점 주인이 낡은 의뢰 전단지를 무시한다.)");
-                    // Game.Instance.WaitForKeyPress(); // WaitForKeyPress() 호출은 Game 클래스에 public으로 있어야 함
+
+                    // 육군 이등별 직업일 때 다른 텍스트 표시
+                    if (player.Job == "육군 이등별")
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("[나레이션] 상점 주인이 즉시 자세를 고쳐 경례 자세를 취합니다.");
+                        Console.ResetColor();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Game.Instance.TypeText("[상점 주인] 충성! 각하! 특수 작전 정보를 요청하셨습니까!", 30);
+                        Game.Instance.TypeText("[상점 주인] 현재 정보국에서 수집된 최신 정보를 즉시 제공하겠습니다!", 30);
+                        Game.Instance.TypeText("[상점 주인] 던전 내부의 적 세력 활동 정보와 실종된 선발대 관련 첩보가 있습니다!", 30);
+                        Console.ResetColor();
+
+                        Console.WriteLine("\n[군사 첩보 문서]");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("- 선발대 마지막 보고: 던전 내부에서 정체불명의 물체 발견, 이후 통신 두절");
+                        Console.WriteLine("- 던전 주변 기이한 현상 관측: 전자장비 이상, 병사들 정신상태 변화 보고");
+                        Console.WriteLine("- 최근 정찰대 보고: 던전 입구에서 이상한 소리 및 빛 관측");
+                        Console.WriteLine("- 작전 권고: 강력한 화력 준비, 철저한 정신 훈련 필요");
+                        Console.ResetColor();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Game.Instance.TypeText("\n[상점 주인] 충성! 각하! 추가 정보가 입수되는 즉시 보고하겠습니다!", 30);
+                        Game.Instance.TypeText("[상점 주인] 선발대 구출과 위협 제거를 위한 각하의 임무 수행을 지원하겠습니다!", 30);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        // 기존 코드 유지
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Game.Instance.TypeText("[상점 주인] 의뢰...? 아아, 이 낡아빠진 전단지 말인가.", 30);
+                        Game.Instance.TypeText("[상점 주인] 쯧... 보다시피, 찾는 사람 하나 없는 쓰레기지.", 30);
+                        Game.Instance.TypeText("[상점 주인] 가져가서 불쏘시개로나 쓰던가. 여기선 아무짝에도 쓸모없으니.", 30);
+                        Console.ResetColor();
+                        Console.WriteLine("\n(상점 주인이 낡은 의뢰 전단지를 무시한다.)");
+                    }
+
+                    // 키 입력 대기
                     Console.ReadKey(); // 임시로 ReadKey 사용
                     continue;
-
-                    /* --- 기존 의뢰 코드 (비활성화) --- */
                 }
                 else if (input == "0")
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Game.Instance.TypeText("[상점 주인] ...잘 가게. 다시 볼 일 없기를 바라지.", 30);
-                    Console.ResetColor();
+
+                    // 육군 이등별 직업일 때 다른 메시지 표시
+                    if (player.Job == "육군 이등별")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Game.Instance.TypeText("[상점 주인] 충성! 각하! 안전한 임무 수행을 기원합니다!", 30);
+                        Game.Instance.TypeText("[상점 주인] 추가 보급품이 필요하시면 언제든지 돌아와주십시오!", 30);
+                        Game.Instance.TypeText("[상점 주인] 왕국의 안위는 각하의 손에 달려있습니다! 충성!", 30);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        // 기존 코드 유지
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Game.Instance.TypeText("[상점 주인] ...잘 가게. 다시 볼 일 없기를 바라지.", 30);
+                        Console.ResetColor();
+                    }
+
                     Music.StopMusic();
-                    // Game.Instance.WaitForKeyPress(); // WaitForKeyPress() 호출은 Game 클래스에 public으로 있어야 함
                     Console.ReadKey(); // 임시로 ReadKey 사용
                     break;
                 }
                 else
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Game.Instance.TypeText("[상점 주인] 딴생각할 시간 있나? 정신 차리게.", 30);
-                    Console.ResetColor();
-                    // Game.Instance.WaitForKeyPress(); // WaitForKeyPress() 호출은 Game 클래스에 public으로 있어야 함
+
+                    // 육군 이등별 직업일 때 다른 메시지 표시
+                    if (player.Job == "육군 이등별")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Game.Instance.TypeText("[상점 주인] 죄송합니다, 각하! 명령을 제대로 이해하지 못했습니다!", 30);
+                        Game.Instance.TypeText("[상점 주인] 정확한 지시를 부탁드립니다! 즉시 조치하겠습니다!", 30);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        // 기존 코드 유지
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Game.Instance.TypeText("[상점 주인] 딴생각할 시간 있나? 정신 차리게.", 30);
+                        Console.ResetColor();
+                    }
+
                     Console.ReadKey(); // 임시로 ReadKey 사용
                 }
             }
