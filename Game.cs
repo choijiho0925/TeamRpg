@@ -1044,9 +1044,9 @@ namespace TeamRpg
         // 랜덤 몬스터 이름 생성 메서드
         private string GetRandomMonsterName(DungeonDifficulty difficulty)
         {
-            string[] easyMonsters = { "슬라임", "고블린", "쥐", "박쥐", "뱀" };
-            string[] normalMonsters = { "오크", "좀비", "스켈레톤", "거미", "거대 거미" };
-            string[] hardMonsters = { "트롤", "오우거", "미노타우루스", "드래곤", "데몬" };
+            string[] easyMonsters = {"심연의 웅덩이", "그림자 손길", "메아리치는 공포", "부유하는 안광", "저주받은 잔해" };
+            string[] normalMonsters = {"길 잃은 선발대원", "공허의 추적자", "악몽의 형체", "비명 지르는 벽", "부서진 파수꾼" };
+            string[] hardMonsters = {"나락의 거수", "만져선 안될 것", "울부짖는 심연", "첫 번째 악몽", "무형의 공포 군주" };
 
             string[] monsters;
 
@@ -1079,125 +1079,122 @@ namespace TeamRpg
         private void Rest()
         {
             string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/hotelshop.wav");
-            Music.PlayMusic(test);
+            Music.PlayMusic(test); // 배경 음악 재생
+
             while (true)
             {
                 Console.Clear();
 
-                // 흰색 나레이션 (분위기 묘사 강화)
-                Console.ForegroundColor = ConsoleColor.White;
-                TypeText("삐걱이는 문 너머, 곰팡내와 체념의 냄새가 뒤섞여 흘러나온다.", 15);
-                TypeText("희미한 등불 아래, 여관 주인은 그림자처럼 앉아 텅 빈 눈으로 허공을 응시한다.", 15);
-                TypeText("그의 눈빛은... 살아있는 자의 것이라기엔 너무 깊은 심연을 담고 있다.", 15);
+                // === 여관 진입 묘사 강화 ===
+                Console.ForegroundColor = ConsoleColor.DarkGray; // 묘사 색상 변경 (어두운 회색)
+                TypeText("삐걱이는 문틈으로 스며드는 것은 퀴퀴한 공기와 깊은 침묵뿐.", 20);
+                TypeText("희미한 등불은 그림자를 길게 늘어뜨리고, 구석에는 거미줄만이 세월을 말해준다.", 20);
+                TypeText("카운터 뒤, 여관 주인은 미동도 없이 앉아있다. 그의 눈은... 마치 오래된 무덤처럼 공허하다.", 20);
                 Console.ResetColor();
 
-                // 여관주인 대사 (음울함 강조, 파란색 유지)
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine();
-                TypeText("[여관주인] ...왔나. 또 한 명의 산 송장이로군.", 30);
-                TypeText("[여관주인] 던전의 저주를 뒤집어쓴 채 여기까지 기어오다니, 용케 숨은 붙어 있군 그래.", 30);
-                TypeText("[여관주인] 여기가 안식처처럼 보이나? 착각 마시게. 여긴 그저... 망각을 기다리는 관일 뿐이니.", 30);
-                TypeText("[여관주인] 축축한 바닥과 썩어가는 벽... 그래도 아직 무너지진 않았지. 그래, 아직은...", 30);
+                // === 여관 주인 초기 대사 ===
+                Console.ForegroundColor = ConsoleColor.DarkCyan; // 여관 주인 색상 변경 (어두운 청록)
+                TypeText("\n[여관주인] ...왔나.", 40);
+                TypeText("[여관주인] 살아서 여기까지 기어온 걸 보니, 아직 저주가 덜 스몄나 보군.", 40);
+                TypeText("[여관주인] 아니면... 곧 잡아먹힐 신선한 고깃덩이인가.", 40);
                 Console.ResetColor();
 
-                // 선택지 표시
-                Console.WriteLine();
-                Console.WriteLine("\n무엇을 원하나:");
+                // === 선택지 표시 ===
+                Console.WriteLine("\n무엇을 하겠나:");
                 Console.WriteLine("1. 잠시 눈 붙이기 (100G)");
-                Console.WriteLine("2. 식당...이랄 것도 없는 곳");
-                Console.WriteLine("0. 이 음습한 곳에서 나가기");
+                Console.WriteLine("2. 이른바 '식당'이라는 곳");
+                Console.WriteLine("0. 이 불길한 곳에서 나가기");
 
                 Console.Write("\n선택: ");
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
-                    case "1": // 휴식 취하기
+                    case "1": // 휴식
                         Console.Clear();
-
-                        // 휴식 비용
                         int restCost = 100;
 
-                        // 보유 골드 확인
+                        // --- 골드 부족 시 ---
                         if (player.Gold < restCost)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            TypeText("[여관주인] ...주머니가 가볍군. 100G 없이는 하룻밤의 망각조차 살 수 없는 곳이야, 여긴.", 30);
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            TypeText("[여관주인] ...주머니가 가볍군.", 40);
+                            TypeText("[여관주인] 잠시 죽음을 잊는 값도 치르지 못한다면, 그냥 여기서 썩어가는 게 어떤가?", 40);
                             Console.ResetColor();
-                            WaitForKeyPress();
-                            continue; // 다시 여관 메뉴로
+                            WaitForKeyPress(); // public WaitForKeyPress 가정
+                            continue;
                         }
 
-                        // 휴식 비용 지불
-                        bool paymentSuccess = player.SpendGold(restCost);
-
-                        if (paymentSuccess)
+                        // --- 골드 지불 ---
+                        if (player.SpendGold(restCost)) // SpendGold 사용
                         {
-                            // 체력과 마나 완전 회복
                             int oldHealth = player.Health;
                             int oldMana = player.Mana;
-
                             player.Health = player.MaxHealth;
                             player.Mana = player.MaxMana;
 
-                            // 흰색 나레이션 (휴식 묘사)
-                            Console.ForegroundColor = ConsoleColor.White;
-                            TypeText("삐걱이는 계단을 올라, 쥐가 드나들 듯한 방에 몸을 누인다.", 15);
-                            TypeText("차가운 공기와 벽 너머의 신음 소리... 그럼에도 눈꺼풀은 무겁게 내려앉는다.", 15);
-                            TypeText("악몽 없는 잠은 사치일 뿐. 잠시 동안, 현실의 무게를 잊었을 뿐이다.", 15);
+                            // --- 휴식 묘사 ---
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            TypeText("삐걱이는 나무 계단을 밟고, 금방이라도 무너질 듯한 방으로 들어선다.", 20);
+                            TypeText("침대에서는 곰팡내와 누군가의 체념이 뒤섞인 냄새가 난다.", 20);
+                            TypeText("눈을 감아도 들려오는 것은 벽 너머의 흐느낌인가, 바람 소리인가...", 20);
+                            TypeText("잠들었다기보다는, 잠시 의식을 잃었을 뿐이다.", 20);
                             Console.ResetColor();
 
-                            // 여관주인 대사
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            TypeText("[여관주인] ...살아있는 걸 보니 운이 좋군. 아니, 불운인가?", 30);
-                            TypeText("[여관주인] 기억하게나. 여기서의 휴식은... 더 깊은 절망으로 나아가기 위한 짧은 숨고르기일 뿐.", 30);
+                            // --- 휴식 후 여관 주인 대사 ---
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            TypeText("\n[여관주인] ...일어났나.", 40);
+                            TypeText("[여관주인] 그 잠깐의 망각이 얼마나 갈 것 같나? 어차피 다시 그 구덩이로 돌아갈 텐데.", 40);
                             Console.ResetColor();
 
                             Console.WriteLine($"\n체력: {oldHealth} -> {player.Health}/{player.MaxHealth}");
                             Console.WriteLine($"마나: {oldMana} -> {player.Mana}/{player.MaxMana}");
                         }
-                        WaitForKeyPress();
-                        break; // 여관 메뉴로 돌아감
+                        WaitForKeyPress(); // public WaitForKeyPress 가정
+                        break; // 여관 메뉴로 복귀
 
-                    case "2": // 식당 이용하기
+                    case "2": // 식당
                         Console.Clear();
 
-                        // 흰색 나레이션
-                        Console.ForegroundColor = ConsoleColor.White;
-                        TypeText("퀴퀴한 냄새가 코를 찌르는 공간. 식탁 위엔 먼지와 마른 핏자국뿐이다.", 15);
-                        TypeText("벽에는 정체 모를 얼룩들이 음울한 그림처럼 번져 있다.", 15);
-                        TypeText("음식이라 부를 만한 것은 보이지 않는다. 오직 차가운 공기와 절망만이 감돌 뿐.", 15);
+                        // --- 식당 묘사 ---
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        TypeText("식당이라 부르기 민망한 공간. 테이블 위엔 말라붙은 얼룩과 먼지뿐.", 20);
+                        TypeText("벽에는 알아볼 수 없는 낙서와 긁힌 자국들이 가득하다.", 20);
+                        TypeText("음식 냄새 대신, 부패와 절망의 악취만이 코를 찌른다.", 20);
                         Console.ResetColor();
 
-                        // 여관주인 대사
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        TypeText("[여관주인] ...식당? 이걸 식당이라고 부르는 건가? 허.", 30);
-                        TypeText("[여관주인] 여기서 뭘 먹겠다는 건가? 벽에 핀 버섯이라도 뜯어먹을 셈인가?", 30);
-                        TypeText("[여관주인] 아니면... 옆방에서 들리는 까마귀 소리라도 안주 삼을 텐가?", 30);
-                        TypeText("[여관주인] 헛된 기대는 버리시게. 여긴 배를 채우는 곳이 아니라, 그저 죽음을 기다리는 곳이니까.", 30);
+                        // --- 식당 관련 여관 주인 대사 (수정) ---
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        TypeText("\n[여관주인] ...식당?", 40);
+                        TypeText("[여관주인] 굶주렸나? 허기진 자의 눈빛이군.", 40);
+                        TypeText("[여관주인] 여기서 먹을 수 있는 건 쥐새끼나 바퀴벌레 정도겠지.", 40);
+                        TypeText("[여관주인] ...아니면, 바닥에 굴러다니는 뼛조각이라도 주워 먹을 텐가?", 40);
                         Console.ResetColor();
 
-                        WaitForKeyPress();
-                        break; // 여관 메뉴로 돌아감
+                        WaitForKeyPress(); // public WaitForKeyPress 가정
+                        break; // 여관 메뉴로 복귀
 
                     case "0": // 나가기
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        TypeText("[여관주인] ...가는 건가. 그 문턱 너머는 더 지독한 어둠일 뿐인데.", 30);
-                        TypeText("[여관주인] 선발대 놈들도... 그렇게 갔지. 돌아온 놈은 하나도 없더군.", 30);
-                        TypeText("[여관주인] 부디... 조용히 죽길 바라네.", 30);
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        // --- 나가기 전 여관 주인 대사 ---
+                        TypeText("[여관주인] ...나가는 건가.", 40);
+                        TypeText("[여관주인] 저 문 너머엔 더 지독한 어둠뿐이야. 선발대 놈들도 그걸 몰랐지.", 40);
+                        TypeText("[여관주인] 부디... 곱게 죽길 바라네. 다음 손님에게 방해가 되지 않도록.", 40);
                         Console.ResetColor();
 
-                        Music.StopMusic();
-                        WaitForKeyPress();
-                        return; // 메인 메뉴로 돌아감
+                        Music.StopMusic(); // 음악 정지
+                        WaitForKeyPress(); // public WaitForKeyPress 가정
+                        return; // 메인 메뉴로
 
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        TypeText("[여관주인] ...헛소리 마시게. 정신을 놓으면 잡아먹히는 건 순식간이야.", 30);
+                    default: // 잘못된 입력
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        TypeText("[여관주인] ...헛소리할 정신이 남아있나 보군.", 40);
+                        TypeText("[여관주인] 그럴 여유가 있다면, 기도나 하시지.", 40);
                         Console.ResetColor();
-
-                        WaitForKeyPress();
-                        break; // 다시 여관 메뉴로
+                        WaitForKeyPress(); // public WaitForKeyPress 가정
+                        break; // 여관 메뉴로 복귀
                 }
             }
         }
