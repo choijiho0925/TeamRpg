@@ -754,6 +754,7 @@ private void ShowRoyalDecree()
         }
 
         // 시작 장비 지급 메서드
+        // 시작 장비 지급 메서드 수정
         private void GiveStartingItems()
         {
             // 플레이어 직업에 따른 기본 무기 찾기
@@ -770,8 +771,14 @@ private void ShowRoyalDecree()
                     item.isBuy = true; // 구매한 것으로 표시
                 }
 
-                // 기본 무기는 직업별로 다름 (Gold가 0인 가장 기본 무기)
-                if (item.Job == player.Job && item.Gold == 0 && item.Attack > 0)
+                // 육군 이등별인 경우 K2소총 지급 (Gold 값에 상관없이)
+                if (player.Job == "육군 이등별" && item.Job == "육군 이등별" && item.Name == "K2소총")
+                {
+                    startingWeapon = item;
+                    item.isBuy = true; // 구매한 것으로 표시
+                }
+                // 일반 직업의 경우 기존 논리대로 Gold가 0인 직업별 무기 지급
+                else if (player.Job != "육군 이등별" && item.Job == player.Job && item.Gold == 0 && item.Attack > 0)
                 {
                     startingWeapon = item;
                     item.isBuy = true; // 구매한 것으로 표시
@@ -861,6 +868,7 @@ private void ShowRoyalDecree()
         private bool isFirstTimeInMainMenu = true; // 메인 메뉴 첫 방문 여부 추적
 
         // DisplayMainMenu 메서드 수정
+        // DisplayMainMenu 메서드 수정
         private void DisplayMainMenu()
         {
             string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/Main.wav");
@@ -870,31 +878,64 @@ private void ShowRoyalDecree()
             // 첫 방문 시에만 상세한 설명 출력
             if (isFirstTimeInMainMenu)
             {
-                // 분위기 묘사 텍스트 (타이핑 효과 적용)
-                Console.ForegroundColor = ConsoleColor.DarkGray; // 어두운 회색 설정
-                string[] descriptionLines = {
-            "\n버려진 듯 넓은 공터에는 임시 천막과 조잡한 가건물들이 어지럽게 널려있다.",
-            "한때는 북적였을 법한 이곳엔 이제 스산한 바람 소리만이 감돌 뿐, 사람의 온기라곤 느껴지지 않는다.",
-            "먼지가 내려앉은 길 위에는 정체 모를 발자국들만 희미하게 남아있고,",
-            "저편의 여관과 상점만이 꺼질 듯한 불빛을 내며 기묘한 존재감을 드러낸다.",
-            "", // 공백 추가
-            "그 안에 선 여관주인과 상점주인은 초췌한 몰골로, 텅 빈 눈동자로 나를 응시한다.",
-            "몇 마디 말을 걸어보았지만, 돌아오는 것은 의미 없는 침묵과 각자의 목적을 위한 대답뿐.",
-            "그들은... 아니, 이것들은... 내 질문에 답할 생각이 전혀 없어 보인다.",
-            "이 섬뜩한 정적 속에는 무엇이 도사리고 있는 걸까.\n"
-        };
-                TypeMultipleLines(descriptionLines, 10); // TypeMultipleLines 메서드 사용 (딜레이 10ms)
+                // 직업 확인하여 다른 메시지 출력
+                if (player.Job == "육군 이등별")
+                {
+                    // 육군 이등별 분위기에 맞는 묘사
+                    Console.ForegroundColor = ConsoleColor.Green; // 밝은 군대 녹색으로 색상 변경
+                    string[] militaryDescriptionLines = {
+                "\n넓은 공터는 흉흉하지만 국군의 기합과 정신력으로 충분히 극복할만합니다!",
+                "인적이 드물었지만 국군이 진입하여 신속하게 안정화 작업을 진행중입니다.",
+                "정착지 주변 경비를 서고 있는 병사들의 모습이 눈에 띕니다.",
+                "잠정 통제구역으로 설정된 이곳에서는 군 지휘부의 명령이 절대적입니다.",
+                "", // 공백 추가
+                "여관과 상점의 민간인들은 국군의 통제 하에 협조적으로 임무를 수행하고 있습니다.",
+                "이 지역에 출현한 적성 세력에 대한 정보는 수집 중이며,",
+                "모든 군 작전은 신속하고 효율적으로 진행될 예정입니다.",
+                "국민 여러분께서는 안심하고 생활하시길 바랍니다.\n"
+            };
+                    TypeMultipleLines(militaryDescriptionLines, 10); // TypeMultipleLines 메서드 사용 (딜레이 10ms)
+                }
+                else
+                {
+                    // 기존 흉흉한 분위기 묘사 (기존 코드 유지)
+                    Console.ForegroundColor = ConsoleColor.DarkGray; // 어두운 회색 설정
+                    string[] descriptionLines = {
+                "\n버려진 듯 넓은 공터에는 임시 천막과 조잡한 가건물들이 어지럽게 널려있다.",
+                "한때는 북적였을 법한 이곳엔 이제 스산한 바람 소리만이 감돌 뿐, 사람의 온기라곤 느껴지지 않는다.",
+                "먼지가 내려앉은 길 위에는 정체 모를 발자국들만 희미하게 남아있고,",
+                "저편의 여관과 상점만이 꺼질 듯한 불빛을 내며 기묘한 존재감을 드러낸다.",
+                "", // 공백 추가
+                "그 안에 선 여관주인과 상점주인은 초췌한 몰골로, 텅 빈 눈동자로 나를 응시한다.",
+                "몇 마디 말을 걸어보았지만, 돌아오는 것은 의미 없는 침묵과 각자의 목적을 위한 대답뿐.",
+                "그들은... 아니, 이것들은... 내 질문에 답할 생각이 전혀 없어 보인다.",
+                "이 섬뜩한 정적 속에는 무엇이 도사리고 있는 걸까.\n"
+            };
+                    TypeMultipleLines(descriptionLines, 10); // TypeMultipleLines 메서드 사용 (딜레이 10ms)
+                }
 
                 // 첫 방문 표시를 false로 변경
                 isFirstTimeInMainMenu = false;
             }
             else
             {
-                // 두 번째 방문부터는 간략한 설명만 출력
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("\n언제나 그렇듯, 삭막하고 흉흉한 정착지이다.");
-                Console.WriteLine("");
-                Console.ResetColor();
+                // 두 번째 방문부터는 간략한 설명만 출력 (직업 분기 적용)
+                if (player.Job == "육군 이등별")
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\n국군이 활기차게 임무를 수행중인 정착지입니다. 모든 상황이 통제하에 있습니다.");
+                    Console.WriteLine("병사들은 정착지 주변을 순찰하며 안전을 확보하고 있습니다.");
+                    Console.WriteLine("");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    // 기존 간략 묘사 유지
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n언제나 그렇듯, 삭막하고 흉흉한 정착지이다.");
+                    Console.WriteLine("");
+                    Console.ResetColor();
+                }
             }
 
             Console.ResetColor(); // 색상 초기화
@@ -902,26 +943,47 @@ private void ShowRoyalDecree()
             // 분위기 묘사 후 메인 메뉴 타이틀 표시
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("========================================");
-            Console.WriteLine("            제1원정대 정착지            ");
+
+            // 직업에 따라 다른 타이틀 표시
+            if (player.Job == "육군 이등별")
+            {
+                Console.WriteLine("          제1원정대 군사 통제구역         ");
+            }
+            else
+            {
+                Console.WriteLine("            제1원정대 정착지            ");
+            }
+
             Console.WriteLine("========================================");
             Console.ResetColor();
 
             // 플레이어 기본 정보 간단 표시
             Console.WriteLine($"\n{player.Name} ({player.Job}) | 체력: {player.Health}/{player.MaxHealth} | 골드: {player.Gold}G");
 
-            // 메뉴 옵션 표시
+            // 메뉴 옵션 표시 (직업에 따라 다른 표현 사용)
             Console.WriteLine("\n원하시는 행동을 선택하세요:");
-            Console.WriteLine("1. 상태 보기");
-            Console.WriteLine("2. 인벤토리");
-            Console.WriteLine("3. 상점");
-            Console.WriteLine("4. 던전 입장");
-            Console.WriteLine("5. 여관 가기");  // "휴식하기"에서 "여관 가기"로 변경
-            Console.WriteLine("0. 게임 종료");
+
+            if (player.Job == "육군 이등별")
+            {
+                Console.WriteLine("1. 작전 상태 확인");
+                Console.WriteLine("2. 장비 점검");
+                Console.WriteLine("3. 군수품 보급소");
+                Console.WriteLine("4. 작전 구역 진입");
+                Console.WriteLine("5. 숙영지 이동");
+                Console.WriteLine("0. 임무 종료");
+            }
+            else
+            {
+                Console.WriteLine("1. 상태 보기");
+                Console.WriteLine("2. 인벤토리");
+                Console.WriteLine("3. 상점");
+                Console.WriteLine("4. 던전 입장");
+                Console.WriteLine("5. 여관 가기");
+                Console.WriteLine("0. 게임 종료");
+            }
 
             Console.Write("\n선택: ");
         }
-
-        // 메인 메뉴 선택 처리 메서드
         // 메인 메뉴 선택 처리 메서드 수정
         private void ProcessMainMenuChoice(string choice)
         {
