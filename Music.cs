@@ -13,10 +13,10 @@ namespace TeamRpg
         private static string currentFile = null;
 
 
-        public static void PlayMusic(string filePath, int startSeconds = 0) // 음악 재생 메서드
+        public static void PlayMusic(string filePath, int startSeconds = 0, bool forcePlay = false) // 음악 재생 메서드
         {
             // 육군 이등별인 경우, armytiger.wav 파일을 재생
-            if (Game.Instance.player != null && Game.Instance.player.Job == "육군 이등별")
+            if (!forcePlay && Game.Instance.player != null && Game.Instance.player.Job == "육군 이등별")
             {
                 // 이미 육군 이등별 테마가 재생 중이면 또 재생하지 않음
                 string armyTigerPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/armytiger.wav");
