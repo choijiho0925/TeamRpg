@@ -802,9 +802,9 @@ private void ShowRoyalDecree()
             // 시작 골드 - 육군 이등별은 특별 지급
             if (player.Job == "육군 이등별")
             {
-                player.Gold = 100000; // 10만 골드 지급
+                player.Gold = 1000000; // 100만 골드 지급
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("육군 이등별 특별 지원금 100,000G가 지급되었습니다!");
+                Console.WriteLine("육군 이등별 특별 지원금 1,000,000G가 지급되었습니다!");
                 Console.ResetColor();
             }
             else
@@ -1172,28 +1172,55 @@ private void ShowRoyalDecree()
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ");
+                // Game.cs - Rest 메서드의 ASCII 아트 이후 부분만 수정
+                // ASCII 아트 출력 후 계속되는 코드:
+
                 Console.ResetColor(); // 색상 초기화
                 Console.WriteLine(); // 아트 아래에 한 줄 띄우기
 
-                // === 여관 진입 묘사 강화 ===
-                Console.ForegroundColor = ConsoleColor.DarkGray; // 묘사 색상 변경 (어두운 회색)
-                TypeText("삐걱이는 문틈으로 스며드는 것은 퀴퀴한 공기와 깊은 침묵뿐.", 20);
-                TypeText("희미한 등불은 그림자를 길게 늘어뜨리고, 구석에는 거미줄만이 세월을 말해준다.", 20);
-                TypeText("카운터 뒤, 여관 주인은 미동도 없이 앉아있다. 그의 눈은... 마치 오래된 무덤처럼 공허하다.", 20);
-                Console.ResetColor();
+                // === 여관 진입 후 분기 ===
+                // 육군 이등별 직업인 경우
+                if (player.Job == "육군 이등별")
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("[나레이션] 여관 주인이 당신을 보자마자 자세를 고쳐 바로 선다.");
+                    Console.ResetColor();
 
-                // === 여관 주인 초기 대사 ===
-                Console.ForegroundColor = ConsoleColor.DarkCyan; // 여관 주인 색상 변경 (어두운 청록)
-                TypeText("\n[여관주인] ...왔나.", 40);
-                TypeText("[여관주인] 살아서 여기까지 기어온 걸 보니, 아직 저주가 덜 스몄나 보군.", 40);
-                TypeText("[여관주인] 아니면... 곧 잡아먹힐 신선한 고깃덩이인가.", 40);
-                Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    TypeText("\n[여관주인] 충!!! 성!!! 이등별 각하! 어서 오십시오!", 40);
+                    TypeText("[여관주인] 각하를 위한 최고급 숙소가 준비되어 있습니다!", 40);
+                    TypeText("[여관주인] 무엇이든 명령만 내려주십시오! 즉시 처리하겠습니다!", 40);
+                    Console.ResetColor();
 
-                // === 선택지 표시 ===
-                Console.WriteLine("\n무엇을 하겠나:");
-                Console.WriteLine("1. 잠시 눈 붙이기 (100G)");
-                Console.WriteLine("2. 이른바 '식당'이라는 곳");
-                Console.WriteLine("0. 이 불길한 곳에서 나가기");
+                    // === 선택지 표시 ===
+                    Console.WriteLine("\n선택하십시오:");
+                    Console.WriteLine("1. 휴식 취하기 (무료)");
+                    Console.WriteLine("2. 식당 이용하기");
+                    Console.WriteLine("0. 복귀하기");
+                }
+                // 일반 직업인 경우
+                else
+                {
+                    // === 여관 진입 묘사 강화 ===
+                    Console.ForegroundColor = ConsoleColor.DarkGray; // 묘사 색상 변경 (어두운 회색)
+                    TypeText("삐걱이는 문틈으로 스며드는 것은 퀴퀴한 공기와 깊은 침묵뿐.", 20);
+                    TypeText("희미한 등불은 그림자를 길게 늘어뜨리고, 구석에는 거미줄만이 세월을 말해준다.", 20);
+                    TypeText("카운터 뒤, 여관 주인은 미동도 없이 앉아있다. 그의 눈은... 마치 오래된 무덤처럼 공허하다.", 20);
+                    Console.ResetColor();
+
+                    // === 여관 주인 초기 대사 ===
+                    Console.ForegroundColor = ConsoleColor.DarkCyan; // 여관 주인 색상 변경 (어두운 청록)
+                    TypeText("\n[여관주인] ...왔나.", 40);
+                    TypeText("[여관주인] 살아서 여기까지 기어온 걸 보니, 아직 저주가 덜 스몄나 보군.", 40);
+                    TypeText("[여관주인] 아니면... 곧 잡아먹힐 신선한 고깃덩이인가.", 40);
+                    Console.ResetColor();
+
+                    // === 선택지 표시 ===
+                    Console.WriteLine("\n무엇을 하겠나:");
+                    Console.WriteLine("1. 잠시 눈 붙이기 (100G)");
+                    Console.WriteLine("2. 이른바 '식당'이라는 곳");
+                    Console.WriteLine("0. 이 불길한 곳에서 나가기");
+                }
 
                 Console.Write("\n선택: ");
                 string choice = Console.ReadLine();
@@ -1202,21 +1229,21 @@ private void ShowRoyalDecree()
                 {
                     case "1": // 휴식
                         Console.Clear();
-                        int restCost = 100;
+                        int restCost = player.Job == "육군 이등별" ? 0 : 100; // 육군 이등별은 무료
 
-                        // --- 골드 부족 시 ---
-                        if (player.Gold < restCost)
+                        // --- 골드 부족 시 (일반 직업만 해당) ---
+                        if (player.Job != "육군 이등별" && player.Gold < restCost)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                             TypeText("[여관주인] ...주머니가 가볍군.", 40);
                             TypeText("[여관주인] 잠시 죽음을 잊는 값도 치르지 못한다면, 그냥 여기서 썩어가는 게 어떤가?", 40);
                             Console.ResetColor();
-                            WaitForKeyPress(); // public WaitForKeyPress 가정
+                            WaitForKeyPress();
                             continue;
                         }
 
-                        // --- 골드 지불 ---
-                        if (player.SpendGold(restCost)) // SpendGold 사용
+                        // --- 골드 지불 (육군 이등별은 무료) ---
+                        if (player.Job == "육군 이등별" || player.SpendGold(restCost))
                         {
                             int oldHealth = player.Health;
                             int oldMana = player.Mana;
@@ -1224,67 +1251,136 @@ private void ShowRoyalDecree()
                             player.Mana = player.MaxMana;
 
                             // --- 휴식 묘사 ---
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            TypeText("삐걱이는 나무 계단을 밟고, 금방이라도 무너질 듯한 방으로 들어선다.", 20);
-                            TypeText("침대에서는 곰팡내와 누군가의 체념이 뒤섞인 냄새가 난다.", 20);
-                            TypeText("눈을 감아도 들려오는 것은 벽 너머의 흐느낌인가, 바람 소리인가...", 20);
-                            TypeText("잠들었다기보다는, 잠시 의식을 잃었을 뿐이다.", 20);
-                            Console.ResetColor();
+                            if (player.Job == "육군 이등별")
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                TypeText("여관 최고급 VIP룸으로 안내받습니다. 깨끗한 침구와 정돈된 환경이 당신을 맞이합니다.", 20);
+                                TypeText("방 안에는 군 통신 장비까지 갖추어져 있고, 응급 의료 키트도 준비되어 있습니다.", 20);
+                                TypeText("인근 병사들이 교대로 경비를 서는 가운데, 당신은 안전하게 휴식을 취합니다.", 20);
+                                Console.ResetColor();
 
-                            // --- 휴식 후 여관 주인 대사 ---
-                            Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            TypeText("\n[여관주인] ...일어났나.", 40);
-                            TypeText("[여관주인] 그 잠깐의 망각이 얼마나 갈 것 같나? 어차피 다시 그 구덩이로 돌아갈 텐데.", 40);
-                            Console.ResetColor();
+                                // --- 휴식 후 여관 주인 대사 ---
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                TypeText("\n[여관주인] 충성! 각하! 휴식은 어떠셨습니까?", 40);
+                                TypeText("[여관주인] 임무 수행을 위한 최상의 컨디션을 유지하셔야 합니다!", 40);
+                                TypeText("[여관주인] 추가로 필요한 것이 있으시면 즉시 말씀해주십시오!", 40);
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                TypeText("삐걱이는 나무 계단을 밟고, 금방이라도 무너질 듯한 방으로 들어선다.", 20);
+                                TypeText("침대에서는 곰팡내와 누군가의 체념이 뒤섞인 냄새가 난다.", 20);
+                                TypeText("눈을 감아도 들려오는 것은 벽 너머의 흐느낌인가, 바람 소리인가...", 20);
+                                TypeText("잠들었다기보다는, 잠시 의식을 잃었을 뿐이다.", 20);
+                                Console.ResetColor();
+
+                                // --- 휴식 후 여관 주인 대사 ---
+                                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                TypeText("\n[여관주인] ...일어났나.", 40);
+                                TypeText("[여관주인] 그 잠깐의 망각이 얼마나 갈 것 같나? 어차피 다시 그 구덩이로 돌아갈 텐데.", 40);
+                                Console.ResetColor();
+                            }
 
                             Console.WriteLine($"\n체력: {oldHealth} -> {player.Health}/{player.MaxHealth}");
                             Console.WriteLine($"마나: {oldMana} -> {player.Mana}/{player.MaxMana}");
                         }
-                        WaitForKeyPress(); // public WaitForKeyPress 가정
-                        break; // 여관 메뉴로 복귀
+                        WaitForKeyPress();
+                        break;
 
                     case "2": // 식당
                         Console.Clear();
 
-                        // --- 식당 묘사 ---
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        TypeText("식당이라 부르기 민망한 공간. 테이블 위엔 말라붙은 얼룩과 먼지뿐.", 20);
-                        TypeText("벽에는 알아볼 수 없는 낙서와 긁힌 자국들이 가득하다.", 20);
-                        TypeText("음식 냄새 대신, 부패와 절망의 악취만이 코를 찌른다.", 20);
-                        Console.ResetColor();
+                        if (player.Job == "육군 이등별")
+                        {
+                            // --- 식당 준비 안됨 (육군 이등별) ---
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.WriteLine("[나레이션] 여관 주인이 당황해서 자세를 고쳐 바로 선다.");
+                            Console.ResetColor();
 
-                        // --- 식당 관련 여관 주인 대사 (수정) ---
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        TypeText("\n[여관주인] ...식당?", 40);
-                        TypeText("[여관주인] 굶주렸나? 허기진 자의 눈빛이군.", 40);
-                        TypeText("[여관주인] 여기서 먹을 수 있는 건 쥐새끼나 바퀴벌레 정도겠지.", 40);
-                        TypeText("[여관주인] ...아니면, 바닥에 굴러다니는 뼛조각이라도 주워 먹을 텐가?", 40);
-                        Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            TypeText("\n[여관주인] 충성! 각하! 대단히 죄송합니다!!!", 40);
+                            TypeText("[여관주인] 아직 식당이 준비가 안되어있습니다 각하!! 죄송합니다!!", 40);
+                            TypeText("[여관주인] 즉시 준비하도록 조치하겠습니다! 용서해주십시오!", 40);
+                            TypeText("[여관주인] 보상으로 최고급 비상 식량을 구비하였습니다! 받아주십시오!", 40);
+                            Console.ResetColor();
 
-                        WaitForKeyPress(); // public WaitForKeyPress 가정
-                        break; // 여관 메뉴로 복귀
+                            // 비상 식량(포션) 지급
+                            foreach (Item item in items)
+                            {
+                                if (item.Type == JobOption.Potion && item.Name == "엘릭서" && !item.isBuy)
+                                {
+                                    item.isBuy = true;
+                                    player.inventory.Add(item);
+                                    Console.WriteLine($"\n비상 식량 지급: {item.Name}");
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // --- 식당 묘사 (일반 직업) ---
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            TypeText("식당이라 부르기 민망한 공간. 테이블 위엔 말라붙은 얼룩과 먼지뿐.", 20);
+                            TypeText("벽에는 알아볼 수 없는 낙서와 긁힌 자국들이 가득하다.", 20);
+                            TypeText("음식 냄새 대신, 부패와 절망의 악취만이 코를 찌른다.", 20);
+                            Console.ResetColor();
+
+                            // --- 식당 관련 여관 주인 대사 ---
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            TypeText("\n[여관주인] ...식당?", 40);
+                            TypeText("[여관주인] 굶주렸나? 허기진 자의 눈빛이군.", 40);
+                            TypeText("[여관주인] 여기서 먹을 수 있는 건 쥐새끼나 바퀴벌레 정도겠지.", 40);
+                            TypeText("[여관주인] ...아니면, 바닥에 굴러다니는 뼛조각이라도 주워 먹을 텐가?", 40);
+                            Console.ResetColor();
+                        }
+
+                        WaitForKeyPress();
+                        break;
 
                     case "0": // 나가기
                         Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        // --- 나가기 전 여관 주인 대사 ---
-                        TypeText("[여관주인] ...나가는 건가.", 40);
-                        TypeText("[여관주인] 저 문 너머엔 더 지독한 어둠뿐이야. 선발대 놈들도 그걸 몰랐지.", 40);
-                        TypeText("[여관주인] 부디... 곱게 죽길 바라네. 다음 손님에게 방해가 되지 않도록.", 40);
-                        Console.ResetColor();
+
+                        if (player.Job == "육군 이등별")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            TypeText("[여관주인] 충성! 각하! 안전한 임무 수행을 기원합니다!", 40);
+                            TypeText("[여관주인] 언제든지 돌아오시면 최고의 서비스로 모시겠습니다!", 40);
+                            TypeText("[여관주인] 왕국의 안위는 각하의 손에 달려있습니다! 충성!", 40);
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            TypeText("[여관주인] ...나가는 건가.", 40);
+                            TypeText("[여관주인] 저 문 너머엔 더 지독한 어둠뿐이야. 선발대 놈들도 그걸 몰랐지.", 40);
+                            TypeText("[여관주인] 부디... 곱게 죽길 바라네. 다음 손님에게 방해가 되지 않도록.", 40);
+                            Console.ResetColor();
+                        }
 
                         Music.StopMusic(); // 음악 정지
-                        WaitForKeyPress(); // public WaitForKeyPress 가정
+                        WaitForKeyPress();
                         return; // 메인 메뉴로
 
                     default: // 잘못된 입력
                         Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        TypeText("[여관주인] ...헛소리할 정신이 남아있나 보군.", 40);
-                        TypeText("[여관주인] 그럴 여유가 있다면, 기도나 하시지.", 40);
-                        Console.ResetColor();
-                        WaitForKeyPress(); // public WaitForKeyPress 가정
-                        break; // 여관 메뉴로 복귀
+
+                        if (player.Job == "육군 이등별")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            TypeText("[여관주인] 죄송합니다, 각하! 명령을 제대로 이해하지 못했습니다!", 40);
+                            TypeText("[여관주인] 다시 한 번 지시해주시면 즉시 처리하겠습니다!", 40);
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            TypeText("[여관주인] ...헛소리할 정신이 남아있나 보군.", 40);
+                            TypeText("[여관주인] 그럴 여유가 있다면, 기도나 하시지.", 40);
+                            Console.ResetColor();
+                        }
+                        WaitForKeyPress();
+                        break;
                 }
             }
         }
