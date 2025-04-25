@@ -132,8 +132,8 @@ namespace TeamRpg
                 player.EarnGold(Game.Instance.rewardGold);
                 //Console.WriteLine($"{Game.Instance.rewardGold}G를 획득했습니다!");
 
-                int healthRecovery = (int)(player.MaxHealth * 0.3);
-                int manaRecovery = (int)(player.MaxMana * 0.3);
+                int healthRecovery = (int)(player.MaxHealth * 0.1);
+                int manaRecovery = (int)(player.MaxMana * 0.1);
                 player.Heal(healthRecovery);
                 player.RecoverMana(manaRecovery);
 

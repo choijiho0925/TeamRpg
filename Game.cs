@@ -1085,6 +1085,24 @@ namespace TeamRpg
             {
                 Console.Clear();
 
+                // === 여관 간판 ASCII 아트 추가 ===
+                Console.ForegroundColor = ConsoleColor.DarkYellow; // 간판 색상 설정
+                                                                   // verbatim string literal (@) 사용하여 이스케이프 시퀀스 무시
+                Console.WriteLine(@"
+   _______________________
+  /                       \
+ /                         \
+|   ___    _   _   _   _   |
+|  |_ _|  | \ | | | \ | |  |
+|   | |   |  \| | |  \| |  |
+|   | |   | |\  | | |\  |  |
+|  |___|  |_| \_| |_| \_|  |
+ \                         /
+  \_______________________/
+");
+                Console.ResetColor(); // 색상 초기화
+                Console.WriteLine(); // 아트 아래에 한 줄 띄우기
+
                 // === 여관 진입 묘사 강화 ===
                 Console.ForegroundColor = ConsoleColor.DarkGray; // 묘사 색상 변경 (어두운 회색)
                 TypeText("삐걱이는 문틈으로 스며드는 것은 퀴퀴한 공기와 깊은 침묵뿐.", 20);
