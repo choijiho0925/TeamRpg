@@ -128,6 +128,7 @@ namespace TeamRpg
 
         // 플레이어 생성 메서드
         // 플레이어 생성 메서드
+        // CreatePlayer 메서드의 관련 부분을 수정합니다 - Game.cs 파일 내부
         private void CreatePlayer()
         {
             Console.Clear();
@@ -229,11 +230,21 @@ namespace TeamRpg
             GiveStartingItems();
 
             Console.WriteLine("\n캐릭터 생성이 완료되었습니다! 게임을 시작합니다.");
-            Console.WriteLine("계속하려면 아무 키나 누르세요...");
-            Console.ReadKey(true);
+
+            // 스토리 스킵 옵션 추가
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n'G'키를 누르면 모든 스토리를 스킵할 수 있습니다.");
+            Console.ResetColor();
+            Console.WriteLine("아무 키나 누르세요...");
+
+            // 키 입력 확인
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            // 입력된 키의 문자를 확인 - 영문 'G', 'g' 또는 한글 'ㅎ' 확인
+            bool skipStory = (keyInfo.Key == ConsoleKey.G || keyInfo.KeyChar == 'g' || keyInfo.KeyChar == 'G' || keyInfo.KeyChar == 'ㅎ') && (job != "육군 이등별");
 
             // 직업별 스토리 표시 (육군 이등별은 스킵)
-            if (job != "육군 이등별")
+            if (job != "육군 이등별" && !skipStory)
             {
                 ShowJobStory(job);
             }
