@@ -1153,45 +1153,74 @@ namespace TeamRpg
         }
 
         // 던전 입장 메서드
+        // Game.cs의 EnterDungeon() 메서드 수정
         private void EnterDungeon()
         {
             string test = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio/battlestart.wav");
             Music.PlayMusic(test);
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("========================================");
-            Console.WriteLine("              던전 입장                 ");
-            Console.WriteLine("========================================");
-            Console.ResetColor();
 
-            Console.WriteLine("\n입장할 던전을 선택하세요:");
-            Console.WriteLine("1. 쉬운 던전 (레벨 1-5)");
-            Console.WriteLine("2. 보통 던전 (레벨 6-10)");
-            Console.WriteLine("3. 어려운 던전 (레벨 11-15)");
-            Console.WriteLine("0. 뒤로 가기");
+            // 육군 이등별 직업에 따라 다른 타이틀과 메뉴 표시
+            if (player.Job == "육군 이등별")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("========================================");
+                Console.WriteLine("        작전 구역 진입 허가서          ");
+                Console.WriteLine("========================================");
+                Console.ResetColor();
+
+                Console.WriteLine("\n투입할 작전 구역을 선택하십시오:");
+                Console.WriteLine("1. 제1작전구역[최전방] (위험도: 하)");
+                Console.WriteLine("2. 제2소탕작전[종심침투] (위험도: 중)");
+                Console.WriteLine("3. 제3원정지[적지소탕전] (위험도: 상)");
+                Console.WriteLine("0. 작전 취소 및 복귀");
+            }
+            else
+            {
+                // 기존 일반 직업 메뉴 유지
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("========================================");
+                Console.WriteLine("              던전 입장                 ");
+                Console.WriteLine("========================================");
+                Console.ResetColor();
+
+                Console.WriteLine("\n입장할 던전을 선택하세요:");
+                Console.WriteLine("1. 쉬운 던전 (레벨 1-5)");
+                Console.WriteLine("2. 보통 던전 (레벨 6-10)");
+                Console.WriteLine("3. 어려운 던전 (레벨 11-15)");
+                Console.WriteLine("0. 뒤로 가기");
+            }
 
             Console.Write("\n선택: ");
             string choice = Console.ReadLine();
 
             switch (choice)
             {
-                case "1": // 쉬운 던전
+                case "1": // 쉬운 던전 / 제1작전구역
                     StartBattle(DungeonDifficulty.Easy);
                     break;
 
-                case "2": // 보통 던전
+                case "2": // 보통 던전 / 제2소탕작전
                     StartBattle(DungeonDifficulty.Normal);
                     break;
 
-                case "3": // 어려운 던전
+                case "3": // 어려운 던전 / 제3원정지
                     StartBattle(DungeonDifficulty.Hard);
                     break;
 
-                case "0": // 뒤로 가기
+                case "0": // 뒤로 가기 / 작전 취소
                     return;
 
                 default:
-                    Console.WriteLine("잘못된 선택입니다. 다시 선택해주세요.");
+                    // 육군 이등별 직업에 따라 메시지 변경
+                    if (player.Job == "육군 이등별")
+                    {
+                        Console.WriteLine("경고: 유효하지 않은 작전 코드입니다. 재입력 바랍니다.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("잘못된 선택입니다. 다시 선택해주세요.");
+                    }
                     WaitForKeyPress();
                     break;
             }
@@ -1269,7 +1298,16 @@ namespace TeamRpg
 
             // 전투 시작 메시지
             Console.Clear();
-            Console.WriteLine($"\n총 {monstersInBattle.Count}마리의 몬스터가 등장했습니다!\n");
+
+            if (player.Job == "육군 이등별")
+            {
+                Console.WriteLine($"\n적 세력 {monstersInBattle.Count}개체 발견. 교전 개시!");
+                Console.WriteLine("작전 수행 준비 완료. 선제 공격 권한 부여됨.");
+            }
+            else
+            {
+                Console.WriteLine($"\n총 {monstersInBattle.Count}마리의 몬스터가 등장했습니다!\n");
+            }
 
             // 전투 실행
             battle.Start();
